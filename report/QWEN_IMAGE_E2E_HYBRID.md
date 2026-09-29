@@ -188,9 +188,21 @@ pages also sit in page cache, part of which MemAvailable still counts as reclaim
 the OV route keeps a separate 8.8 GB INT8 copy resident instead. Both figures reported;
 neither is rounded up.
 
-## Continuous-generation throughput
+## Continuous-generation throughput (Phase 14)
 
-(filled from `results/e2e/throughput/` — 5-prompt continuous runs, G vs H vs H-pipelined)
+5 distinct prompts back-to-back, models resident (`results/e2e/throughput/`):
+
+| run | per-image mean | encode mean | images/min |
+|---|---:|---:|---:|
+| cont_gpu (G) | 151.5 s | 1.89 s | 0.40 |
+| cont_ov (H) | 153.4 s | 1.27 s | 0.39 |
+
+G ran first on a cooler machine and still shows rising DiT latency image-to-image
+(144.1→149.0 s); H ran immediately after (hotter, 148.2→150.7 s). **Within thermal
+drift, steady-state throughput is equal** — the hybrid does not claim a throughput
+gain at 1024²/20 steps; its continuous-mode advantage is that the GPU sits idle during
+conditioning (available for other work) rather than 1–4 s faster per image.
+
 
 ## CPU/GPU overlap and UMA contention (Phases 15–16)
 
@@ -203,10 +215,24 @@ neither is rounded up.
 
 The GPU stays "busy" 99.7% but takes **2.05× longer**: on this UMA APU the two engines
 share LPDDR5X, and a 16-core AVX-512 encoder streaming ~8.5 GB of int8 weights per encode
-starves the DiT of memory bandwidth. **Naive CPU-encode-during-GPU-DiT overlap is
-counterproductive on this machine** — reported as such. (Single-next-prompt overlap — the
-realistic pipelined case, ~1 s of encode inside a ~150 s DiT — is measured by the
-`pipe_ov5/pipe_ov10` runs; see Continuous-generation throughput.)
+starves the DiT of memory bandwidth. **Sustained CPU-encode-during-GPU-DiT overlap is
+counterproductive on this machine** — reported as such.
+
+**Realistic pipelined case** (encode ONLY the next prompt during the current DiT —
+`pipe_ov5`, 5 distinct prompts; `pipe_ov10` confirms at 10):
+
+- the CPU encode of prompt n+1 finishes long before DiT of image n (post-DiT wait
+  0.00002–0.0006 s — fully hidden);
+- DiT with one concurrent ~1 s encode: 148.8–150.6 s — statistically equal to the
+  sequential runs (148–151 s): a single encode inside a 150 s DiT costs nothing
+  measurable;
+- per-image E2E ≈ 153.5 s vs sequential 153.3 s — pipelining neither gains nor loses
+  wall-clock at ~150-token prompts; it HIDES the encoder (worth 1–2.7 s/image as
+  prompts lengthen) but cannot create throughput on a GPU that is already 99.5% busy.
+
+**Q5 verdict**: CPU/GPU overlap is feasible and free at product scale (one prompt ahead),
+hard-limited by shared DRAM bandwidth if abused (encode storms), and is not a throughput
+multiplier on this APU.
 
 
 
@@ -238,9 +264,32 @@ Q8 answer: the hybrid's advantage grows monotonically with prompt length (GPU en
 scales ~linearly with tokens at fp32; OV INT8 scales much flatter), reaching +2.65 s and
 a 3.5 s E2E gap at ~300 tokens — but it is always bounded by DiT dominance at 1024²/20.
 
-## DQ group 32/64/128 (+0 control) (Phase 17)
+## DQ group 0/32/64/128 (Phase 17) and compile cache (Phase 26)
 
-(filled from `results/e2e/dq/` + quality subset — real generated images per config)
+Warm encode (P3 pos+neg, median of in-process iterations, `results/e2e/dq/`):
+
+| DQ group | warm encode (s) | cos vs GPU-route, pos P3 (this round) | cos vs BF16-ref (root-cause round) | cos vs GPU-route, neg (9 tok) |
+|---:|---:|---:|---:|---:|
+| 0 (disabled, BF16-dot engine) | 1.44 | **0.998786** | 0.99879 | — |
+| 32 (default) | 1.02 | 0.998451 | 0.99845 | 0.971018 |
+| 64 | 0.88 | 0.998209 | 0.99780 | 0.944117 |
+| 128 | 0.835 | 0.997068 | 0.99707 | 0.956907 |
+
+(Cross-validation: dq0 0.998786↔0.99879 and dq128 0.997068↔0.99707 reproduce the merged
+root-cause round to 5 decimals — three independent numerical paths agree. The negative
+prompt (" ", 9 tokens) diverges more and non-monotonically across DQ groups — small-
+sequence quantization noise, disclosed; the quality dataset arbitrates its effect.)
+
+DiT/VAE are unaffected by DQ (same 149–150 s). Real-image quality per DQ group is
+measured in the quality dataset (below) — the e2e round generates actual images for
+every DQ config, not just conditioning cosines. DQ128 saves a further ~0.19 s per
+encode vs DQ32; whether that is worth the (root-cause-round) cosine drop is a
+latency-vs-quality judgment the quality data informs.
+
+**OpenVINO compile cache**: fresh cache dir compile = 3.45 s; warm cache = 0.69 s
+(~2.8 s saved on every process start). Cached compile is the default product behavior
+(cache persists at `models/.ov_cache`).
+
 
 ## Final image quality (Phases 18–21)
 

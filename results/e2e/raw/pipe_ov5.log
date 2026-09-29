@@ -1,17 +1,15 @@
-[pipe_ov5 P1_s20260929_i0] enc=0.969s dit=136.36s vae=2.49s total=141.97s peak=34.39GiB
-Traceback (most recent call last):
-  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/e2e_pipeline.py", line 483, in <module>
-    main()
-  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/e2e_pipeline.py", line 388, in main
-    assert list(pos_t.shape) == cond_shape_ref, \
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: cond shape changed within run: torch.Size([1, 67, 4096]) vs [1, 25, 4096]
-Exception ignored in: <function ModelPatcher.__del__ at 0x702af1fdc040>
+[pipe_ov5 P1_s20260929_i0] enc=1.268s dit=148.78s vae=2.80s total=155.15s peak=34.39GiB
+[pipe_ov5 P2_s20260929_i0] enc=0.763s dit=150.57s vae=2.94s total=153.52s peak=34.39GiB
+[pipe_ov5 P3_s20260929_i0] enc=4.815s dit=150.25s vae=2.53s total=152.79s peak=34.39GiB
+[pipe_ov5 P4_s20260929_i0] enc=4.523s dit=150.30s vae=2.59s total=152.90s peak=34.39GiB
+[pipe_ov5 P5_s20260929_i0] enc=5.094s dit=150.46s vae=2.56s total=153.03s peak=34.39GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/throughput/pipe_ov5.json (5 images, wall=781.1s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x79a12268c040>
 Traceback (most recent call last):
   File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
   File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
 AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
-Exception ignored in: <function ModelPatcher.__del__ at 0x702af1fdc040>
+Exception ignored in: <function ModelPatcher.__del__ at 0x79a12268c040>
 Traceback (most recent call last):
   File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
   File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach

@@ -69,18 +69,16 @@ def tabulate(groups, polarity):
     out = []
     for pid in sorted(groups):
         tags = groups[pid]
-        ref_tag = "native" if any(k.endswith("native") for k in tags) else (
-            "gpu" if any("gpu" in k and "native" not in k for k in tags) else sorted(tags)[0])
-        # prefer explicit baseline tags from the core A/B (ab_p*_gpu etc.)
-        for k in tags:
-            if "native" in k:
-                ref_tag = k
-                break
-        else:
+        # reference = the GPU product route (architecture G baseline); fall back to native
+        ref_tag = sorted(tags)[0]
+        for pref in ("gpu", "native"):
             for k in tags:
-                if "gpu" in k:
+                if pref in k:
                     ref_tag = k
                     break
+            else:
+                continue
+            break
         ref = tags[ref_tag]
         for tag in sorted(tags):
             r = {"polarity": polarity, "prompt": pid, "route_tag": tag, "reference": ref_tag}
