@@ -64,15 +64,52 @@ def main():
         print(f"[warn] CLIP evaluator unavailable ({e}); pixel metrics only")
         have_clip = False
 
+    MAXTOK = clip_model.config.text_config.max_position_embeddings - 2
+
+    def pooled_norm(out):
+        if torch.is_tensor(out):
+            t = out
+        else:
+            t = getattr(out, "pooler_output", None)
+            if t is None:
+                t = out[0]
+            if not torch.is_tensor(t):
+                t = t[0]
+        return t / t.norm(dim=-1, keepdim=True)
+
+    def chunks(text):
+        ids = proc.tokenizer(text, add_special_tokens=False)["input_ids"]
+        out, cur = [], []
+        for t in ids:
+            cur.append(t)
+            if len(cur) >= MAXTOK:
+                out.append(cur)
+                cur = []
+        if cur:
+            out.append(cur)
+        return [proc.tokenizer.decode(c) for c in out] or [text]
+
     def clip_scores(imgs, texts):
+        """Chunked CLIP scoring: prompts longer than the CLIP context are split
+        into <=max_pos windows; per-image score = mean cosine over chunks.
+        Same evaluator + same truncation for every route."""
+        img_embs = []
         with torch.no_grad():
-            inp = proc(text=texts, images=imgs, return_tensors="pt", padding=True)
-            out = clip_model(**inp)
-            ti = out.logits_per_image.softmax(dim=1)  # not used; use raw cos
-            iemb = out.image_embeds / out.image_embeds.norm(dim=-1, keepdim=True)
-            temb = out.text_embeds / out.text_embeds.norm(dim=-1, keepdim=True)
-            cos = (iemb @ temb.T).diagonal()
-        return cos.tolist(), iemb
+            for im in imgs:
+                inp = proc(text=["x"], images=[im], return_tensors="pt")
+                e = clip_model.get_image_features(pixel_values=inp["pixel_values"])
+                img_embs.append(pooled_norm(e))
+            scores, iemb_rows = [], []
+            for im_idx, text in enumerate(texts):
+                cs = []
+                for ch in chunks(text):
+                    inp = proc(text=[ch], return_tensors="pt", padding=True)
+                    e = clip_model.get_text_features(**{k: v for k, v in inp.items() if k != "pixel_values"})
+                    e = pooled_norm(e)
+                    cs.append(float((img_embs[im_idx] @ e.T).item()))
+                scores.append(sum(cs) / len(cs))
+            iemb = torch.cat(img_embs, 0)
+        return scores, iemb
 
     # collect images per (QID, seed)
     entries = {}

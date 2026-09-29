@@ -131,17 +131,17 @@ ov_cache() {
 quality() {
   run q_gpu scripts/e2e_pipeline.py --tag q_gpu --group quality --route gpu \
     --dq 32 --prompt-file prompts/prompts_quality.json --prompts all \
-    --steps 20 --iters 1
+    --steps 20 --iters 1 --warmup-steps 2
   run q_dq32 scripts/e2e_pipeline.py --tag q_dq32 --group quality --route ov \
     --dq 32 --prompt-file prompts/prompts_quality.json --prompts all \
-    --steps 20 --iters 1
+    --steps 20 --iters 1 --warmup-steps 2
 }
 
 quality_dq_subset() {  # DQ64/128 on Q01-Q12 (documented subset reduction)
   for dq in 64 128; do
     run "q_dq${dq}" scripts/e2e_pipeline.py --tag "q_dq${dq}" --group quality \
       --route ov --dq "$dq" --prompt-file prompts/prompts_quality.json \
-      --prompts Q01,Q02,Q03,Q04,Q05,Q06,Q07,Q08,Q09,Q10,Q11,Q12 --steps 20 --iters 1
+      --prompts Q01,Q02,Q03,Q04,Q05,Q06,Q07,Q08,Q09,Q10,Q11,Q12 --steps 20 --iters 1 --warmup-steps 2
   done
 }
 
@@ -150,15 +150,21 @@ repeated_seeds() {
   QS="Q02,Q05,Q10,Q18,Q23"
   run rs_gpu scripts/e2e_pipeline.py --tag rs_gpu --group quality --route gpu \
     --dq 32 --prompt-file prompts/prompts_quality.json --prompts "$QS" \
-    --seeds 11,22,33,44,55 --steps 20 --iters 1
+    --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2
   run rs_dq128 scripts/e2e_pipeline.py --tag rs_dq128 --group quality --route ov \
     --dq 128 --prompt-file prompts/prompts_quality.json --prompts "$QS" \
-    --seeds 11,22,33,44,55 --steps 20 --iters 1
+    --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2
+}
+
+# ---- determinism validation of --warmup-steps (compare i0 sha vs known steady-state) ----
+det_test() {
+  run det_test scripts/e2e_pipeline.py --tag det_test --group dq --route ov \
+    --dq 32 --prompts P3 --seeds 20260929 --steps 20 --iters 1 --warmup-steps 2 --save-cond
 }
 
 case "${1:-}" in
   core_ab|core_native|prompt_matrix|step_matrix|res_matrix|dit_kernel_note|\
-  continuous|pipelined|contention|dq_matrix|ov_cache|quality|quality_dq_subset|repeated_seeds) "$1" ;;
+  continuous|pipelined|contention|dq_matrix|ov_cache|quality|quality_dq_subset|repeated_seeds|det_test) "$1" ;;
   *) echo "stages: core_ab core_native prompt_matrix step_matrix res_matrix dit_kernel_note continuous pipelined contention dq_matrix ov_cache quality quality_dq_subset repeated_seeds"; exit 1 ;;
 esac
 echo "[suite $(date +%H:%M:%S)] stage $1 done"

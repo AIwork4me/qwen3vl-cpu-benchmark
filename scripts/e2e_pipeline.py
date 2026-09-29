@@ -99,6 +99,10 @@ def main():
     ap.add_argument("--contend-text", default=None)
     ap.add_argument("--no-dit-preload", action="store_true",
                     help="do not force_full_load the DiT before sampling (probe streaming behavior)")
+    ap.add_argument("--warmup-steps", type=int, default=0,
+                    help="throwaway sampling pass at N steps before the plan (triggers kernel "
+                         "compilation/autotune so the FIRST plan image matches steady-state determinism); "
+                         "not included in any timing")
     args = ap.parse_args()
 
     outdir = os.path.join(ROOT, "results", "e2e", args.group)
@@ -308,6 +312,18 @@ def main():
         t_post = now_ns()
         st["postprocess_s"] = (t_post - t7) / 1e9  # D2H + uint8 conversion
         return st, img, t7
+
+    if args.warmup_steps > 0:
+        wc, _ = encode_cond(plan[0]["text"])
+        ensure_dit_loaded()
+        wnoise = comfy.sample.prepare_noise(latent0, plan[0]["seed"])
+        torch.cuda.synchronize()
+        comfy.sample.sample(model, wnoise, args.warmup_steps, args.cfg, args.sampler,
+                            args.scheduler, wc[0], wc[1], latent0, disable_pbar=True,
+                            seed=plan[0]["seed"])
+        torch.cuda.synchronize()
+        del wc, wnoise
+        print(f"[warmup] {args.warmup_steps}-step throwaway pass done", flush=True)
 
     images_meta = []
     cond_shape_ref = None
