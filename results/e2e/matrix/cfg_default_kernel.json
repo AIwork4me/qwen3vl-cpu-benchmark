@@ -1,0 +1,450 @@
+{
+ "meta": {
+  "tag": "cfg_default_kernel",
+  "group": "matrix",
+  "route": "ov",
+  "timestamp": "2026-09-29T19:47:12.773585+00:00",
+  "torch": "2.12.0+rocm7.14.0",
+  "hip": "7.14.60850",
+  "gpu": "AMD Radeon 8060S Graphics",
+  "gtt_free_gib_start": 90.9,
+  "gtt_total_gib": 100.0,
+  "vram_state": "NORMAL_VRAM",
+  "te_device_selected": "cuda:0",
+  "dit": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1-full/diffusion_models/qwen_image_2.1_bf16.safetensors",
+  "vae": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1-full/vae/qwen_image_2.1_vae_bf16.safetensors",
+  "dit_sha16": "89f4158d066cc339",
+  "steps": 20,
+  "cfg": 2.5,
+  "sampler": "euler",
+  "scheduler": "simple",
+  "width": 1024,
+  "height": 1024,
+  "prompts": "P3",
+  "seeds": "20260929",
+  "iters": 2,
+  "pipelined": false,
+  "contend_text": false,
+  "comfyui_version": "0.37.0",
+  "aotriton": "0",
+  "cpu_governor": "powersave",
+  "cpu_epp": "balance_performance",
+  "vae_sha16": "bb21f7473051e1ac",
+  "ov": {
+   "openvino": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+   "dq_requested": 32,
+   "dq_effective": "32",
+   "compile_read_s": 0.142,
+   "compile_s": 4.624,
+   "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8"
+  },
+  "te_model": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8"
+ },
+ "loads": {
+  "dit_read_s": 4.511867434,
+  "vae_read_s": 1.096856074,
+  "ov_total_s": 5.82030944,
+  "ov_compile_read_s": 0.141873789,
+  "ov_compile_s": 4.623741052,
+  "total_load_s": 11.437473541
+ },
+ "images": [
+  {
+   "idx": 0,
+   "label": "P3_s20260929_i0",
+   "prompt_id": "P3",
+   "seed": 20260929,
+   "iter": 0,
+   "encode_s": 1.592886952,
+   "encode_pos_s": 1.425623618,
+   "encode_neg_s": 0.162536015,
+   "n_tokens_full": 185,
+   "n_tokens_kept": 171,
+   "cond_prep_s": 0.000313927,
+   "cond_pos_shape": [
+    1,
+    171,
+    4096
+   ],
+   "ov_ids_pos": [
+    151644,
+    8948,
+    198,
+    1092,
+    30782,
+    408,
+    323,
+    23643
+   ],
+   "dit_s": 209.287707977,
+   "dit_steps": [
+    [
+     0,
+     58319304616800
+    ],
+    [
+     1,
+     58329709836069
+    ],
+    [
+     2,
+     58340107617195
+    ],
+    [
+     3,
+     58350492469706
+    ],
+    [
+     4,
+     58360827343190
+    ],
+    [
+     5,
+     58371224269433
+    ],
+    [
+     6,
+     58381580140735
+    ],
+    [
+     7,
+     58391983393309
+    ],
+    [
+     8,
+     58402380137126
+    ],
+    [
+     9,
+     58412791320493
+    ],
+    [
+     10,
+     58423222813030
+    ],
+    [
+     11,
+     58433599064717
+    ],
+    [
+     12,
+     58443999826453
+    ],
+    [
+     13,
+     58454478134749
+    ],
+    [
+     14,
+     58464905372837
+    ],
+    [
+     15,
+     58475374699428
+    ],
+    [
+     16,
+     58485812229605
+    ],
+    [
+     17,
+     58496237868137
+    ],
+    [
+     18,
+     58506726517628
+    ],
+    [
+     19,
+     58517155858347
+    ]
+   ],
+   "dit_preload_in_window_s": 1.675987262,
+   "vae_s": 2.68437705,
+   "postprocess_s": 0.005394283,
+   "cond_shape": [
+    1,
+    171,
+    4096
+   ],
+   "cond_pos_mean": 0.09718061983585358,
+   "cond_pos_std": 11.00864028930664,
+   "total_gen_s": 215.252244356,
+   "png_save_s": 0.24811394,
+   "png": "results/e2e/images/cfg_default_kernel_P3_s20260929_i0.png",
+   "img_sha16": "e961ad556959af94",
+   "total_save_inclusive_s": 215.531816937,
+   "gtt_free_gib_after": 55.53,
+   "cuda_peak_alloc_gib": 34.38,
+   "windows": {
+    "enc": {
+     "gpu_busy_pct": {
+      "mean": 13.47,
+      "max": 26,
+      "n": 53
+     },
+     "proc_cpu_pct": {
+      "mean": 982.04,
+      "max": 1704.1,
+      "n": 53
+     },
+     "gtt_used_bytes": {
+      "mean": 3654334657.21,
+      "max": 14363967488,
+      "n": 53
+     }
+    },
+    "dit": {
+     "gpu_busy_pct": {
+      "mean": 99.37,
+      "max": 100,
+      "n": 3867
+     },
+     "proc_cpu_pct": {
+      "mean": 214.68,
+      "max": 1067.5,
+      "n": 3867
+     },
+     "gtt_used_bytes": {
+      "mean": 18485667112.85,
+      "max": 18499588096,
+      "n": 3867
+     }
+    }
+   }
+  },
+  {
+   "idx": 1,
+   "label": "P3_s20260929_i1",
+   "prompt_id": "P3",
+   "seed": 20260929,
+   "iter": 1,
+   "encode_s": 0.988189129,
+   "encode_pos_s": 0.823320428,
+   "encode_neg_s": 0.160277643,
+   "n_tokens_full": 185,
+   "n_tokens_kept": 171,
+   "cond_prep_s": 0.000341318,
+   "cond_pos_shape": [
+    1,
+    171,
+    4096
+   ],
+   "ov_ids_pos": [
+    151644,
+    8948,
+    198,
+    1092,
+    30782,
+    408,
+    323,
+    23643
+   ],
+   "dit_s": 208.079721284,
+   "dit_steps": [
+    [
+     0,
+     58531995861978
+    ],
+    [
+     1,
+     58542402753026
+    ],
+    [
+     2,
+     58552786080416
+    ],
+    [
+     3,
+     58563106947795
+    ],
+    [
+     4,
+     58573471536009
+    ],
+    [
+     5,
+     58583846947786
+    ],
+    [
+     6,
+     58594190062907
+    ],
+    [
+     7,
+     58604531985368
+    ],
+    [
+     8,
+     58614911539769
+    ],
+    [
+     9,
+     58625297385102
+    ],
+    [
+     10,
+     58635650421129
+    ],
+    [
+     11,
+     58646044657177
+    ],
+    [
+     12,
+     58656399117916
+    ],
+    [
+     13,
+     58666809450334
+    ],
+    [
+     14,
+     58677214208729
+    ],
+    [
+     15,
+     58687655384086
+    ],
+    [
+     16,
+     58698029477709
+    ],
+    [
+     17,
+     58708403255119
+    ],
+    [
+     18,
+     58718815298936
+    ],
+    [
+     19,
+     58729222642685
+    ]
+   ],
+   "vae_s": 2.34818494,
+   "postprocess_s": 0.011231953,
+   "cond_shape": [
+    1,
+    171,
+    4096
+   ],
+   "cond_pos_mean": 0.09718061983585358,
+   "cond_pos_std": 11.00864028930664,
+   "total_gen_s": 211.417998915,
+   "png_save_s": 0.238043534,
+   "png": "results/e2e/images/cfg_default_kernel_P3_s20260929_i1.png",
+   "img_sha16": "e961ad556959af94",
+   "total_save_inclusive_s": 211.693537779,
+   "gtt_free_gib_after": 55.52,
+   "cuda_peak_alloc_gib": 34.38,
+   "windows": {
+    "enc": {
+     "gpu_busy_pct": {
+      "mean": 42.22,
+      "max": 58,
+      "n": 18
+     },
+     "proc_cpu_pct": {
+      "mean": 1575.81,
+      "max": 1717.5,
+      "n": 18
+     },
+     "gtt_used_bytes": {
+      "mean": 37909209088.0,
+      "max": 37909209088,
+      "n": 18
+     }
+    },
+    "dit": {
+     "gpu_busy_pct": {
+      "mean": 99.64,
+      "max": 100,
+      "n": 3843
+     },
+     "proc_cpu_pct": {
+      "mean": 214.97,
+      "max": 1175.4,
+      "n": 3843
+     },
+     "gtt_used_bytes": {
+      "mean": 18546345038.07,
+      "max": 28658671616,
+      "n": 3843
+     }
+    }
+   }
+  }
+ ],
+ "marks_ns": {
+  "start": 58298227230792,
+  "load_start": 58298228497231,
+  "load_end": 58309665970772,
+  "img0_P3_s20260929_i0_start": 58309683129300,
+  "img0_dit_start": 58312963256759,
+  "img0_dit_end": 58522250984644,
+  "img1_P3_s20260929_i1_start": 58525223251096,
+  "img1_dit_start": 58526213269108,
+  "img1_dit_end": 58734293055463,
+  "stop": 58736917239910
+ },
+ "monitor_summary": {
+  "whole_run": {
+   "proc_cpu_pct": {
+    "mean": 241.47,
+    "max": 3185.3,
+    "n": 8066
+   },
+   "sys_cpu_pct": {
+    "mean": 12.44,
+    "max": 100.0,
+    "n": 8066
+   },
+   "gpu_busy_pct": {
+    "mean": 96.63,
+    "max": 100,
+    "n": 8066
+   },
+   "gtt_used_bytes": {
+    "mean": 18158665163.31,
+    "max": 37932277760,
+    "n": 8066
+   },
+   "rss_bytes": {
+    "mean": 18262779594.74,
+    "max": 32268496896,
+    "n": 8066
+   },
+   "sys_available_bytes": {
+    "mean": 70111511800.07,
+    "max": 97021599744,
+    "n": 8066
+   },
+   "gpu_temp_c": {
+    "mean": 68.34,
+    "max": 72.0,
+    "n": 8066
+   },
+   "gpu_power_w": {
+    "mean": 52.22,
+    "max": 54.09,
+    "n": 8066
+   },
+   "cpu_temp_c": {
+    "mean": 70.46,
+    "max": 100.38,
+    "n": 8066
+   },
+   "cpu_freq_mhz": {
+    "mean": 1947.79,
+    "max": 4242.0,
+    "n": 8066
+   }
+  },
+  "n_samples": 8066
+ },
+ "epoch_at_t0": 1790711232.7729976,
+ "first_image_ready_epoch": 1790711459.4811404,
+ "mon_t0_epoch": 1790711232.7729976
+}

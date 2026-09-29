@@ -156,6 +156,20 @@ repeated_seeds() {
     --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2
 }
 
+# ---- controlled 20-step kernel head-to-head (AOTriton vs default), back-to-back ----
+kernel_note20() {
+  run kn20_aot scripts/e2e_pipeline.py --tag kn20_aot --group matrix --route ov \
+    --dq 32 --prompts P3 --seeds "$SEED" --steps 20 --iters 2 --warmup-steps 4
+  local t0 t1 tag=kn20_def
+  t0=$(date +%s.%N)
+  env -u TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL \
+    "$PY" scripts/e2e_pipeline.py --tag "$tag" --group matrix --route ov \
+      --dq 32 --prompts P3 --seeds "$SEED" --steps 20 --iters 2 --warmup-steps 4 \
+      > "results/e2e/raw/${tag}.log" 2>&1
+  t1=$(date +%s.%N)
+  echo "${tag},${t0},${t1}" >> results/e2e/raw/process_walls.csv
+}
+
 # ---- determinism validation of --warmup-steps (compare i0 sha vs known steady-state) ----
 det_test() {
   run det_test scripts/e2e_pipeline.py --tag det_test --group dq --route ov \
@@ -164,7 +178,7 @@ det_test() {
 
 case "${1:-}" in
   core_ab|core_native|prompt_matrix|step_matrix|res_matrix|dit_kernel_note|\
-  continuous|pipelined|contention|dq_matrix|ov_cache|quality|quality_dq_subset|repeated_seeds|det_test) "$1" ;;
+  continuous|pipelined|contention|dq_matrix|ov_cache|quality|quality_dq_subset|repeated_seeds|det_test|kernel_note20) "$1" ;;
   *) echo "stages: core_ab core_native prompt_matrix step_matrix res_matrix dit_kernel_note continuous pipelined contention dq_matrix ov_cache quality quality_dq_subset repeated_seeds"; exit 1 ;;
 esac
 echo "[suite $(date +%H:%M:%S)] stage $1 done"

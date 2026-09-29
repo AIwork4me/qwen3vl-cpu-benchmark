@@ -326,7 +326,7 @@ def main():
         print(f"[warmup] {args.warmup_steps}-step throwaway pass done", flush=True)
 
     images_meta = []
-    cond_shape_ref = None
+    cond_shape_ref = {}
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=1) if args.pipelined else None
     next_future = None
 
@@ -381,12 +381,12 @@ def main():
                 rec.update(st_enc)
                 rec.update(st)
 
-            # conditioning identity bookkeeping
+            # conditioning identity bookkeeping (per prompt id: token counts
+            # legitimately differ ACROSS prompts; within one prompt they must match)
             pos_t = cond[0][0][0]
-            if cond_shape_ref is None:
-                cond_shape_ref = list(pos_t.shape)
-            assert list(pos_t.shape) == cond_shape_ref, \
-                f"cond shape changed within run: {pos_t.shape} vs {cond_shape_ref}"
+            ref_for_prompt = cond_shape_ref.setdefault(item["id"], list(pos_t.shape))
+            assert list(pos_t.shape) == ref_for_prompt, \
+                f"cond shape changed for {item['id']}: {pos_t.shape} vs {ref_for_prompt}"
             rec["cond_shape"] = list(pos_t.shape)
             rec["cond_pos_mean"] = float(pos_t.float().mean())
             rec["cond_pos_std"] = float(pos_t.float().std())

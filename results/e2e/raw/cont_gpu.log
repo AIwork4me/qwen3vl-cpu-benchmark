@@ -1,0 +1,2 @@
+[cont_gpu P1_s20260929_i0] enc=1.741s dit=144.06s vae=2.59s total=150.71s peak=50.73GiB
+[cont_gpu P2_s20260929_i0] enc=1.812s dit=144.64s vae=2.42s total=148.88s peak=50.73GiB

@@ -1,0 +1,41 @@
+Exception ignored in: <function ModelPatcher.__del__ at 0x7404d881bec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+[chain] continuous FAILED
+Exception ignored in: <function ModelPatcher.__del__ at 0x702af1fdc040>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+[chain] pipelined FAILED
+  [wall] contd_ov: 450.1s
+  [wall] contd_ov_enc: 934.2s
+[suite 01:46:18] stage contention done
+  [wall] pm_gpu: 1576.5s
+  [wall] pm_ov: 1562.0s
+  [wall] pm_native: 1261.7s
+[suite 02:59:38] stage prompt_matrix done
+  [wall] sm40_gpu: 631.8s
+  [wall] sm40_ov: 637.5s
+[suite 03:20:47] stage step_matrix done
+  [wall] rm1328_gpu: 796.9s
+  [wall] rm1328_ov: 784.0s
+[suite 03:47:08] stage res_matrix done
+[suite 03:54:33] stage dit_kernel_note done
+  [wall] dq0_s1: 322.3s
+  [wall] dq0_s2: 327.0s
+  [wall] dq64_s1: 322.0s
+  [wall] dq64_s2: 324.9s
+  [wall] dq128_s1: 321.7s
+  [wall] dq128_s2: 324.6s
+scripts/run_e2e_suite.sh: line 170: syntax error near unexpected token `compare'
+[chain] dq_matrix FAILED
+  [wall] ovcache_cold: 51.3s
+  [wall] ovcache_cold2: 50.0s
+  [wall] ovcache_warm: 48.6s
+[suite 04:29:25] stage ov_cache done
+  [wall] det_test: 184.9s
+[suite 04:32:30] stage det_test done
+[chain 04:32:30] ALL DONE

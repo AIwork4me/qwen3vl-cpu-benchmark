@@ -1,0 +1,21 @@
+[pm_ov P1_s20260929_i0] enc=9.039s dit=149.62s vae=2.64s total=163.08s peak=34.39GiB
+[pm_ov P1_s20260929_i1] enc=0.348s dit=149.66s vae=2.41s total=152.42s peak=34.39GiB
+[pm_ov P2_s20260929_i0] enc=0.608s dit=149.87s vae=2.52s total=153.00s peak=34.39GiB
+[pm_ov P2_s20260929_i1] enc=0.613s dit=150.57s vae=2.49s total=153.68s peak=34.39GiB
+[pm_ov P3_s20260929_i0] enc=1.237s dit=150.29s vae=2.23s total=153.76s peak=34.39GiB
+[pm_ov P3_s20260929_i1] enc=1.016s dit=149.56s vae=2.26s total=152.84s peak=34.39GiB
+[pm_ov P4_s20260929_i0] enc=0.336s dit=148.28s vae=2.26s total=150.88s peak=34.39GiB
+[pm_ov P4_s20260929_i1] enc=0.330s dit=148.44s vae=2.22s total=150.98s peak=34.39GiB
+[pm_ov P5_s20260929_i0] enc=1.576s dit=150.16s vae=2.22s total=153.95s peak=34.39GiB
+[pm_ov P5_s20260929_i1] enc=1.490s dit=149.92s vae=2.24s total=153.65s peak=34.39GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/matrix/pm_ov.json (10 images, wall=1553.9s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x7a614f03fec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x7a614f03fec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

@@ -192,11 +192,51 @@ neither is rounded up.
 
 (filled from `results/e2e/throughput/` — 5-prompt continuous runs, G vs H vs H-pipelined)
 
-## CPU/GPU overlap (Phase 15)
+## CPU/GPU overlap and UMA contention (Phases 15–16)
 
-(filled from pipelined runs — CPU encodes prompt n+1 during GPU DiT of image n;
-if overlap hides the encode entirely, H's steady-state per-image cost drops by the full
-encode time in continuous generation)
+**Contention stress test** (same prompt/seed/steps, back-to-back; `results/e2e/throughput/`):
+
+| run | DiT latency (3 imgs) | GPU busy (DiT window) | proc CPU | concurrent CPU encode |
+|---|---|---|---|---|
+| contd_ov (DiT alone) | 140.5 / 142.2 / 143.4 s | 99.2–99.6% | ~217% | none |
+| contd_ov_enc (DiT + encode storm) | **286.8 / 303.4 / 308.6 s** | 99.3–99.7% | ~1561% | continuous OV encodes of P5 |
+
+The GPU stays "busy" 99.7% but takes **2.05× longer**: on this UMA APU the two engines
+share LPDDR5X, and a 16-core AVX-512 encoder streaming ~8.5 GB of int8 weights per encode
+starves the DiT of memory bandwidth. **Naive CPU-encode-during-GPU-DiT overlap is
+counterproductive on this machine** — reported as such. (Single-next-prompt overlap — the
+realistic pipelined case, ~1 s of encode inside a ~150 s DiT — is measured by the
+`pipe_ov5/pipe_ov10` runs; see Continuous-generation throughput.)
+
+
+
+## Step and resolution matrices (Phases 10–11)
+
+Step matrix (P3, 1024²): 40 steps DiT = 299.0–300.5 s (G) — exactly 2× the 20-step
+149–150 s, i.e. linear; the encoder's 2.65 s share drops to 0.87% of a 305.8 s image.
+**Honest scaling law: the hybrid's warm E2E advantage (fixed ~1–3 s) is diluted as DiT
+work grows** — it is an encoder-stage win, not a DiT win.
+
+Resolution matrix (P3, 20 steps, 1328×1328): G DiT = 375.2–376.0 s, VAE 6.0–6.2 s,
+**torch CUDA peak 65.07 GiB** (vs 50.7 at 1024²). At this operating point the GPU route
+consumes 2/3 of the 100 GiB GTT; the hybrid's 16.5 GiB saving grows in practical value
+(larger batches, reference-image latents, or co-resident models would not fit on G).
+
+## Prompt matrix (Phase 9)
+
+Warm encode (pos+neg) and E2E by prompt length (`results/e2e/matrix/`):
+
+| tokens kept | G enc (s) | H enc (s) | saved | G E2E | H E2E |
+|---:|---:|---:|---:|---:|---:|
+| 15 (P4) | 1.296 | 0.330 | 0.97 | 152.6 | 151.0 |
+| 25 (P1) | 1.351 | 0.348 | 1.00 | 155.2 | 152.4 |
+| 67 (P2) | 2.003 | 0.613 | 1.39 | 154.2 | 153.7 |
+| 171 (P3) | 2.691 | 1.016 | 1.68 | 155.1 | 152.8 |
+| 299 (P5) | 4.142 | 1.490 | 2.65 | 157.1 | 153.6 |
+
+Q8 answer: the hybrid's advantage grows monotonically with prompt length (GPU encode
+scales ~linearly with tokens at fp32; OV INT8 scales much flatter), reaching +2.65 s and
+a 3.5 s E2E gap at ~300 tokens — but it is always bounded by DiT dominance at 1024²/20.
 
 ## DQ group 32/64/128 (+0 control) (Phase 17)
 
