@@ -1,0 +1,78 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[inv] openvino 2026.4.0-22959-99c81491cc3-releases/2026/4 devices=['CPU', 'GPU']
+[inv] pre-norm node: __module.model.language_model.layers.35/aten::add/Add_1
+[inv] read 0.101s compile 1.083s
+[inv] supported_properties:
+    CPU_DENORMALS_OPTIMIZATION = False
+    CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE = 1.0
+    DYNAMIC_QUANTIZATION_GROUP_SIZE = 32
+    ENABLE_CPU_PINNING = True
+    ENABLE_CPU_RESERVATION = False
+    ENABLE_HYPER_THREADING = False
+    ENABLE_TENSOR_PARALLEL = False
+    EXECUTION_DEVICES = ['CPU']
+    EXECUTION_MODE_HINT = ExecutionMode.PERFORMANCE
+    INFERENCE_NUM_THREADS = 16
+    INFERENCE_PRECISION_HINT = <Type: 'bfloat16'>
+    KEY_CACHE_GROUP_SIZE = 0
+    KEY_CACHE_PRECISION = <Type: 'uint8_t'>
+    KV_CACHE_PRECISION = <Type: 'uint8_t'>
+    LOG_LEVEL = Level.NO
+    MODEL_DISTRIBUTION_POLICY = set()
+    NETWORK_NAME = Model0
+    NUM_STREAMS = 1
+    OPTIMAL_NUMBER_OF_INFER_REQUESTS = 1
+    PERFORMANCE_HINT = LATENCY
+    PERFORMANCE_HINT_NUM_REQUESTS = 0
+    PERF_COUNT = YES
+    RUNTIME_REQUIREMENTS = meta=1.0;ov=2026.4.0;isa=Intel AVX-512 with Intel DL Boost and bfloat16 support
+    SCHEDULING_CORE_TYPE = SchedulingCoreType.ANY_CORE
+    SUPPORTED_PROPERTIES = {'SUPPORTED_PROPERTIES': 'RO', 'NETWORK_NAME': 'RO', 'OPTIMAL_NUMBER_OF_INFER_REQUESTS': 'RO', 'NUM_STREAMS': 'RO', 'INFERENCE_NUM_THREADS': 'RO', 'PERF_COUNT': 'RO', 'INFERENCE_PRECISION_HINT': 'RO', 'PERFORMANCE_HINT': 'RO', 'EXECUTION_MODE_HINT': 'RO', 'PERFORMANCE_HINT_NUM_REQUESTS': 'RO', 'ENABLE_CPU_PINNING': 'RO', 'ENABLE_CPU_RESERVATION': 'RO', 'SCHEDULING_CORE_TYPE': 'RO', 'MODEL_DISTRIBUTION_POLICY': 'RO', 'ENABLE_HYPER_THREADING': 'RO', 'EXECUTION_DEVICES': 'RO', 'CPU_DENORMALS_OPTIMIZATION': 'RO', 'LOG_LEVEL': 'RO', 'CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE': 'RO', 'ENABLE_TENSOR_PARALLEL': 'RO', 'TBB_PARTITIONER': 'RO', 'DYNAMIC_QUANTIZATION_GROUP_SIZE': 'RO', 'KV_CACHE_PRECISION': 'RO', 'KEY_CACHE_PRECISION': 'RO', 'VALUE_CACHE_PRECISION': 'RO', 'KEY_CACHE_GROUP_SIZE': 'RO', 'VALUE_CACHE_GROUP_SIZE': 'RO', 'RUNTIME_REQUIREMENTS': 'RO'}
+    TBB_PARTITIONER = TbbPartitioner.STATIC
+    VALUE_CACHE_GROUP_SIZE = 0
+    VALUE_CACHE_PRECISION = <Type: 'uint8_t'>
+[inv] DYNAMIC_QUANTIZATION_GROUP_SIZE supported: True
+[inv] top runtime op/exec types:
+     2712  ExecutionNode
+        6  Parameter
+        3  Result
+[P1] n_tok=39 warm_p50=0.1862s mean=0.1860s min=0.1781s cos_hostA=1.0000001192092896
+           13137.0 us  __module.lm_head/aten::linear/MatMul                                     brgemm_avx512_bf16
+            1340.0 us  __module.model.language_model.layers.10.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1339.0 us  __module.model.language_model.layers.25.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1336.0 us  __module.model.language_model.layers.7.mlp.gate_proj/aten::linear/MatM   brgemm_avx512_bf16
+            1302.0 us  __module.model.language_model.layers.19.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1299.0 us  __module.model.language_model.layers.28.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1298.0 us  __module.model.language_model.layers.2.mlp.gate_proj/aten::linear/MatM   brgemm_avx512_bf16
+            1285.0 us  __module.model.language_model.layers.24.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1254.0 us  __module.model.language_model.layers.20.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1234.0 us  __module.model.language_model.layers.31.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1220.0 us  __module.model.language_model.layers.8.mlp.gate_proj/aten::linear/MatM   brgemm_avx512_bf16
+            1192.0 us  __module.model.language_model.layers.4.mlp.gate_proj/aten::linear/MatM   brgemm_avx512_bf16
+[P2] n_tok=81 warm_p50=0.4206s mean=0.4218s min=0.4150s cos_hostA=1.0000001192092896
+           26916.0 us  __module.lm_head/aten::linear/MatMul                                     brgemm_avx512_bf16
+            2068.0 us  __module.model.language_model.layers.10.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1987.0 us  __module.model.language_model.layers.25.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1977.0 us  __module.model.language_model.layers.20.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1933.0 us  __module.model.language_model.layers.30.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1874.0 us  __module.model.language_model.layers.35.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1869.0 us  __module.model.language_model.layers.33.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1860.0 us  __module.model.language_model.layers.22.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1859.0 us  __module.model.language_model.layers.31.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1855.0 us  __module.model.language_model.layers.22.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            1853.0 us  __module.model.language_model.layers.32.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            1835.0 us  __module.model.language_model.layers.9.mlp.down_proj/aten::linear/MatM   brgemm_avx512_bf16
+[P3] n_tok=185 warm_p50=0.8860s mean=0.8848s min=0.8606s cos_hostA=1.0
+           38353.0 us  __module.lm_head/aten::linear/MatMul                                     brgemm_avx512_bf16
+            3186.0 us  __module.model.language_model.layers.25.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            3138.0 us  __module.model.language_model.layers.10.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            3094.0 us  __module.model.language_model.layers.35.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            3091.0 us  __module.model.language_model.layers.33.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            3078.0 us  __module.model.language_model.layers.30.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            3071.0 us  __module.model.language_model.layers.27.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+            3067.0 us  __module.model.language_model.layers.20.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            3017.0 us  __module.model.language_model.layers.16.mlp.up_proj/aten::linear/MatMu   brgemm_avx512_bf16
+            3017.0 us  __module.model.language_model.layers.24.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            3015.0 us  __module.model.language_model.layers.10.mlp.down_proj/aten::linear/Mat   brgemm_avx512_bf16
+            3015.0 us  __module.model.language_model.layers.32.mlp.gate_proj/aten::linear/Mat   brgemm_avx512_bf16
+[saved] /workspace/qwen3vl-cpu-benchmark/results/openvino_root_cause/investigate_baseline_p3.json  (rss 14.78 GiB)

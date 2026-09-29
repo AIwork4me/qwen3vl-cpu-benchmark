@@ -1,0 +1,158 @@
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/_pyopenvino.cpython-312-x86_64-linux-gnu.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_tensorflow_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_paddle_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_auto_plugin.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_intel_npu_plugin.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_jax_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbbmalloc.so.2
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbb.so.12
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_auto_batch_plugin.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_gguf_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_intel_gpu_plugin.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbbbind_2_5.so.3
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_pytorch_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_onnx_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_tensorflow_lite_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_intel_cpu_plugin.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_hetero_plugin.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libhwloc.so.15
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_c.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_ir_frontend.so.2640
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbbmalloc_proxy.so.2
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/frontend/tensorflow/py_tensorflow_frontend.cpython-312-x86_64-linux-gnu.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/frontend/jax/py_jax_frontend.cpython-312-x86_64-linux-gnu.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/frontend/onnx/py_onnx_frontend.cpython-312-x86_64-linux-gnu.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/frontend/paddle/py_paddle_frontend.cpython-312-x86_64-linux-gnu.so
+/workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/frontend/pytorch/py_pytorch_frontend.cpython-312-x86_64-linux-gnu.so
+total 5716
+drwxr-xr-x 35 root root    4096 Sep 29 10:11 .
+drwxr-xr-x 68 root root    4096 Sep 29 10:12 ..
+-rw-r--r--  1 root root    3489 Sep 29 10:11 __init__.py
+-rw-r--r--  1 root root    3636 Sep 29 10:11 __init__.pyi
+drwxr-xr-x  2 root root    4096 Sep 29 10:11 __pycache__
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 _offline_transformations
+-rw-r--r--  1 root root     896 Sep 29 10:11 _op_base.py
+-rw-r--r--  1 root root     617 Sep 29 10:11 _op_base.pyi
+-rw-r--r--  1 root root   30292 Sep 29 10:11 _ov_api.py
+-rw-r--r--  1 root root   41214 Sep 29 10:11 _ov_api.pyi
+drwxr-xr-x  4 root root    4096 Sep 29 10:11 _pyopenvino
+-rw-r--r--  1 root root 5593281 Sep 29 10:11 _pyopenvino.cpython-312-x86_64-linux-gnu.so
+drwxr-xr-x  2 root root    4096 Sep 29 10:11 cmake
+-rw-r--r--  1 root root     402 Sep 29 10:11 exceptions.py
+-rw-r--r--  1 root root     437 Sep 29 10:11 exceptions.pyi
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 experimental
+drwxr-xr-x  8 root root    4096 Sep 29 10:11 frontend
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 helpers
+drwxr-xr-x  5 root root    4096 Sep 29 10:11 include
+drwxr-xr-x  2 root root    4096 Sep 29 10:11 libs
+drwxr-xr-x  4 root root    4096 Sep 29 10:11 op
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset1
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset10
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset11
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset12
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset13
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset14
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset15
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset16
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset17
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset2
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset3
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset4
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset5
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset6
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset7
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset8
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 opset9
+-rw-r--r--  1 root root    6056 Sep 29 10:11 package_utils.py
+-rw-r--r--  1 root root    2154 Sep 29 10:11 package_utils.pyi
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 passes
+drwxr-xr-x  4 root root    4096 Sep 29 10:11 preprocess
+drwxr-xr-x 11 root root    4096 Sep 29 10:11 properties
+drwxr-xr-x  5 root root    4096 Sep 29 10:11 tools
+drwxr-xr-x  3 root root    4096 Sep 29 10:11 torch
+drwxr-xr-x  4 root root    4096 Sep 29 10:11 utils
+=== ldd .venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_intel_cpu_plugin.so ===
+	linux-vdso.so.1 (0x00007fffa31f5000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x000078f543812000)
+	libopenvino.so.2640 => /workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino.so.2640 (0x000078f53e600000)
+	libtbb.so.12 => /workspace/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbb.so.12 (0x000078f5437a0000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000078f53e382000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000078f53e299000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000078f543770000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x000078f54376b000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000078f53e087000)
+	/lib64/ld-linux-x86-64.so.2 (0x000078f54382c000)
+
+=== readelf -d NEEDED ===
+ 0x000000000000000f (RPATH)              Library rpath: [$ORIGIN]
+ 0x0000000000000001 (NEEDED)             Shared library: [libdl.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libopenvino.so.2640]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtbb.so.12]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libpthread.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]
+
+=== oneDNN strings ===
+ for use with oneDNN.
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/amx_tile_configure.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/brgemm/jit_brdgmm_kernel.hpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/brgemm/jit_brgemm_amx_uker.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/brgemm/jit_brgemm_kernel.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/cpu_reducer.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/gemm/f32/common_f32.hpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/gemm/f32/jit_sse41_gemv_n_f32_kern.hpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/gemm/f32/jit_sse41_gemv_t_f32_kern.hpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/gemm/s8x8s32/common_u8.hpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/injectors/jit_uni_binary_injector.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/injectors/jit_uni_eltwise_injector.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/injectors/jit_uni_postops_injector.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/ip_convolution.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/jit_avx2_1x1_conv_kernel_f32.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/jit_avx2_conv_kernel_f32.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/jit_avx512_common_1x1_conv_kernel.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/jit_avx512_common_conv_kernel.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/jit_avx512_core_amx_1x1_conv_kernel.cpp
+../../../../../../../../../../repos/openvino/src/plugins/intel_cpu/thirdparty/onednn/src/cpu/x64/jit_avx512_core_amx_conv_kernel.cpp
+
+=== vendored dnnl symbols (nm -D count) ===
+0
+
+=== TBB strings ===
+	@*N3tbb6detail2d19start_forINS1_13blocked_rangeIiEENS1_25parallel_for_body_wrapperIZNK2ov9intel_cpu11CpuParallel18cpu_parallel_for3dImmmZNS6_10Extensions3Cpu4AVX2L23mha_single_token_kernelIfhfEEvRKNS7_11PlainTensorESG_SG_SG_SG_SG_RSE_SH_SH_bbfSG_SG_SH_mmbSG_RKSt10shared_ptrIS8_EEUlmmmE_EEvRKT_RKT0_RKT1_RKT2_EUliE_iEEKNS1_16auto_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeIiEENS1_18lambda_reduce_bodyIS4_iZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumIiiZNS7_4node15DetectionOutput7executeERKN4dnnl6streamEEUlmE_EET0_RKT_RKSH_RKT1_EUlRKS4_iE0_ZNKS9_IiiSG_EESH_SK_SM_SP_EUliiE0_EEKNS1_18static_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeIiEENS1_18lambda_reduce_bodyIS4_iZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumIiiZNS7_4node15DetectionOutput7executeERKN4dnnl6streamEEUlmE_EET0_RKT_RKSH_RKT1_EUlRKS4_iE_ZNKS9_IiiSG_EESH_SK_SM_SP_EUliiE_EEKNS1_18simple_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNJitExecutor7mvn_plnEPKhPhPKvRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE0_EET0_RKT_RKST_RKT1_EUlRKS4_fE0_ZNKS9_ImfSS_EEST_SW_SY_S11_EUlffE0_EEKNS1_18static_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNJitExecutor7mvn_plnEPKhPhPKvRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE0_EET0_RKT_RKST_RKT1_EUlRKS4_fE_ZNKS9_ImfSS_EEST_SW_SY_S11_EUlffE_EEKNS1_18simple_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNJitExecutor7mvn_plnEPKhPhPKvRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE_EET0_RKT_RKST_RKT1_EUlRKS4_fE0_ZNKS9_ImfSS_EEST_SW_SY_S11_EUlffE0_EEKNS1_18static_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNJitExecutor7mvn_plnEPKhPhPKvRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE_EET0_RKT_RKST_RKT1_EUlRKS4_fE_ZNKS9_ImfSS_EEST_SW_SY_S11_EUlffE_EEKNS1_18simple_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNRefExecutor7mvn_refEPKhPhRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE0_EET0_RKT_RKSR_RKT1_EUlRKS4_fE0_ZNKS9_ImfSQ_EESR_SU_SW_SZ_EUlffE0_EEKNS1_18static_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNRefExecutor7mvn_refEPKhPhRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE0_EET0_RKT_RKSR_RKT1_EUlRKS4_fE_ZNKS9_ImfSQ_EESR_SU_SW_SZ_EUlffE_EEKNS1_18simple_partitionerEEE
+*N3tbb6detail2d126start_deterministic_reduceINS1_13blocked_rangeImEENS1_18lambda_reduce_bodyIS4_fZNK2ov9intel_cpu11CpuParallel16cpu_parallel_sumImfZZNS7_4node3MVN14MVNRefExecutor7mvn_refEPKhPhRKSt6vectorImSaImEERKSt10shared_ptrIS8_EENKUliE_clEiEUlmE_EET0_RKT_RKSR_RKT1_EUlRKS4_fE0_ZNKS9_ImfSQ_EESR_SU_SW_SZ_EUlffE0_EEKNS1_18static_partitionerEEE
+
+=== oneDNN version string ===
+
+=== ONEDNN_VERBOSE support strings ===
+could not create a primitive descriptor for the AUGRU forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the GRU forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the LBR AUGRU forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the LBR GRU forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the LSTM forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the concat primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the convolution forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the deconvolution forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the inner product forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the lrn forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the matmul primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the reorder primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+could not create a primitive descriptor for the vanilla RNN forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+
+=== isa name strings ===
+
+=== SHA256 ===
+493c2febdacbffe3cf32996c0aa2dd8e9edc69844df849e9800307bf686ee361  .venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_intel_cpu_plugin.so
+f13a529596831d118cd7bfe4f1bbb2ed005cef765c1ccee10bb555839b495c82  .venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino.so.2640
+ac9518497a4f2cb6729792730f145ee58367316031511923fef263c9ac81ca61  .venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbb.so.12

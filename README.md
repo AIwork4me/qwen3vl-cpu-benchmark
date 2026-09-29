@@ -32,12 +32,51 @@ A/B benchmark on **AMD Ryzen AI Max+ PRO 395** (Strix Halo, 16C/32T, AVX-512 + A
 | Memory | 7.59 GiB CPU RSS | 7.35 GiB | 16.63 GiB GPU (GTT, resident) | 14.57 GiB CPU RSS |
 | Compute unit busy | CPU ~1318% (16 thr) | CPU | **GPU 85%** (busy mean) | CPU ~1332% (GPU free) |
 | Model disk | 9.351 GB | same weights | 17.534 GB | 8.810 GB |
-| True INT8 GEMM | **NO** | **YES** | n/a (BF16 weights, fp32 GEMM) | UNKNOWN¹ |
+| True INT8 GEMM | **NO** | **YES** | n/a (BF16 weights, fp32 GEMM) | YES — dynamic-quantization VNNI kernels¹ (root-cause) |
 | Cosine vs BF16 reference | 0.9989–0.9993 | 0.9978–0.9986 | **1.000000** | 0.9972–0.9985 |
 
-¹ OpenVINO's internal oneDNN kernel choice was not dumped; what is proven: int8 weights resident, CPU execution asserted at runtime, accuracy consistent with int8 weight-only compute.
+¹ OpenVINO's internal oneDNN kernel choice was not dumped; what is proven: int8 weights resident, CPU execution asserted at runtime, accuracy consistent with int8 weight-only compute. **Resolved 2026-09-29 by the root-cause investigation — see [Root-cause investigation](#root-cause-investigation).**
 
 Thread sweep (both runtimes): **16 (default) is fastest**; 8 is clearly slower; 32 gives no gain.
+
+## Root-cause investigation
+
+**Before root-cause investigation:** `True INT8 GEMM: UNKNOWN` (footnote ¹ above).
+
+**After root-cause investigation (2026-09-29, see
+[report/OPENVINO_ZEN5_ROOT_CAUSE.md](report/OPENVINO_ZEN5_ROOT_CAUSE.md)):**
+the OpenVINO CPU hot path keeps the INT8 weights resident and executes
+**AVX-512 VNNI integer dot-product kernels** (`vpdpbusd`, verified by JIT
+disassembly) with **activations dynamically quantized in-flight**
+(`DYNAMIC_QUANTIZATION_GROUP_SIZE=32` default) — i.e. weight-only INT8
+storage + runtime dynamic activation quantization, **still not W8A8**.
+Causal ablations: disabling dynamic quantization removes every VNNI
+instruction from the JIT kernels and is 1.37–1.47× slower; an FP16-weights
+build of the same architecture is 1.21–1.47× slower at 1.999× the bytes;
+`DQ=128` is a further free 1.16–1.26× win. The 22–69× vs the ComfyUI CPU
+product path is dominated by eliminating the per-encode 13.9 GB dequant +
+fp32 GEMM — not by VNNI alone.
+
+Investigation mechanics (re-run on an ISA-equivalent replica host, EPYC 9334 /
+Zen 4, byte-identical model, numerically identical outputs cos=1.0000001;
+original Ryzen numbers were not re-measured and are never overwritten):
+OpenVINO 2026.4.0 wheel = statically-vendored oneDNN v3.13.0 + oneTBB;
+execType `brgemm_avx512_bf16` = the *activation dtype*, not the compute
+dtype; AVX-512 is a hard requirement (AVX2 ceilings cannot run the model);
+`ONEDNN_MAX_CPU_ISA=AVX512_CORE` does **not** disable VNNI on this build, so
+a pure VNNI-vs-no-VNNI number does not exist here; perf/PMU hotspot proof was
+not obtainable (container). All evidence levels and per-claim scope are in
+the report.
+
+### CPU-utilization figure clarification (1332% vs ~1550–1570%)
+
+Both numbers are real, different aggregation windows: `~1332%` is the
+**whole-process** `proc_cpu_mean_pct` of the standalone `default` run
+(`openvino_default.json` `full_run`, start→stop including load + idle gaps;
+the bridge run's whole-process figure is 1312%). During the **warm-encode
+windows themselves** the process averages **1509–1572%** (≈15.1–15.7 of 16
+threads; per-prompt `interval_stats.proc_cpu_mean_pct`). No historical number
+was changed; headline tables quote the whole-process figure.
 
 ## The INT8 truth (evidence chain)
 
@@ -111,7 +150,7 @@ Three independent read-only subagent checkpoints (setup/downloads → ComfyUI ro
 
 - OS page cache was **not** dropped (no root); "cold" = fresh process, model file may be page-cached. Warm numbers are unaffected.
 - ComfyUI `model_load_s=0.30 s` is the safetensors mmap-assign; the real disk page-in shows up inside the first encode (12.11 s).
-- OpenVINO internal GEMM dtype not dumped → marked UNKNOWN, deliberately **not** claimed as W8A8.
+- OpenVINO internal GEMM dtype not dumped at benchmark time → marked UNKNOWN, deliberately **not** claimed as W8A8. (Resolved later the same day by the root-cause investigation — dynamic-quantization VNNI kernels, still not W8A8; see above.)
 - End-to-end image-generation A/B was out of scope for this round (conditioning semantics verified; the 33 GB Qwen-Image-2.1 checkpoint was not pulled).
 
 ## Repo layout

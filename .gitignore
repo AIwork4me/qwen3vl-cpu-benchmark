@@ -6,3 +6,6 @@ __pycache__/
 *.pyc
 logs/
 nohup.out
+# root-cause investigation: raw JIT binaries stay local (summaries/hashes committed)
+results/openvino_isa/jit_dump/*.bin
+runtime_model_*.bin

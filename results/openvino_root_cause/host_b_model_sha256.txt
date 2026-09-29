@@ -1,0 +1,5 @@
+# HOST B model artifacts (re-downloaded from ModelScope 2026-09-29)
+# both match HOST A hashes in environment/model_sha256.txt
+755ff48c68db08a571aed331f0558f75be1d9ddb0fdeb95506a8a5eafc54b64d  models/qwen3vl-openvino-int8/openvino_language_model.bin
+391a745c125520cc3e7c29270017fccdc32f73135401229546a52c62a5c6b4d7  models/qwen3vl-openvino-int8/openvino_text_embeddings_model.bin
+e09c1469532cbd83646f12deb7d3ca3085b159d84eba990b1b3da40d59915cbc  models/qwen3vl-openvino-int8/openvino_language_model.xml

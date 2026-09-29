@@ -1,0 +1,49 @@
+onednn_verbose,v1,info,oneDNN v3.13.0 (commit 1289c3b65dd6a119a5ed12a816517d9c3a21d81b)
+onednn_verbose,v1,info,cpu,runtime:threadpool,nthr:16
+onednn_verbose,v1,info,cpu,isa:Intel AVX-512 with Intel DL Boost and bfloat16 support
+onednn_verbose,v1,info,gpu,runtime:none
+onednn_verbose,v1,primitive,info,template:operation,engine,primitive,implementation,prop_kind,memory_descriptors,attributes,auxiliary,problem_desc,exec_time
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.00805664
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.0012207
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.0012207
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.000976562
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.000976562
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit:uni,undef,src:u8::blocked:ab::f0 dst:u8::blocked:AB4b32a4b::f0,,,4096x4096,1.68018
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit_direct_copy:uni,undef,src:f32::blocked:abc::f0 dst:bf16::blocked:abc::f0,,,1x39x4096,0.0288086
+[inv] openvino 2026.4.0-22959-99c81491cc3-releases/2026/4 devices=['CPU', 'GPU']
+[inv] pre-norm node: __module.model.language_model.layers.35/aten::add/Add_1
+[inv] read 0.100s compile 1.070s
+[inv] supported_properties:
+    CPU_DENORMALS_OPTIMIZATION = False
+    CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE = 1.0
+    DYNAMIC_QUANTIZATION_GROUP_SIZE = 32
+    ENABLE_CPU_PINNING = True
+    ENABLE_CPU_RESERVATION = False
+    ENABLE_HYPER_THREADING = False
+    ENABLE_TENSOR_PARALLEL = False
+    EXECUTION_DEVICES = ['CPU']
+    EXECUTION_MODE_HINT = ExecutionMode.PERFORMANCE
+    INFERENCE_NUM_THREADS = 16
+    INFERENCE_PRECISION_HINT = <Type: 'bfloat16'>
+    KEY_CACHE_GROUP_SIZE = 0
+    KEY_CACHE_PRECISION = <Type: 'uint8_t'>
+    KV_CACHE_PRECISION = <Type: 'uint8_t'>
+    LOG_LEVEL = Level.NO
+    MODEL_DISTRIBUTION_POLICY = set()
+    NETWORK_NAME = Model0
+    NUM_STREAMS = 1
+    OPTIMAL_NUMBER_OF_INFER_REQUESTS = 1
+    PERFORMANCE_HINT = LATENCY
+    PERFORMANCE_HINT_NUM_REQUESTS = 0
+    PERF_COUNT = YES
+    RUNTIME_REQUIREMENTS = meta=1.0;ov=2026.4.0;isa=Intel AVX-512 with Intel DL Boost and bfloat16 support
+    SCHEDULING_CORE_TYPE = SchedulingCoreType.ANY_CORE
+    SUPPORTED_PROPERTIES = {'SUPPORTED_PROPERTIES': 'RO', 'NETWORK_NAME': 'RO', 'OPTIMAL_NUMBER_OF_INFER_REQUESTS': 'RO', 'NUM_STREAMS': 'RO', 'INFERENCE_NUM_THREADS': 'RO', 'PERF_COUNT': 'RO', 'INFERENCE_PRECISION_HINT': 'RO', 'PERFORMANCE_HINT': 'RO', 'EXECUTION_MODE_HINT': 'RO', 'PERFORMANCE_HINT_NUM_REQUESTS': 'RO', 'ENABLE_CPU_PINNING': 'RO', 'ENABLE_CPU_RESERVATION': 'RO', 'SCHEDULING_CORE_TYPE': 'RO', 'MODEL_DISTRIBUTION_POLICY': 'RO', 'ENABLE_HYPER_THREADING': 'RO', 'EXECUTION_DEVICES': 'RO', 'CPU_DENORMALS_OPTIMIZATION': 'RO', 'LOG_LEVEL': 'RO', 'CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE': 'RO', 'ENABLE_TENSOR_PARALLEL': 'RO', 'TBB_PARTITIONER': 'RO', 'DYNAMIC_QUANTIZATION_GROUP_SIZE': 'RO', 'KV_CACHE_PRECISION': 'RO', 'KEY_CACHE_PRECISION': 'RO', 'VALUE_CACHE_PRECISION': 'RO', 'KEY_CACHE_GROUP_SIZE': 'RO', 'VALUE_CACHE_GROUP_SIZE': 'RO', 'RUNTIME_REQUIREMENTS': 'RO'}
+    TBB_PARTITIONER = TbbPartitioner.STATIC
+    VALUE_CACHE_GROUP_SIZE = 0
+    VALUE_CACHE_PRECISION = <Type: 'uint8_t'>
+[inv] DYNAMIC_QUANTIZATION_GROUP_SIZE supported: True
+[inv] top runtime op/exec types:
+     2712  ExecutionNode
+        6  Parameter
+        3  Result

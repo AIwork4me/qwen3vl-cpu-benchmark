@@ -1,0 +1,23 @@
+[matrix] default proc 1 rc=0
+[matrix] isa_bf16 proc 1 rc=0
+[matrix] vnni_f32 proc 1 rc=0
+[matrix] core_f32 proc 1 rc=0
+[matrix] dq0 proc 1 rc=0
+[matrix] dq128 proc 1 rc=0
+[matrix] default proc 2 rc=0
+[matrix] isa_bf16 proc 2 rc=0
+[matrix] vnni_f32 proc 2 rc=0
+[matrix] core_f32 proc 2 rc=0
+[matrix] dq0 proc 2 rc=0
+[matrix] dq128 proc 2 rc=0
+[matrix] default proc 3 rc=0
+[matrix] isa_bf16 proc 3 rc=0
+[matrix] vnni_f32 proc 3 rc=0
+[matrix] core_f32 proc 3 rc=0
+[matrix] dq0 proc 3 rc=0
+[matrix] dq128 proc 3 rc=0
+[matrix] err_avx2 proc 1 rc=1
+[matrix] err_avx2_vnni proc 1 rc=1
+[matrix] err_core proc 1 rc=1
+[matrix] err_vnni proc 1 rc=1
+[matrix] complete -> /workspace/qwen3vl-cpu-benchmark/results/openvino_isa/isa_matrix.csv
