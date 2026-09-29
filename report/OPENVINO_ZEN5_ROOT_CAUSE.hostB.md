@@ -51,8 +51,10 @@ Date: 2026-09-29 · Investigation branch: `investigate/openvino-zen5-vnni-root-c
    (`AB4b32a4b`) and dequantization is fused into the JIT kernel. An FP16
    model of the same architecture (same export pipeline) runs **1.21–1.47×
    slower** and needs **1.999× the weight bytes, 1.94× RSS**.
-6. The default group size 32 is **not optimal** — `DQ=128` is another
-   **1.16–1.26× faster** than the shipped default (P1 0.157 s on HOST B).
+6. The default group size 32 is **not latency-optimal** — `DQ=128` is
+   **1.16–1.26× faster** than the shipped default (P1 0.157 s on HOST B), at
+   cosine 0.998 vs the default's numerics (DQ=64: ~1.2× at cosine 0.999 —
+   the closer-numerics trade-off; HOST A measurements agree in direction).
 7. The 22–69× vs the ComfyUI CPU product path is dominated by *structural*
    factors (no per-encode 13.9 GB dequant, no fp32 GEMM, persistent packed
    weights, fused JIT, 1.26 s load) — **not** by "VNNI magic". Even ComfyUI's
@@ -207,12 +209,19 @@ median across processes (HOST B, seconds):
 `DYNAMIC_QUANTIZATION_GROUP_SIZE` is supported, writable, and the override is
 reflected by `get_property` (0/32/64/128 all verified applied).
 
-| group size | P1 | P2 | P3 | VNNI kernels in JIT |
-|---|---:|---:|---:|---|
-| 0 (disabled) | 0.2632 | 0.6425 | 1.3067 | none (vdpbf16ps only) |
-| 32 (default) | 0.1922 | 0.4375 | 0.9311 | 12×208 vpdpbusd |
-| 64 | 0.1658 | 0.3942 | 0.8691 | (not dumped) |
-| 128 | 0.1565 | 0.3786 | 0.7393 | (not dumped) |
+| group size | P1 | P2 | P3 | cos vs HOST-A ref (P1/P2/P3) | VNNI kernels in JIT |
+|---|---:|---:|---:|---|---|
+| 0 (disabled) | 0.2632 | 0.6425 | 1.3067 | 0.99911 / 0.99928 / 0.99939 | none (vdpbf16ps only) |
+| 32 (default) | 0.1922 | 0.4375 | 0.9311 | **1.0000001 / 1.0000001 / 1.0** | 12×208 vpdpbusd |
+| 64 | 0.1658 | 0.3942 | 0.8691 | 0.99897 / 0.99916 / 0.99925 | (not dumped) |
+| 128 | 0.1565 | 0.3786 | 0.7393 | 0.99807 / 0.99791 / 0.99818 | (not dumped) |
+
+(Cosines measured in a follow-up run with `--compare-npy`
+(`results/openvino_root_cause/investigate_dqcos_*.json`); the original
+ablation runs did not capture cosine — a gap found by self-audit and closed
+by the follow-up data. The HOST-A (Zen 5) main report measured the same
+trade-off against the BF16 reference: DQ=128 cos 0.9959–0.9971 vs DQ=32
+0.9972–0.9985 — direction identical on both hosts.)
 
 Answers to the task's five questions:
 1. Default **does** enable dynamic activation quantization (property=32 +
@@ -221,9 +230,15 @@ Answers to the task's five questions:
    changes the *kernel*: bf16 `vdpbf16ps` brgemm on decompressed weights.
 3. Disabling removes every VNNI kernel from the dump. **Yes, they vanish.**
 4. Latency cost of disabling: **+37% (P1) / +47% (P2) / +40% (P3)**.
-5. Output cosine vs HOST-A reference unchanged (1.0000001 at DQ=32; the DQ=0
-   path also produces cos≈1.0 — numerically both are valid; they differ only
-   in rounding of activations, within float32 noise).
+5. Output cosine vs the HOST-A (DQ=32) reference is **exactly 1.0000001 only
+   at DQ=32** — group size is numerics-relevant, not a pure speed knob:
+   DQ=64 → 0.9990–0.9994, DQ=128 → 0.9979–0.9982, DQ=0 (bf16 compute) →
+   0.9991–0.9994. These sit in the same band as the repo's accepted variants
+   (OV-bridge 0.9972–0.9985, ComfyUI A1 0.9978–0.9986, A2 0.9989–0.9993 vs
+   BF16 reference), so DQ=128's accuracy cost is comparable to switching
+   between already-accepted paths — but it is **not** numerically equivalent,
+   and DQ=64 offers a better speed/accuracy trade-off than DQ=128 if closer
+   numerics are required.
 
 ## Weight-compression effect (Phase 9 + 10)
 
@@ -264,7 +279,7 @@ NOT ESTABLISHED / DISPROVEN.
 | Integer MatMul actually executed | vpdpbusd in 12 JIT kernels (machine code) | DQ=0 removes them + slows | same as above | CONFIRMED at dispatch+machine-code level; PMU hotspot NOT ESTABLISHED (no perf) |
 | AVX-512 (vs AVX2) | primitive-creation failure at AVX2/AVX2_VNNI ceilings | ceiling runs | prerequisite; magnitude not measurable (no fallback) | CONFIRMED (requirement), magnitude NOT ESTABLISHED |
 | AVX512_VNNI increment over avx512 bf16-dot | JIT: DQ kernels are VNNI; ceiling cannot disable VNNI on this build | DQ=0 (bundles bytes+VNNI) | 1.37–1.47× bundled; pure ISA increment NOT ESTABLISHED | STRONG EVIDENCE (bundled) |
-| DQ group size tuning (32→128) | matrix | DQ sweep | additional 1.16–1.26× | CONFIRMED |
+| DQ group size tuning (32→64/128) | matrix + dqcos runs | DQ sweep | 1.16–1.26× faster; cosine 0.998 (DQ=128) / 0.999 (DQ=64) vs shipped numerics | CONFIRMED (speed); accuracy cost CONFIRMED small but non-zero |
 | Threading (16c, 1 stream, LATENCY) | HOST A sweep + HOST B replica | 8/32 threads (HOST A) | 8 slower, 32 flat | CONFIRMED (HOST A) |
 | OpenVINO graph/runtime (persistent packed weights, fused dequant, no per-call Python) | load 1.26 s; one-time blocked reorder; JIT fusion; vs A1-forced (true int8 GEMM) still 12–39× slower (HOST A) | A1 vs OV | 39×/20×/12× (HOST A: 7.32/7.46/8.36 s vs 0.187/0.377/0.687 s) | STRONG EVIDENCE |
 | Avoided per-encode full dequant (13.9 GB/encode, 252 layers) | HOST A runtime counters | OV keeps u8 + fused dequant | major part of the 22–69× | CONFIRMED |
@@ -309,7 +324,8 @@ path could theoretically do.
   model artifact run through JIT kernels containing `vpdpbusd`, with
   dynamically quantized activations, u8 weights resident, and this path is
   1.37–1.47× faster than the bf16-decompressed alternative and 1.21–1.47×
-  faster than an FP16-weights model; DQ=128 adds another 1.16–1.26×.
+  faster than an FP16-weights model; DQ=128 adds another 1.16–1.26× at
+cosine 0.998 (DQ=64 ≈1.2× at 0.999).
 - On HOST A (transfer): same wheel + byte-identical model + same ISA decision
   inputs + cosine-1.0 replica ⇒ the same dispatch decision; STRONG EVIDENCE,
   not a direct measurement.
@@ -403,8 +419,11 @@ taskset -c 0-15 .venv-openvino/bin/python scripts/investigate_openvino_runtime.p
 - An FP16-weights build of the same model is 1.21–1.47× slower and uses
   1.999× the weight bytes (RSS 1.94×).
 - Raising the dynamic-quantization group size to 128 gives a further
-  1.16–1.26× speedup at unchanged output cosine — a free tuning win found by
-  this investigation.
+  1.16–1.26× speedup at cosine 0.998 vs the shipped-default numerics
+  (same band as the repo's other accepted int8 variants; DQ=64 is the
+  closer-numerics option at ~1.2×) — a speed/accuracy tuning trade-off
+  found by this investigation, confirmed in the same direction by the
+  HOST-A (Zen 5) measurements in the main report.
 
 ### Strong evidence (needs the qualifier)
 
