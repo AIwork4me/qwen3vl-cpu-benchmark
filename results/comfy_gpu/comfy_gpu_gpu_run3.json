@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "timestamp": "2026-09-29T16:54:23.491805",
+    "model_path": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1/text_encoders/qwen3vl_8b_bf16.safetensors",
+    "model_disk_bytes": 17534334616,
+    "torch_version": "2.12.0+rocm7.14.0",
+    "hip_version": "7.14.60850",
+    "gpu_name": "AMD Radeon 8060S Graphics",
+    "comfy_device": "cuda:0",
+    "threads": {
+      "torch_num_threads": 32
+    },
+    "tokenizer_init_and_tokenize_s": 0.002633992,
+    "model_load_s": 4.480513073,
+    "post_load_peak_rss_bytes": 18744713216,
+    "gtt_pool_free_at_start_gib": 90.9,
+    "gtt_pool_total_gib": 100.0,
+    "alloc_after_load_bytes": 17548027904,
+    "audit": {
+      "weight_devices": [
+        "cuda:0"
+      ],
+      "weight_dtypes": [
+        "torch.bfloat16"
+      ],
+      "n_modules": 778,
+      "compute_input_dtypes": [
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32"
+      ],
+      "hooked": [
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.q_proj",
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.k_proj",
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.v_proj"
+      ],
+      "patcher_load_device": "cuda",
+      "patcher_offload_device": "cuda"
+    },
+    "gpu_busy_pct_mean": 84.5,
+    "gpu_busy_pct_max": 100,
+    "gpu_busy_n_samples": 292,
+    "peak_gpu_alloc_bytes": 17856901632,
+    "gtt_pool_free_at_end_gib": 73.9,
+    "full_run": null
+  },
+  "prompts": {
+    "P1": {
+      "n_tokens": 39,
+      "first_encode_s": 0.60572503,
+      "warm_encode_s": [
+        0.608980305,
+        0.621963463,
+        0.589970497,
+        0.58696469,
+        0.599066478
+      ],
+      "warmup_s": 1.097358007,
+      "interval_stats": {
+        "start_label": "P1_warmup",
+        "end_label": "P1_warm",
+        "wall_s": 3.612866197,
+        "peak_rss_bytes": 1499037696,
+        "peak_vms_bytes": 39047151616,
+        "sys_used_peak_bytes": 24153907200,
+        "sys_available_min_bytes": 76847349760,
+        "cpu_util_mean_pct": 14.22,
+        "cpu_util_max_pct": 44.7,
+        "proc_cpu_mean_pct": 282.23,
+        "proc_cpu_max_pct": 1276.4,
+        "threads_max": 162,
+        "cpu_freq_mean_mhz": 1844.8,
+        "n_samples": 72
+      },
+      "output": {
+        "shape": [
+          1,
+          25,
+          4096
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "cuda_memory": {
+        "allocated_bytes": 17627719680,
+        "max_allocated_bytes": 17835220992,
+        "reserved_bytes": 18077450240
+      }
+    },
+    "P2": {
+      "n_tokens": 81,
+      "first_encode_s": null,
+      "warm_encode_s": [
+        1.183972281,
+        1.244967955,
+        1.248016281,
+        1.195940079,
+        1.198010405
+      ],
+      "warmup_s": 1.288381034,
+      "interval_stats": {
+        "start_label": "P2_warmup",
+        "end_label": "P2_warm",
+        "wall_s": 7.281013217,
+        "peak_rss_bytes": 1499045888,
+        "peak_vms_bytes": 39047151616,
+        "sys_used_peak_bytes": 23882203136,
+        "sys_available_min_bytes": 77119053824,
+        "cpu_util_mean_pct": 11.73,
+        "cpu_util_max_pct": 41.2,
+        "proc_cpu_mean_pct": 239.5,
+        "proc_cpu_max_pct": 1215.6,
+        "threads_max": 162,
+        "cpu_freq_mean_mhz": 1871.9,
+        "n_samples": 146
+      },
+      "output": {
+        "shape": [
+          1,
+          67,
+          4096
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "cuda_memory": {
+        "allocated_bytes": 17627719680,
+        "max_allocated_bytes": 17842247168,
+        "reserved_bytes": 18077450240
+      }
+    },
+    "P3": {
+      "n_tokens": 185,
+      "first_encode_s": null,
+      "warm_encode_s": [
+        1.818051041,
+        1.787942415,
+        1.82694929,
+        1.809013173,
+        1.8539265
+      ],
+      "warmup_s": 1.807801641,
+      "interval_stats": {
+        "start_label": "P3_warmup",
+        "end_label": "P3_warm",
+        "wall_s": 10.920008315,
+        "peak_rss_bytes": 1499332608,
+        "peak_vms_bytes": 39047151616,
+        "sys_used_peak_bytes": 23882731520,
+        "sys_available_min_bytes": 77118525440,
+        "cpu_util_mean_pct": 10.68,
+        "cpu_util_max_pct": 42.9,
+        "proc_cpu_mean_pct": 228.01,
+        "proc_cpu_max_pct": 1258.2,
+        "threads_max": 162,
+        "cpu_freq_mean_mhz": 1858.8,
+        "n_samples": 218
+      },
+      "output": {
+        "shape": [
+          1,
+          171,
+          4096
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "cuda_memory": {
+        "allocated_bytes": 17627719680,
+        "max_allocated_bytes": 17856901632,
+        "reserved_bytes": 18077450240
+      }
+    }
+  }
+}

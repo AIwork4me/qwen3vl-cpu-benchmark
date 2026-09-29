@@ -27,6 +27,7 @@ VARIANTS = [
     ("comfy_int8_convrot_A2_product", os.path.join(RES, "comfy_cpu", "cond_{P}.npy")),
     ("comfy_int8_convrot_A1_forced", os.path.join(RES, "comfy_cpu", "cond_{P}_a1.npy")),
     ("openvino_int8_bridge", os.path.join(RES, "openvino_cpu", "hidden_{P}_bridge.npy")),
+    ("comfy_bf16_radeon_gpu", os.path.join(RES, "comfy_gpu", "cond_{P}_gpu.npy")),
 ]
 
 

@@ -29,16 +29,23 @@ def load(path):
 
 def comfy_rows():
     rows = []
-    for jpath in sorted(glob.glob(os.path.join(RES, "comfy_cpu", "comfy_*.json"))):
+    for jpath in sorted(glob.glob(os.path.join(RES, "comfy_cpu", "comfy_*.json"))) + \
+            sorted(glob.glob(os.path.join(RES, "comfy_gpu", "comfy_gpu_*.json"))):
         tag = os.path.basename(jpath)[6:-5]
-        if tag.startswith("smoke"):
+        if "smoke" in tag:
             continue
         d = load(jpath)
         meta = d["meta"]
+        if meta.get("force_quant_mm"):
+            route = "comfy_int8_convrot_A1_forced"
+        elif "gpu_name" in meta:
+            route = "comfy_bf16_radeon_gpu"
+        else:
+            route = "comfy_int8_convrot_A2_product"
         for pid, pd in d["prompts"].items():
             w = pd["warm_encode_s"]
             rows.append({
-                "route": "comfy_int8_convrot_A1_forced" if meta.get("force_quant_mm") else "comfy_int8_convrot_A2_product",
+                "route": route,
                 "config": tag,
                 "prompt": pid,
                 "n_tokens": pd["n_tokens"],
@@ -48,12 +55,16 @@ def comfy_rows():
                 "warm_p50_s": round(statistics.median(w), 4),
                 "warm_min_s": round(min(w), 4),
                 "warm_max_s": round(max(w), 4),
-                "peak_rss_gb": round(pd["peak_rss_bytes"] / 2**30, 3),
+                "peak_rss_gb": round((pd["peak_rss_bytes"] if "peak_rss_bytes" in pd
+                                      else pd["interval_stats"]["peak_rss_bytes"]) / 2**30, 3),
+                "peak_gpu_alloc_gb": (round(meta["peak_gpu_alloc_bytes"] / 2**30, 3)
+                                      if "peak_gpu_alloc_bytes" in meta else ""),
+                "gpu_busy_pct_mean": meta.get("gpu_busy_pct_mean", ""),
                 "post_load_rss_gb": round(meta.get("post_first_encode_rss_bytes", 0) / 2**30, 3),
                 "baseline_rss_gb": round((meta.get("baseline_rss_bytes") or 0) / 2**30, 3),
-                "int_mm_calls": pd["compute_counters"]["int_mm"],
-                "dequant_calls": pd["compute_counters"]["dequant"],
-                "dequant_bytes": pd["compute_counters"]["dequant_bytes"],
+                "int_mm_calls": pd.get("compute_counters", {}).get("int_mm", ""),
+                "dequant_calls": pd.get("compute_counters", {}).get("dequant", ""),
+                "dequant_bytes": pd.get("compute_counters", {}).get("dequant_bytes", ""),
                 "threads": meta["threads"]["torch_num_threads"],
                 "cpu_util_mean_pct": (pd["interval_stats"] or {}).get("proc_cpu_mean_pct"),
                 "model_disk_gb": round(meta["model_disk_bytes"] / 1e9, 3),
@@ -107,6 +118,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     cols = ["route", "config", "prompt", "n_tokens", "model_load_s", "first_encode_s",
             "warm_mean_s", "warm_p50_s", "warm_min_s", "warm_max_s", "peak_rss_gb",
+            "peak_gpu_alloc_gb", "gpu_busy_pct_mean",
             "post_load_rss_gb", "baseline_rss_gb", "int_mm_calls", "dequant_calls",
             "dequant_bytes", "threads", "cpu_util_mean_pct", "model_disk_gb"]
     with open(os.path.join(OUT, "summary.csv"), "w", newline="") as f:

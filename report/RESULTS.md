@@ -113,11 +113,48 @@ force-cast 设计关闭。
 | ComfyUI A2（产品，fp32 计算） | 0.99893 | 0.99921 | 0.99926 | 0.42–0.56 | ✓ |
 | ComfyUI A1-forced（真 int8 GEMM） | 0.99783 | 0.99845 | 0.99859 | 0.59–0.80 | ✓ |
 | OpenVINO INT8 bridge | 0.99724 | 0.99806 | 0.99845 | 0.61–0.90 | ✓ |
+| ComfyUI BF16（Radeon GPU，fp32 计算） | **1.000000** | **1.000000** | **1.000000** | 0.00006–0.00008 | ✓ |
 
 三者与 BF16 参考均高度一致（cos ≥ 0.997）；A2 最高（本就是 FP 计算）符合预期。
 bridge 若 tokenization/hidden-state 层错位，cosine 不可能达到 0.997+ —— 语义对齐由数据证实。
 
 ---
+
+## 4.5 实验 C：BF16 模型在本机 Radeon 8060S GPU 上的实测（对照路线）
+
+**环境**：torch 2.12.0+rocm7.14.0（HIP 7.14.60850），独立 venv `.venv-comfy-rocm`
+（site-packages 硬链接复用本机 SenseNova venv，源 venv 经 145 包清单 diff 验证未修改）。
+ComfyUI 产品路径不变（load_clip / QwenImage21TEModel），load_device=offload_device=cuda(HIP)。
+
+**取证**：权重全部 `cuda:0 / torch.bfloat16`；forward pre-hook 捕获前 12 个 Linear 输入 +
+`F.linear` 包装计数 —— **252 个线性层全部以 `input=fp32 × weight=fp32` 在 GPU 上执行**
+（`sd1_clip.py:279` 强制 fp32 的同一设计在 GPU 上生效）。即 GPU 路线的真实形态是
+**"BF16 存储 → cast → FP32 GEMM"**，不是 bf16 tensor-core 计算。
+
+| Metric | ComfyUI BF16 → GPU（产品路径） | OpenVINO INT8 bridge（CPU） |
+|---|---:|---:|
+| Model load（真实 disk→显存） | 4.48 s | 1.26 s |
+| Warm P1（25 tok） | 0.601 s（3-run 中位） | **0.187 s** |
+| Warm P2（67 tok） | 1.228 s | **0.377 s** |
+| Warm P3（171 tok） | 1.834 s | **0.687 s** |
+| 计算单元占用 | GPU busy 84.5–85.6%（max 100%） | CPU ~1332%（16 线程，GPU 空闲） |
+| 内存占用 | 16.63 GiB GPU 侧（GTT，常驻） | 14.57 GiB 系统侧（CPU 进程） |
+| Cosine vs CPU-BF16 参考 | **1.000000**（RMSE 6–8e-5） | 0.9972–0.9985 |
+| Compute dtype 实测 | fp32 × fp32（252/252 线性层） | int8 权重常驻（内部未 dump） |
+
+**对比结论**：
+
+1. **速度：OpenVINO INT8 CPU 比 GPU BF16 还快 2.7–3.3×**（P1 3.2× / P2 3.3× / P3 2.7×）。
+   GPU 慢的原因是产品路径把全部权重 cast 成 fp32 计算（流量 ×2 且用不到 bf16 吞吐）；
+   理论上纯 bf16 compute 会显著更快，但那不是当前 ComfyUI conditioning 路径的行为。
+2. **精度：GPU BF16 与 CPU BF16 参考互为镜像验证**（cos=1.000000，仅 GEMM 求和顺序差异）——
+   同时印证了"CPU int8 路线实际是 FP32 计算"与"GPU BF16 路线实际也是 FP32 计算"两个取证结论。
+3. **资源竞争：GPU 路线把 16.63 GiB 常驻在 GPU 侧 GTT 并占用 85% GPU**，与 Qwen-Image DiT
+   直接抢算力和显存；**OV CPU 路线完全不碰 GPU**，把全部 GTT 留给 DiT。
+4. UMA 视角：两条路线最终共享同一 LPDDR5X 池（GPU 侧 16.6 GiB + 系统 14.6 GiB 并存时仍余 ~60 GiB），
+   但 OV 路线的绝对内存成本更低且不产生 GPU 上下文切换。
+5. **推荐不变且更强**：conditioning 放 CPU（OV INT8 bridge）+ DiT 放 GPU，比 conditioning 放 GPU
+   更快、更省 GPU 资源——实测推翻了"文本编码器放 GPU 更快"的直觉。
 
 ## 5. 工程判断（Q1–Q4，全部基于实测）
 
@@ -131,13 +168,16 @@ bridge 若 tokenization/hidden-state 层错位，cosine 不可能达到 0.997+ �
 最优线程 = 默认（LATENCY hint 自动 16 线程、NUM_STREAMS=1）；8 线程明显变慢，32 线程无收益。
 
 **Q3：谁 RAM 更低 / 启动更快 / encode 更快？**
-- RAM：ComfyUI 路线更低（峰值 7.6 vs 15.1 GiB）——int8 常驻 + mmap 分页，但计算时反复反量化有 CPU 代价。
-- 启动（首次可用 encode）：OpenVINO 快约 10×（0.18 vs 12.11 s）。
-- encode：语义一致前提下 OpenVINO 快 22–68×；即使对照 ComfyUI 自己的真 int8 内核（A1-forced）也快 12–39×。
+- RAM：ComfyUI CPU 路线最低（峰值 7.6 GiB）< OV bridge（15.1 GiB）< GPU BF16（16.63 GiB GPU 侧常驻）。
+- 启动（首次可用 encode）：OpenVINO 快约 10×（0.18 vs 12.11 s）；GPU 路线 load 4.48 s。
+- encode（语义一致前提）：OV bridge 0.19–0.69 s，比 ComfyUI A2 快 22–69×，比 A1-forced 快 12–39×，
+  **比 GPU BF16 产品路径快 2.7–3.3×**（§4.5）。
 
 **Q4：推荐架构（Ryzen AI Max+ 395 CPU → Qwen3-VL conditioning → Radeon GPU → DiT）？**
 **推荐 OpenVINO INT8 weight-compressed + `add_outputs` conditioning bridge 跑在 CPU**：
 - 唯一同时满足"低延迟 conditioning + CPU 执行 + 语义对齐验证通过"的方案（0.19–0.69 s vs 12.7–15.4 s）；
+- **对照实验 C 后结论更强：它甚至比把 BF16 编码器放上 GPU 还快 2.7–3.3×，且不占 GPU（GPU 路线
+  常驻 16.63 GiB GTT + busy 85%，会直接挤压 DiT）**；
 - bridge 零重算（IR 图内已有 layers.35 残差节点），无需重导出模型；
 - 16 GiB 峰值对 94 GiB UMA 无压力，且不与 GPU 侧 DiT 争夺 VRAM 之外的 CPU 资源（编码期间 CPU util ~42%）；
 - 若必须留在 ComfyUI 生态：短期可接受 A2 现状（慢 22–68×，但功能正确），

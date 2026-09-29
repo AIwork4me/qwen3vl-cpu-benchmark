@@ -41,3 +41,19 @@
 ## 结论
 
 三重独立验核全部 PASS；报告数字可复现、取证链完整、诚实性声明齐备。
+
+## CHECKPOINT 4 — GPU BF16 路线（实验 C）→ PASS
+
+- GPU 设备证据：gpu_name=AMD Radeon 8060S Graphics，weight_devices=['cuda:0']，
+  weight_dtypes=['torch.bfloat16']，load/offload device=cuda（3 run 一致）。
+- compute dtype 取证：forward pre-hook 前 12 个 Linear 输入全 fp32（JSON 内）+
+  `compute_dtype_probe.log` 全量 `in=fp32 weight=fp32 dev=cuda:0: 252` —— 互补证据链。
+- 测量质量：warm×5、3 fresh process、中位数重算 0.601/1.228/1.834 s 吻合、
+  GPU busy 84.5–85.6%、peak_gpu_alloc=16.63 GiB、load 4.48 s、20 Hz 采样核验（19.9–20.1 Hz）。
+- 精度：cosine 0.999999999977–0.999999999985（≈1.000000）、shape_equal 全 True、
+  RMSE 5.99e-5–7.69e-5。
+- venv 隔离：硬链接复制 + 源 venv 145 包 diff 为空（before/after 清单逐字节相同）。
+- 报告一致性：README 与 RESULTS.md §4.5 数字全部可复现；速度比 3.21×/3.26×/2.67×
+  与"2.7–3.3×"一致；如实区分"产品路径强制 fp32"与"理论 bf16 compute 更快"。
+
+总体：PASS（7/7）。

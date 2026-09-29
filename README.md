@@ -7,30 +7,33 @@ A/B benchmark on **AMD Ryzen AI Max+ PRO 395** (Strix Halo, 16C/32T, AVX-512 + A
 1. **ComfyUI's `qwen3vl_8b_int8_convrot` on CPU does NOT run INT8 GEMM.** It is **INT8 storage → full dequant every forward (252 layers, 13.9 GB/encode) → FP32 compute** ("A2"). Proven by zero `torch._int_mm` calls, byte-exact dequant accounting, profiler, and the source chain.
 2. **True INT8 CPU GEMM works on this chip** (`torch._int_mm` / oneDNN-VNNI). Forcing ComfyUI's own int8 kernels (A1 variant) gives **1.77×** speedup — the capability exists, the conditioning path just disables it.
 3. **OpenVINO INT8 weight-compressed wins by an order of magnitude**: with a zero-recompute `add_outputs` bridge that exactly matches Qwen-Image 2.1 conditioning semantics (cosine ≥ 0.997 vs BF16 reference), it is **22–69× faster** than ComfyUI's product path and loads ~10× faster.
-4. **Recommendation for `CPU → Qwen3-VL conditioning → Radeon GPU → Qwen-Image 2.1 DiT`:** run the encoder with **OpenVINO INT8 + the `add_outputs` bridge** (scripts included). Cost: ~2× peak RAM (15 vs 7.6 GiB, still only 16% of 94 GiB).
+4. **Putting the BF16 encoder on the Radeon 8060S GPU does NOT help** — measured: 0.60/1.23/1.83 s (P1/P2/P3). ComfyUI's conditioning path forces **fp32 GEMM on GPU too** (all 252 linears measured `fp32×fp32`), so the OpenVINO INT8 CPU bridge is still **2.7–3.3× faster** than the GPU route, while the GPU route parks 16.6 GiB in GTT and keeps the GPU 85% busy — competing with the DiT.
+5. **Recommendation for `CPU → Qwen3-VL conditioning → Radeon GPU → Qwen-Image 2.1 DiT`:** run the encoder with **OpenVINO INT8 + the `add_outputs` bridge** (scripts included). Cost: ~2× peak RAM (15 vs 7.6 GiB, still only 16% of 94 GiB), zero GPU occupancy.
 
 ## Decision table
 
 | You are… | Use | Why |
 |---|---|---|
-| Building a Qwen-Image 2.1 pipeline on Ryzen AI Max+ 395 / Strix Halo | **OpenVINO INT8 + bridge** (scripts/bench_openvino_bridge.py) | 0.19–0.69 s conditioning, 1.26 s load, semantics verified |
+| Building a Qwen-Image 2.1 pipeline on Ryzen AI Max+ 395 / Strix Halo | **OpenVINO INT8 + bridge** (scripts/bench_openvino_bridge.py) | 0.19–0.69 s conditioning, 1.26 s load, semantics verified, GPU left free for the DiT |
+| "Just put the encoder on the GPU" | Don't — measured 0.60–1.83 s (BF16→fp32 compute) and 85% GPU busy | OV INT8 CPU bridge is 2.7–3.3× faster and uses 0% GPU |
 | Locked into the ComfyUI ecosystem | ComfyUI product path works, but 22–69× slower; consider upstream patch to enable int8 path (A1) | A1 measured: 1.77×, cos 0.9978, kernels already ship |
 | RAM-constrained (UMA shared with GPU) | ComfyUI route uses less peak RAM | 7.6 vs 15.1 GiB |
 | Wanting TRUE int8 on CPU in ComfyUI | Flip `comfy_force_cast_weights` + `use_quantized_matmul` | See A1 evidence below; needs upstream acceptance |
 
 ## Headline numbers (warm encode, best config = 16 threads, median of 3 fresh processes)
 
-| Metric | ComfyUI INT8 ConvRot (product, A2) | ComfyUI forced-int8 (A1) | OpenVINO INT8 (bridge) |
-|---|---:|---:|---:|
-| Warm P1 (25 tok) | 12.98 s | 7.32 s | **0.187 s** |
-| Warm P2 (67 tok) | 13.73 s | 7.46 s | **0.377 s** |
-| Warm P3 (171 tok) | 15.43 s | 8.36 s | **0.687 s** |
-| Model load | 0.30 s (mmap assign; real page-in lands in first encode 12.11 s) | same | **1.26 s** (read+compile) |
-| First usable encode (cold) | 12.11 s | ~7.5 s | **0.18 s** |
-| Peak RAM | 7.59 GiB | 7.35 GiB | 14.57 GiB |
-| Model disk | 9.351 GB | same weights | 8.810 GB |
-| True INT8 GEMM | **NO** | **YES** | UNKNOWN¹ |
-| Cosine vs BF16 reference | 0.9989–0.9993 | 0.9978–0.9986 | 0.9972–0.9985 |
+| Metric | ComfyUI INT8 ConvRot (product, A2) | ComfyUI forced-int8 (A1) | ComfyUI BF16 on Radeon GPU | OpenVINO INT8 (bridge) |
+|---|---:|---:|---:|---:|
+| Warm P1 (25 tok) | 12.98 s | 7.32 s | 0.601 s | **0.187 s** |
+| Warm P2 (67 tok) | 13.73 s | 7.46 s | 1.228 s | **0.377 s** |
+| Warm P3 (171 tok) | 15.43 s | 8.36 s | 1.834 s | **0.687 s** |
+| Model load | 0.30 s (mmap assign; real page-in lands in first encode 12.11 s) | same | 4.48 s (disk→GTT) | **1.26 s** (read+compile) |
+| First usable encode (cold) | 12.11 s | ~7.5 s | 0.60 s | **0.18 s** |
+| Memory | 7.59 GiB CPU RSS | 7.35 GiB | 16.63 GiB GPU (GTT, resident) | 14.57 GiB CPU RSS |
+| Compute unit busy | CPU ~1318% (16 thr) | CPU | **GPU 85%** (busy mean) | CPU ~1332% (GPU free) |
+| Model disk | 9.351 GB | same weights | 17.534 GB | 8.810 GB |
+| True INT8 GEMM | **NO** | **YES** | n/a (BF16 weights, fp32 GEMM) | UNKNOWN¹ |
+| Cosine vs BF16 reference | 0.9989–0.9993 | 0.9978–0.9986 | **1.000000** | 0.9972–0.9985 |
 
 ¹ OpenVINO's internal oneDNN kernel choice was not dumped; what is proven: int8 weights resident, CPU execution asserted at runtime, accuracy consistent with int8 weight-only compute.
 
@@ -64,6 +67,16 @@ Standalone OpenVINO numbers with the **official chat template** (different seman
 | ComfyUI A2 (fp32 compute) | 0.99893 | 0.99921 | 0.99926 | ✓ |
 | ComfyUI A1 (true int8 GEMM) | 0.99783 | 0.99845 | 0.99859 | ✓ |
 | OpenVINO INT8 bridge | 0.99724 | 0.99806 | 0.99845 | ✓ |
+| ComfyUI BF16 on Radeon GPU (fp32 compute) | 1.000000 | 1.000000 | 1.000000 | ✓ |
+
+## BF16 on the Radeon 8060S GPU (Experiment C)
+
+Same ComfyUI product path, weights on the HIP device (torch 2.12.0+rocm7.14.0, Radeon 8060S, UMA/GTT):
+
+- Warm encode: **P1 0.601 s, P2 1.228 s, P3 1.834 s** (median of 3 fresh processes), GPU busy **85%** (max 100%), peak GPU allocation **16.63 GiB**.
+- **Compute-dtype forensics**: all 252 linear layers measured running **fp32 × fp32 GEMM** on GPU (forward-pre-hook + `F.linear` wrapper). The conditioning path forces fp32 (`sd1_clip.py:279`) on every device — so "BF16 on GPU" is *BF16 storage → cast → fp32 compute*, never bf16 tensor-core math. That is why it loses to the int8 CPU bridge.
+- Precision: cosine **1.000000** vs the CPU BF16 reference (RMSE 6–8e-5, GEMM summation-order noise only) — which also cross-validates that the CPU int8 path really computes in fp32.
+- Takeaway: the GPU route parks 16.6 GiB in GTT, keeps the iGPU at 85% busy, and is still 2.7–3.3× slower than the OpenVINO INT8 CPU bridge. Conditioning belongs on the CPU; the GPU belongs to the DiT.
 
 ## Reproduce
 
@@ -80,6 +93,9 @@ modelscope download --model OpenVINO/Qwen3-VL-8B-Instruct-int8-ov --local_dir mo
 # Experiment B: OpenVINO standalone + conditioning bridge (needs .venv-openvino: openvino>=2026.1, tokenizers, jinja2, transformers)
 .venv-openvino/bin/python scripts/bench_openvino_qwen3vl_cpu.py --tag default --warm-iters 5
 .venv-openvino/bin/python scripts/bench_openvino_bridge.py --tag bridge --warm-iters 5
+
+# Experiment C: BF16 on Radeon GPU (needs .venv-comfy-rocm: torch 2.12.0+rocm7.14.0, -r ComfyUI/requirements.txt)
+.venv-comfy-rocm/bin/python scripts/bench_comfy_bf16_gpu.py --tag gpu_run1 --warm-iters 5 --save-npy
 
 # accuracy + aggregation
 .venv-comfy/bin/python scripts/bench_bf16_reference.py
