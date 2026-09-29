@@ -1,0 +1,5 @@
+== /home/amd/SenseNova-U1.5-ROCm-work ==
+0
+== /home/amd/Desktop/muse-rocm ==
+e6eb7c2d109a76a172ae0c297de527983abd27c2
+0

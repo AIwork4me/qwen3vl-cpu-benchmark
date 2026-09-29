@@ -1,0 +1,20 @@
+{
+  "description": "Unified prompts for ComfyUI-INT8-ConvRot-CPU vs OpenVINO-INT8-CPU benchmark. All runtimes must use these exact strings.",
+  "prompts": [
+    {
+      "id": "P1",
+      "name": "short_english",
+      "text": "A cinematic photo of a white dog wearing blue goggles, standing beside a futuristic computer."
+    },
+    {
+      "id": "P2",
+      "name": "chinese_complex",
+      "text": "一只白色马尔济斯犬戴着蓝色护目镜，站在现代个人AI工作站旁边。桌面上有一台电脑和两块显示器，左侧显示代码，右侧显示一张红色跑车图片。背景是明亮的科技实验室，要求物体数量、左右关系和颜色准确。"
+    },
+    {
+      "id": "P3",
+      "name": "long_structured",
+      "text": "A wide-angle editorial photograph of a modern robotics laboratory: in the foreground, a silver humanoid robot with exactly two blue LED eyes holds a red coffee mug in its left hand and a green circuit board in its right hand; behind it, three monitors on a dark wooden desk show, from left to right, a line graph titled 'Qwen3-VL Throughput', a Python code editor with syntax highlighting, and a photograph of a white Maltese dog; two ceiling-mounted studio softboxes light the scene from above, while a floor-to-ceiling window in the background reveals a night city skyline with neon signs reading 'AI EXPO 2026'; shallow depth of field, 35mm lens, photorealistic, high dynamic range, sharp focus on the robot, bokeh background."
+    }
+  ]
+}

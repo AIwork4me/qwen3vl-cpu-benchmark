@@ -1,0 +1,8 @@
+models/
+ComfyUI/
+ComfyUI-master/
+.venv-*/
+__pycache__/
+*.pyc
+logs/
+nohup.out
