@@ -126,6 +126,7 @@ def main():
     mon = E2EMonitor(os.path.join(rawdir, f"{args.tag}.csv"), hz=20.0)
     mon.start()
     t_proc0 = now_ns()
+    epoch_at_t0 = time.time() - (t_proc0 - mon.t0) / 1e9  # epoch sec at monitor t0
 
     free0, total0 = torch.cuda.mem_get_info()
     meta = {
@@ -212,15 +213,17 @@ def main():
     dit_preload_s = None
 
     def ensure_dit_loaded():
+        """Returns True iff the load happened in THIS call (first image only)."""
         nonlocal dit_preloaded, dit_preload_s
         if dit_preloaded or args.no_dit_preload:
-            return
+            return False
         torch.cuda.synchronize()
         t0 = now_ns()
         mm.load_models_gpu([model], force_full_load=True)
         torch.cuda.synchronize()
         dit_preload_s = (now_ns() - t0) / 1e9
         dit_preloaded = True
+        return True
 
     ids = None if args.prompts == "all" else [p for p in args.prompts.split(",") if p]
     prompt_items = load_prompt_set(args.prompt_file, ids)
@@ -275,7 +278,7 @@ def main():
         """T4+T5 (+T6+T7 VAE). Returns (stage dict, image ndarray, t_ready_ns)."""
         st = {}
         noise = comfy.sample.prepare_noise(latent0, seed)
-        ensure_dit_loaded()
+        loaded_now = ensure_dit_loaded()
         step_times = []
 
         def cb(i, denoised, x, total_steps):
@@ -291,7 +294,7 @@ def main():
         t5 = now_ns()
         st["dit_s"] = (t5 - t4) / 1e9
         st["dit_steps"] = step_times
-        if dit_preload_s is not None:
+        if loaded_now:
             st["dit_preload_in_window_s"] = dit_preload_s  # first-image transfer cost
         mon.mark(f"img{idx}_dit_end")
         torch.cuda.synchronize()
@@ -302,6 +305,8 @@ def main():
         st["vae_s"] = (t7 - t6) / 1e9
         img = imgs[0].detach().float().cpu().numpy()
         img = (np.clip(img, 0, 1) * 255).astype("uint8")
+        t_post = now_ns()
+        st["postprocess_s"] = (t_post - t7) / 1e9  # D2H + uint8 conversion
         return st, img, t7
 
     images_meta = []
@@ -375,9 +380,14 @@ def main():
                 np.save(os.path.join(conddir, f"cond_{args.tag}_{item['id']}_neg.npy"),
                         cond[1][0][0].float().numpy())
 
+            rec["total_gen_s"] = (t_ready - t_img0) / 1e9  # T1..T7 (image ready, save excluded)
             t8 = now_ns()
             png = os.path.join(imgdir, f"{args.tag}_{label}.png")
             Image.fromarray(img).save(png)
+            rec["png_save_s"] = (now_ns() - t8) / 1e9
+            rec["png"] = os.path.relpath(png, ROOT)
+            rec["img_sha16"] = sha16(png)
+            rec["total_save_inclusive_s"] = (now_ns() - t_img0) / 1e9
             sidecar = {
                 "prompt": item["text"], "prompt_id": item["id"], "seed": item["seed"],
                 "route": args.route, "dq": args.dq if args.route == "ov" else None,
@@ -389,16 +399,14 @@ def main():
                 "comfyui_version": meta["comfyui_version"], "torch": meta["torch"],
                 "aotriton": meta["aotriton"],
                 "encode_s": rec.get("encode_s"), "dit_s": rec.get("dit_s"),
-                "vae_s": rec.get("vae_s"), "total_gen_s": rec.get("total_gen_s"),
+                "vae_s": rec.get("vae_s"), "postprocess_s": rec.get("postprocess_s"),
+                "png_save_s": rec.get("png_save_s"),
+                "total_gen_s": rec.get("total_gen_s"),
+                "total_save_inclusive_s": rec.get("total_save_inclusive_s"),
                 "tag": args.tag,
             }
             with open(png.replace(".png", ".json"), "w") as f:
                 json.dump(sidecar, f, indent=1)
-            rec["png_save_s"] = (now_ns() - t8) / 1e9
-            rec["png"] = os.path.relpath(png, ROOT)
-            rec["img_sha16"] = sha16(png)
-            rec["total_gen_s"] = (t_ready - t_img0) / 1e9  # T1..T7 (image ready, save excluded)
-            rec["total_save_inclusive_s"] = (now_ns() - t_img0) / 1e9
             free1, _ = torch.cuda.mem_get_info()
             rec["gtt_free_gib_after"] = round(free1 / 2**30, 2)
             rec["cuda_peak_alloc_gib"] = round(torch.cuda.max_memory_allocated() / 2**30, 2)
@@ -441,6 +449,13 @@ def main():
             ws[name] = {k: win(a, b, k) for k in ("gpu_busy_pct", "proc_cpu_pct", "gtt_used_bytes")}
         rec["windows"] = ws
 
+    run["epoch_at_t0"] = epoch_at_t0
+    if images_meta:
+        # epoch when the FIRST image became ready (for cold TTFI reconstruction)
+        m0 = dict(mon.marks)
+        t0_img = m0.get("img0_" + images_meta[0]["label"] + "_start", mon.t0)
+        run["first_image_ready_epoch"] = epoch_at_t0 + (t0_img + images_meta[0]["total_gen_s"] * 1e9 - mon.t0) / 1e9
+        run["mon_t0_epoch"] = epoch_at_t0
     out_json = os.path.join(outdir, f"{args.tag}.json")
     with open(out_json, "w") as f:
         json.dump(run, f, indent=1, default=str)

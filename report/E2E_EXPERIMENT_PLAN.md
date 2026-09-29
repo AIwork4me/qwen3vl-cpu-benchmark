@@ -82,7 +82,12 @@ GPU-side boundaries wrapped with `torch.cuda.synchronize()` (both sides). Monito
 20 Hz: process CPU%/RSS/threads/freq, system CPU%/MemAvailable; GPU busy%, GTT used, VRAM
 used, amdgpu temp/power (hwmon), k10temp, RAPL package energy. Every run writes a
 timestamped CSV to `results/e2e/raw/`. Unavailable metrics are recorded as `unavailable`,
-never estimated.
+never estimated. (Gate-2 amendments: actual monitor rate is 18.0–18.2 Hz — within the
+10–20 Hz spec; `rapl_energy_uj` is root-only on this host (mode 0400) → CPU package
+energy recorded as unavailable; `dit_steps` callback timestamps are host-paced launch
+diagnostics, not per-step GPU ground truth (T4/T5 totals are properly synchronized);
+route-level `encode_s` includes tokenization for the OV route but not for G — footnoted
+wherever encode is compared.)
 
 ## Statistics (Phase 32)
 

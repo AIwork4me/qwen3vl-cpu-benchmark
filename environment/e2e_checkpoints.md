@@ -38,4 +38,30 @@ Protocol: each gate ends with an independent read-only subagent audit
 
 ## Gate 2 — models + harness + baseline + conditioning identity (Phases 1–7, 29–30)
 
-(pending)
+- **Verdict: PASS** (2026-09-29, read-only agent; independent SHA256 recompute,
+  identity recompute from npys, monitor-window recompute from CSVs+marks).
+- Key verified facts: models byte-exact; server baseline P1/P2/P3 success
+  (150.1/140.6/141.6 s prompt-exec, TE+DiT+VAE all cuda:0); harness sync placement
+  correct at all 4 boundaries; within-route i0/i1 PNGs bit-identical (determinism);
+  OV-DQ32-vs-GPU P1 pos identity cos 0.9972436 == merged fresh-process value to
+  7 decimals; monitor 18.0–18.2 Hz; DiT-window GPU busy independently recomputed
+  (96.66%, n=745).
+- Findings & resolutions:
+  1. MED sidecar total_gen_s null (write order) → harness reordered + backfill
+     (scripts/backfill_sidecars.py); verified on subsequent runs.
+  2. MED negative-prompt identity unreported → analyze_e2e_cond.py extended;
+     measured: OV vs GPU neg cos 0.9710 (relL2 0.239, 9 tokens; CFG consumes it) —
+     disclosed in report + quality section.
+  3. MED AOTriton attribution via tag names → dit_kernel_note stage queued
+     (recorded aotriton field in all new runs).
+  4. LOW stale dit_preload on warm rows → only-first-image now.
+  5. LOW dit_steps host-paced → documented footnote (plan).
+  6. LOW T7→T8 gap unattributed → postprocess_s stage added.
+  7. LOW encode_s definitional asymmetry → footnote (plan).
+  8. LOW RAPL unreadable (0400) → CPU package energy = unavailable; plan amended.
+  9. INFO k10temp hits 99–100 °C during CPU encode bursts (powersave/balance_performance)
+     → thermal watch item for Phase 36.
+  10. INFO server wall_s 2 s polling quantization → use server "Prompt executed in".
+- Also at this gate: quality evaluator CLIP ViT-L/14 downloaded from ModelScope
+  (AI-ModelScope/clip-vit-large-patch14, 1.71 GB, snapshot ready); scikit-image
+  installed into .venv-comfy for SSIM/PSNR (CPU venv, no GPU timing impact).

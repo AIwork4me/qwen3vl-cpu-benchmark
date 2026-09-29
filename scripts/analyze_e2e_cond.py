@@ -35,15 +35,38 @@ def metrics(ref, x):
 
 
 def main():
-    files = sorted(glob.glob(os.path.join(COND, "cond_*_pos.npy")))
-    groups = {}
-    for f in files:
-        m = re.match(r"cond_(.+?)_(P\d+)_pos\.npy", os.path.basename(f))
-        if not m:
-            continue
-        tag, pid = m.group(1), m.group(2)
-        groups.setdefault(pid, {})[tag] = np.load(f)
     rows = []
+    for polarity in ("pos", "neg"):
+        files = sorted(glob.glob(os.path.join(COND, f"cond_*_{polarity}.npy")))
+        groups = {}
+        for f in files:
+            m = re.match(r"cond_(.+?)_(P\d+)_" + polarity + r"\.npy", os.path.basename(f))
+            if not m:
+                continue
+            tag, pid = m.group(1), m.group(2)
+            groups.setdefault(pid, {})[tag] = np.load(f)
+        rows.extend(tabulate(groups, polarity))
+    if not rows:
+        print("no cond npy found")
+        sys.exit(1)
+    import csv
+    with open(os.path.join(COND, "identity.csv"), "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        w.writerows(rows)
+    with open(os.path.join(COND, "identity.md"), "w") as f:
+        f.write("# Conditioning identity (Phase 4/30)\n\n")
+        f.write("| polarity | prompt | route | ref | shape_eq | n_tok | cosine | RMSE | relL2 | max_abs | mean | std |\n")
+        f.write("|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|\n")
+        for r in rows:
+            f.write(f"| {r['polarity']} | {r['prompt']} | {r['route_tag']} | {r['reference']} | {r['shape_equal']} | "
+                    f"{r['n_tokens']} | {r['cosine']:.6f} | {r['rmse']} | {r['relative_l2']:.6f} | "
+                    f"{r['max_abs']} | {r['mean_x']} | {r['std_x']} |\n")
+    print(open(os.path.join(COND, "identity.md")).read())
+
+
+def tabulate(groups, polarity):
+    out = []
     for pid in sorted(groups):
         tags = groups[pid]
         ref_tag = "native" if any(k.endswith("native") for k in tags) else (
@@ -60,26 +83,10 @@ def main():
                     break
         ref = tags[ref_tag]
         for tag in sorted(tags):
-            r = {"prompt": pid, "route_tag": tag, "reference": ref_tag}
+            r = {"polarity": polarity, "prompt": pid, "route_tag": tag, "reference": ref_tag}
             r.update(metrics(ref, tags[tag]))
-            rows.append(r)
-    if not rows:
-        print("no cond npy found")
-        sys.exit(1)
-    import csv
-    with open(os.path.join(COND, "identity.csv"), "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
-        w.writeheader()
-        w.writerows(rows)
-    with open(os.path.join(COND, "identity.md"), "w") as f:
-        f.write("# Conditioning identity (Phase 4/30)\n\n")
-        f.write("| prompt | route | ref | shape_eq | n_tok | cosine | RMSE | relL2 | max_abs | mean | std |\n")
-        f.write("|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|\n")
-        for r in rows:
-            f.write(f"| {r['prompt']} | {r['route_tag']} | {r['reference']} | {r['shape_equal']} | "
-                    f"{r['n_tokens']} | {r['cosine']:.6f} | {r['rmse']} | {r['relative_l2']:.6f} | "
-                    f"{r['max_abs']} | {r['mean_x']} | {r['std_x']} |\n")
-    print(open(os.path.join(COND, "identity.md")).read())
+            out.append(r)
+    return out
 
 
 if __name__ == "__main__":

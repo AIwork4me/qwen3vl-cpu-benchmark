@@ -1,0 +1,9 @@
+polarity,prompt,route_tag,reference,cosine,rmse,relative_l2,max_abs,mean_x,std_x,shape_equal,n_tokens
+pos,P1,smoke_gpu,smoke_gpu,1.0,0.0,0.0,0.0,0.13493,12.10996,True,25
+pos,P1,smoke_ov,smoke_gpu,0.997244,0.8989,0.074223,53.4953,0.13168,12.05269,True,25
+pos,P3,ab_p1_gpu,ab_p1_gpu,1.0,0.0,0.0,0.0,0.10129,11.00108,True,171
+pos,P3,ab_p1_ov,ab_p1_gpu,0.998451,0.6127,0.055689,53.4928,0.09718,11.00863,True,171
+neg,P1,smoke_gpu,smoke_gpu,1.0,0.0,0.0,0.0,-0.0197,12.23197,True,9
+neg,P1,smoke_ov,smoke_gpu,0.971018,2.9248,0.239112,186.5498,-0.01816,11.96368,True,9
+neg,P3,ab_p1_gpu,ab_p1_gpu,1.0,0.0,0.0,0.0,-0.0197,12.23197,True,9
+neg,P3,ab_p1_ov,ab_p1_gpu,0.971018,2.9248,0.239112,186.5498,-0.01816,11.96368,True,9
