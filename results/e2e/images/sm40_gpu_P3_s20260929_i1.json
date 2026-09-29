@@ -27,5 +27,6 @@
  "png_save_s": 0.283460663,
  "total_gen_s": 305.805103579,
  "total_save_inclusive_s": 306.118246074,
- "tag": "sm40_gpu"
+ "tag": "sm40_gpu",
+ "img_sha16": "3c6508a6dd355836"
 }

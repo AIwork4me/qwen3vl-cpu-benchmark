@@ -136,12 +136,12 @@ sampling; full report: **[report/QWEN_IMAGE_E2E_HYBRID.md](report/QWEN_IMAGE_E2E
 | DiT latency | 149.1 s | 148.0 s (equal within noise) |
 | GPU (GTT) residency | 51.9 GiB | **35.4 GiB (−16.5)** |
 | Physical UMA consumed | 52.7 GiB | **43.5 GiB (−9.2)** |
-| Same-seed image output | reference | CLIP similarity 0.993 |
+| Same-seed image output | reference | quality metrics in report |
 
 Verdict: the pipeline is DiT-dominated, so the warm win is small (~2%) — the real value
 is **16.5 GiB of GPU memory freed, 9 GiB less physical RAM, faster cold start, and a GPU
 that stays fully available to the DiT during conditioning**. Two honest negatives:
-sustained CPU-encoding during GPU-DiT is 2.05× slower (shared LPDDR5X bandwidth), and
+sustained CPU-encoding during GPU-DiT is 2.11× slower (DiT mean) (shared LPDDR5X bandwidth), and
 pipelining hides the encoder but does not multiply throughput. Recommended on this
 machine: Hybrid with DQ 32/64 (see report for the DQ trade-off and quality dataset).
 

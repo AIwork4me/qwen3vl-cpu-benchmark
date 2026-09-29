@@ -27,5 +27,6 @@
  "png_save_s": 0.23030556,
  "total_gen_s": 248.867855864,
  "total_save_inclusive_s": 249.127464914,
- "tag": "ab_p1_native"
+ "tag": "ab_p1_native",
+ "img_sha16": "b79ff64b5805992d"
 }

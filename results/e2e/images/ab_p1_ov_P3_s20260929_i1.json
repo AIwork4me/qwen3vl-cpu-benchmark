@@ -3,7 +3,7 @@
  "prompt_id": "P3",
  "seed": 20260929,
  "route": "ov",
- "dq": 32,
+ "dq": null,
  "resolution": [
   1024,
   1024
@@ -23,6 +23,10 @@
  "encode_s": 1.036632748,
  "dit_s": 143.71888151,
  "vae_s": 2.427631721,
- "total_gen_s": null,
- "tag": "ab_p1_ov"
+ "total_gen_s": 147.18516943,
+ "tag": "ab_p1_ov",
+ "postprocess_s": null,
+ "png_save_s": 0.226895852,
+ "total_save_inclusive_s": 147.443301557,
+ "img_sha16": "b66244f56f312e14"
 }

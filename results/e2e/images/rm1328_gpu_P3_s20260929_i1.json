@@ -27,5 +27,6 @@
  "png_save_s": 0.433246202,
  "total_gen_s": 384.006700373,
  "total_save_inclusive_s": 384.516888959,
- "tag": "rm1328_gpu"
+ "tag": "rm1328_gpu",
+ "img_sha16": "0b5cef549e3e8ba9"
 }

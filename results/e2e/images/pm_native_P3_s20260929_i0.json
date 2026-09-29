@@ -27,5 +27,6 @@
  "png_save_s": 0.228769784,
  "total_gen_s": 250.626087393,
  "total_save_inclusive_s": 250.888246857,
- "tag": "pm_native"
+ "tag": "pm_native",
+ "img_sha16": "b79ff64b5805992d"
 }

@@ -27,5 +27,6 @@
  "png_save_s": 0.235345436,
  "total_gen_s": 154.163026615,
  "total_save_inclusive_s": 154.424291238,
- "tag": "ab_p3_gpu"
+ "tag": "ab_p3_gpu",
+ "img_sha16": "8dbe52636a1a7667"
 }

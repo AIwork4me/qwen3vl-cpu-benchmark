@@ -27,5 +27,6 @@
  "png_save_s": 0.23751237,
  "total_gen_s": 152.06085401,
  "total_save_inclusive_s": 152.323747034,
- "tag": "cont_gpu"
+ "tag": "cont_gpu",
+ "img_sha16": "8dbe52636a1a7667"
 }

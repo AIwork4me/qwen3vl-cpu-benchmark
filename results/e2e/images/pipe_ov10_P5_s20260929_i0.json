@@ -3,7 +3,7 @@
  "prompt_id": "P5",
  "seed": 20260929,
  "route": "ov",
- "dq": 32,
+ "dq": null,
  "resolution": [
   1024,
   1024
@@ -27,5 +27,6 @@
  "png_save_s": 0.449255911,
  "total_gen_s": 175.436034109,
  "total_save_inclusive_s": 175.923557206,
- "tag": "pipe_ov10"
+ "tag": "pipe_ov10",
+ "img_sha16": "3dc951991ad4e3bc"
 }

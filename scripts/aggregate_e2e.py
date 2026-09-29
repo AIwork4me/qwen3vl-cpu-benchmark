@@ -149,10 +149,30 @@ def main():
             encs.append(st.median([im["encode_s"] for im in ims[1:]]) if wt else None)
             dits.append(st.median([im["dit_s"] for im in ims[1:]]) if wt else None)
             vaes.append(st.median([im["vae_s"] for im in ims[1:]]) if wt else None)
-            # TTFI from process spawn
+            # TTFI from process spawn, uniform epoch anchor:
+            # prefer explicit first_image_ready_epoch; fall back to meta.timestamp
+            # (UTC wall clock at main() start) + monitor-relative marks
             tag = r["_tag"]
-            if tag in walls and "first_image_ready_epoch" in r:
-                colds[-1] = round(r["first_image_ready_epoch"] - walls[tag][0], 2)
+            first_ready = r.get("first_image_ready_epoch")
+            anchor = first_ready
+            if anchor is None and "mon_t0_epoch" in r:
+                anchor = r["mon_t0_epoch"]
+            if anchor is None:
+                try:
+                    from datetime import datetime
+                    anchor = datetime.fromisoformat(r["meta"]["timestamp"]).timestamp()
+                except Exception:
+                    anchor = None
+            if anchor is not None and tag in walls:
+                m0 = dict(r.get("marks_ns", [])) if isinstance(r.get("marks_ns"), dict) else {}
+                t0mark = r.get("marks_ns", {}).get("start")
+                im0 = ims[0]
+                off = 0.0
+                if first_ready is None and t0mark is not None and \
+                        m0.get(f"img0_{im0['label']}_start") is not None:
+                    off = (m0[f"img0_{im0['label']}_start"] + im0["total_gen_s"] * 1e9 - t0mark) / 1e9
+                colds[-1] = round(anchor + off - walls[tag][0], 2)
+                r["_cold_epoch_based"] = True
         warm_vals = [w for w in warms if w is not None]
         headline.append({
             "route": route, "n_proc": len(rs),

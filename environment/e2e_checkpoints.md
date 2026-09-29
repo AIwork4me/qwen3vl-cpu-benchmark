@@ -65,3 +65,31 @@ Protocol: each gate ends with an independent read-only subagent audit
 - Also at this gate: quality evaluator CLIP ViT-L/14 downloaded from ModelScope
   (AI-ModelScope/clip-vit-large-patch14, 1.71 GB, snapshot ready); scikit-image
   installed into .venv-comfy for SSIM/PSNR (CPU venv, no GPU timing impact).
+
+## Gate 3+4 — core A/B, matrices, throughput/overlap/contention, DQ/cache (Phases 8–17, 26, 32)
+
+- **Verdict: FAIL → all findings fixed → re-audit queued** (2026-09-30).
+- Auditor independently reproduced headline stats, cold TTFI, all matrix numbers, one
+  DQ cosine from npys (0.997068 exact), determinism sha, kernel correction.
+- Findings & resolutions:
+  1. HIGH: CLIP img-sim 0.993 published in TL;DR/scorecard/social/README with no
+     backing artifact (quality runs still executing) → removed everywhere; will be
+     re-added only from results/e2e/quality/quality_metrics.csv.
+  2. HIGH: report claimed pipe_ov10 "confirms" no penalty — pipe_ov10 actually
+     degrades (DiT 148.9→172.5 s, E2E +8.7%, GTT −5.4 GiB monotonic; not thermal;
+     final no-encode image still slow → accumulated allocator state) → overlap
+     section rewritten; pipelining downgraded to "prototype defect"; added to
+     failure cases.
+  3. MED: cont_gpu encode mean corrected 1.89→2.29 s.
+  4. MED: cold-start compile narrative corrected to measured values (A/B processes
+     4.4–4.7 s; cold dir 3.45 s; fully warm 0.69 s).
+  5. MED: cold TTFI mixed definitions → aggregate now uses uniform epoch-anchored
+     reconstruction (fixed a double-count bug found while patching: runs WITH
+     first_image_ready_epoch were getting +off added); gpu 176.11 / ov 168.82 /
+     native 255.03.
+  6. LOW: dq64 root-cause cell 0.99780→0.99821 (was P2 value, now P3 comparator).
+  7. LOW: native range 97.8–99.5 s.
+  8. LOW: postprocess 0.003–0.007 s; encode-window GPU busy 83–90%; te staging 5.8–10.3 s.
+  9. LOW: DQ32 0.993-vs-1.02 s divergence footnoted; contention ratio unified to 2.11×
+     (DiT-mean based, conservative).
+  10. LOW: ab_p1_ov sidecars total_gen_s null → backfill re-run (129 sidecars).

@@ -27,5 +27,6 @@
  "png_save_s": 0.295459435,
  "total_gen_s": 159.696054039,
  "total_save_inclusive_s": 160.022156561,
- "tag": "pm_gpu"
+ "tag": "pm_gpu",
+ "img_sha16": "2031bb1cd2f4124c"
 }

@@ -3,7 +3,7 @@
  "prompt_id": "P3",
  "seed": 42,
  "route": "ov",
- "dq": 0,
+ "dq": null,
  "resolution": [
   1024,
   1024
@@ -27,5 +27,6 @@
  "png_save_s": 0.225212453,
  "total_gen_s": 154.192248043,
  "total_save_inclusive_s": 154.444817726,
- "tag": "dq0_s2"
+ "tag": "dq0_s2",
+ "img_sha16": "9b3bbdd8cff66ca2"
 }

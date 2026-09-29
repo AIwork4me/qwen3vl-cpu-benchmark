@@ -3,7 +3,7 @@
  "prompt_id": "P2",
  "seed": 20260929,
  "route": "ov",
- "dq": 32,
+ "dq": null,
  "resolution": [
   1024,
   1024
@@ -27,5 +27,6 @@
  "png_save_s": 0.281700717,
  "total_gen_s": 151.894705738,
  "total_save_inclusive_s": 152.206102283,
- "tag": "cont_ov"
+ "tag": "cont_ov",
+ "img_sha16": "f7a6bd992f3372e0"
 }

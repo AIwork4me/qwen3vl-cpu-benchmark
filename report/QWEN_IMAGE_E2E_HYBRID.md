@@ -25,9 +25,9 @@ reason one might expect, and not by a large wall-clock margin:
 - **DiT latency is statistically indistinguishable** between the two architectures at
   1024²/20 steps on this 100 GiB-GTT configuration (147.95 vs 149.05 s medians, within
   ±3–5 s run-to-run thermal drift — drift documented in Thermal stability).
-- **Output quality is preserved**: same-seed steady-state images are deterministic per
-  route; OV-DQ32 vs GPU-route images reach CLIP image-similarity ~0.993; the 30-prompt
-  quality dataset (SSIM/PSNR/CLIP, blind package) is reported below.
+- **Output quality**: same-seed steady-state images are deterministic per route; the
+  30-prompt quality dataset (SSIM/PSNR/CLIP + blind package) is reported below
+  (numbers filled from results/e2e/quality/quality_metrics.csv).
 - **Recommended architecture on this machine: Hybrid (CPU OpenVINO INT8 encoder, DQ 32 or
   64, GPU DiT/VAE)** — lower GPU memory, lower UMA footprint, faster cold start, equal or
   better warm latency, with a CPU encoder that is 2.6× faster per warm encode and leaves
@@ -74,7 +74,7 @@ for this DiT (it consumes only the tensor + attention_mask/reference_latents key
 DiT + VAE + sampler + seed + latent identical to G.
 
 **C — context reference (not a headline route).** ComfyUI int8-convrot TE forced to CPU
-inside the ROCm venv: measured 99.2–99.5 s per P3 pos+neg encode — ~3.2× slower than the
+inside the ROCm venv: measured 97.8–99.5 s per P3 pos+neg encode — ~3.2× slower than the
 same product path under torch 2.9.1+cpu (12.98–15.43 s pos-only, merged results) — a
 torch-build CPU-kernel effect, disclosed as such and not used for cross-route claims.
 
@@ -123,11 +123,15 @@ Final image quality).
 
 ## Time-to-first-image (cold, fresh process)
 
-G 176.11 s vs H 168.82 s (median of 3). Composition: the GPU route pays TE disk→GTT
-before the first encode (first encode 2.99–3.21 s vs warm 2.5–2.8 s, plus ~5–8 s of
-staged loading inside ComfyUI's loader) while the hybrid pays a 0.6–0.7 s OpenVINO
-compile (warm cache) or ~1.4 s cold cache. Note: fresh-process cold, not disk-cold —
-the OS page cache is not droppable without root (recorded).
+G 176.11 s vs H 168.82 s (median of 3; uniform epoch-anchored method — process spawn
+from `process_walls.csv` minus first-image-ready reconstructed from each run's monitor
+marks; disclosed because the two runs written before the explicit epoch field use the
+`meta.timestamp` anchor, accurate to ±1 s). Composition: the GPU route pays TE
+disk→GTT staging before the first encode (te_read 5.8–10.3 s + first encode 2.99–3.21 s
+vs warm 2.5–2.8 s) while the hybrid pays the OV compile — 4.4–4.7 s in the core A/B
+processes (partially warm cache), 3.45 s against a cold cache dir, 0.69 s fully warm
+(dedicated `ovcache_*` runs). Note: fresh-process cold, not disk-cold — the OS page
+cache is not droppable without root (recorded).
 
 ## Warm end-to-end latency
 
@@ -148,13 +152,13 @@ counts (measured in Step matrix).
 | conditioning prep | ~0.00 | 0.005 | host tensor wrap |
 | DiT (20 steps, AOTriton) | 149.05 | 147.95 | equal within thermal drift |
 | VAE decode | 2.43 | 2.25 | same VAE object/file |
-| postprocess (D2H+uint8) | ~0.03 | ~0.03 | |
+| postprocess (D2H+uint8) | 0.003–0.007 | 0.003–0.007 | |
 | PNG save (excluded from headline) | ~0.2 | ~0.2 | |
 
 ## GPU utilization
 
 DiT windows: GPU busy 99.4–99.7% on BOTH routes (GPU-bound pipeline).
-Encode windows: G 87.9% GPU busy (warm; the TE occupies the GPU); H does the same work
+Encode windows: G 83–90% GPU busy (warm mean range across runs; the TE occupies the GPU); H does the same work
 on 15.5 CPU cores with the GPU idle (cold-window sensor reads 13.5%; the warm-window
 43.7% figure is amdgpu busy-percent sensor decay after the preceding 150 s DiT — an
 honestly-documented sensor artifact, not GPU work).
@@ -194,7 +198,7 @@ neither is rounded up.
 
 | run | per-image mean | encode mean | images/min |
 |---|---:|---:|---:|
-| cont_gpu (G) | 151.5 s | 1.89 s | 0.40 |
+| cont_gpu (G) | 151.5 s | 2.29 s | 0.40 |
 | cont_ov (H) | 153.4 s | 1.27 s | 0.39 |
 
 G ran first on a cooler machine and still shows rising DiT latency image-to-image
@@ -213,26 +217,36 @@ conditioning (available for other work) rather than 1–4 s faster per image.
 | contd_ov (DiT alone) | 140.5 / 142.2 / 143.4 s | 99.2–99.6% | ~217% | none |
 | contd_ov_enc (DiT + encode storm) | **286.8 / 303.4 / 308.6 s** | 99.3–99.7% | ~1561% | continuous OV encodes of P5 |
 
-The GPU stays "busy" 99.7% but takes **2.05× longer**: on this UMA APU the two engines
+The GPU stays "busy" 99.7% but takes **2.11× longer** (DiT-mean basis): on this UMA APU the two engines
 share LPDDR5X, and a 16-core AVX-512 encoder streaming ~8.5 GB of int8 weights per encode
 starves the DiT of memory bandwidth. **Sustained CPU-encode-during-GPU-DiT overlap is
 counterproductive on this machine** — reported as such.
 
 **Realistic pipelined case** (encode ONLY the next prompt during the current DiT —
-`pipe_ov5`, 5 distinct prompts; `pipe_ov10` confirms at 10):
+`pipe_ov5` and `pipe_ov10` vs sequential `cont_ov10`, same 10-prompt plan):
 
-- the CPU encode of prompt n+1 finishes long before DiT of image n (post-DiT wait
-  0.00002–0.0006 s — fully hidden);
-- DiT with one concurrent ~1 s encode: 148.8–150.6 s — statistically equal to the
-  sequential runs (148–151 s): a single encode inside a 150 s DiT costs nothing
-  measurable;
-- per-image E2E ≈ 153.5 s vs sequential 153.3 s — pipelining neither gains nor loses
-  wall-clock at ~150-token prompts; it HIDES the encoder (worth 1–2.7 s/image as
-  prompts lengthen) but cannot create throughput on a GPU that is already 99.5% busy.
+- The CPU encode of prompt n+1 finishes long before DiT of image n ends (post-DiT wait
+  0.00002–0.0006 s — fully hidden) in BOTH pipelined runs.
+- **5-image burst (pipe_ov5): no penalty** — DiT 148.8–150.6 s, per-image E2E ~153.5 s,
+  statistically equal to sequential.
+- **10-image run (pipe_ov10): degradation appears** — DiT rises monotonically
+  148.9 → 172.5 s (mean 162.3 vs sequential 149.9 s; E2E mean 166.6 vs 153.3 s, +8.7%),
+  accompanied by a monotonic GTT-free decline 55.53 → 50.09 GiB (−5.4 GiB) that the
+  sequential 10-image run does NOT show (55.45–55.53 flat). GPU busy stays 99.2–99.9%
+  and power/temp match the sequential run, so this is **not thermal**: the concurrent
+  host-thread encode path interacts with the torch-HIP allocator such that GPU-side
+  memory accumulates and the DiT slows once free GTT drops below ~51 GiB. The final
+  image (no concurrent encode at all) is still slow (172.5 s), confirming accumulated
+  state rather than instantaneous bandwidth contention. Root cause not fully diagnosed
+  in this round — recorded as an implementation defect of the in-process pipelining
+  prototype, NOT claimed as a fundamental architecture limit.
 
-**Q5 verdict**: CPU/GPU overlap is feasible and free at product scale (one prompt ahead),
-hard-limited by shared DRAM bandwidth if abused (encode storms), and is not a throughput
-multiplier on this APU.
+**Q5 verdict**: one-prompt-ahead overlap hides the encoder entirely and is penalty-free
+in short bursts (≤5 images measured), but the current implementation degrades over
+longer runs via GPU-memory accumulation (+8.7% E2E at 10 images). Sustained concurrent
+encoding is bandwidth-bound (2.11× DiT slowdown). Sequential hybrid generation is the
+recommended steady-state mode on this machine; pipelining needs allocator work before
+it is a product feature.
 
 
 
@@ -272,7 +286,7 @@ Warm encode (P3 pos+neg, median of in-process iterations, `results/e2e/dq/`):
 |---:|---:|---:|---:|---:|
 | 0 (disabled, BF16-dot engine) | 1.44 | **0.998786** | 0.99879 | — |
 | 32 (default) | 1.02 | 0.998451 | 0.99845 | 0.971018 |
-| 64 | 0.88 | 0.998209 | 0.99780 | 0.944117 |
+| 64 | 0.88 | 0.998209 | 0.99821 | 0.944117 |
 | 128 | 0.835 | 0.997068 | 0.99707 | 0.956907 |
 
 (Cross-validation: dq0 0.998786↔0.99879 and dq128 0.997068↔0.99707 reproduce the merged
@@ -280,7 +294,9 @@ root-cause round to 5 decimals — three independent numerical paths agree. The 
 prompt (" ", 9 tokens) diverges more and non-monotonically across DQ groups — small-
 sequence quantization noise, disclosed; the quality dataset arbitrates its effect.)
 
-DiT/VAE are unaffected by DQ (same 149–150 s). Real-image quality per DQ group is
+DiT/VAE are unaffected by DQ (same 149–150 s). (DQ32 warm encode appears as 0.993 s in
+the core A/B median and 1.02 s in the DQ-matrix runs — both are real measurements of
+the same configuration on different processes, within run-to-run variance.) Real-image quality per DQ group is
 measured in the quality dataset (below) — the e2e round generates actual images for
 every DQ config, not just conditioning cosines. DQ128 saves a further ~0.19 s per
 encode vs DQ32; whether that is worth the (root-cause-round) cosine drop is a
@@ -300,9 +316,9 @@ latency-vs-quality judgment the quality data informs.
 Actively looked for, honestly reported:
 
 1. **Sustained CPU-encode + GPU-DiT concurrency**: the hybrid's signature failure mode
-   on this UMA APU — DiT 2.05× slower under an encode storm (286.8–308.6 s vs 140.5–143.4 s
-   control, same prompt/seed/steps). Any product that overlaps long CPU encoder runs with
-   GPU generation will regress; one-prompt-ahead is safe (measured: no penalty).
+   on this UMA APU — DiT 2.11× slower (mean 299.6 vs 142.0 s) under an encode storm
+   (286.8–308.6 s vs 140.5–143.4 s, same prompt/seed/steps). Any product that overlaps
+   long CPU encoder runs with GPU generation will regress.
 2. **Very short prompts**: at 15 tokens the hybrid saves only ~0.97 s/image (0.6%) — the
    architecture's minimum win; not worth a migration if prompts are always short AND
    memory is not a constraint.
@@ -315,11 +331,14 @@ Actively looked for, honestly reported:
 5. **Cold CPU-side pitfalls**: a fresh OpenVINO cache dir costs +2.8 s on the first
    process start (3.45 vs 0.69 s compile) — negligible once cached, worth knowing for
    one-shot containers.
-6. **Thermal drift**: ±3–5 s run-to-run DiT drift under sustained load exceeds the
+6. **Pipelining beyond ~5 images** (prototype defect): pipe_ov10 degrades DiT to
+   172.5 s with a −5.4 GiB GTT accumulation the sequential run does not show — the
+   in-process pipelining prototype is not production-ready (see CPU/GPU overlap).
+7. **Thermal drift**: ±3–5 s run-to-run DiT drift under sustained load exceeds the
    hybrid's warm E2E margin — single-run comparisons of G vs H are meaningless at this
    operating point; only paired/counterbalanced statistics separate them (this round's
    headline uses median-of-fresh-process-medians with the drift documented).
-7. **The native CPU product path in the ROCm build**: 99.2–99.5 s per P3 encode (torch
+8. **The native CPU product path in the ROCm build**: 97.8–99.5 s per P3 encode (torch
    2.12+rocm CPU kernels, ~3.2× the torch-cpu build's 15.4 s) — anyone running ComfyUI's
    int8-convrot TE on CPU from a ROCm install pays this; the OV bridge avoids it.
 
@@ -339,7 +358,7 @@ Actively looked for, honestly reported:
 | Physical UMA consumed | 52.7 GiB | **43.5 GiB** | −9.2 GiB |
 | CPU RSS | 32.0 GiB | 30.1 GiB | |
 | Conditioning cosine (pos/neg) | ref | 0.9985 / 0.9710 | DQ32 |
-| Image quality | ref | CLIP img-sim 0.993 (DQ32, same seed) | quality dataset below |
+| Image quality | ref | (quality_metrics.csv) | quality dataset below |
 | Startup complexity | 1 model load | + OV compile 0.7 s (cached) | |
 
 
@@ -392,7 +411,7 @@ pipelining asset in continuous generation.
 - Hybrid cuts cold time-to-first-image by 7.3 s (4.1%) and warm E2E by ~2–3 s (~1.5–2%),
   growing with prompt length (up to 3.5 s at ~300 tokens).
 - DiT and VAE latencies are unaffected by the architecture choice at 1024²/20 steps.
-- Sustained concurrent CPU-encoding + GPU-DiT is bandwidth-bound and 2.05× slower for
+- Sustained concurrent CPU-encoding + GPU-DiT is bandwidth-bound and 2.11× slower for
   the DiT; single-prompt-ahead pipelining is free and hides the encoder.
 - Conditioning identity is numerically anchored to three independent rounds.
 
@@ -412,14 +431,14 @@ pipelining asset in continuous generation.
   CPU via OpenVINO INT8 while the Radeon 8060S runs the DiT+VAE **frees 16.5 GiB of GPU
   memory and ~9 GiB of physical RAM**, starts ~7 s faster cold, and is ~2 s faster per
   warm image — with the GPU left completely free during conditioning.
-- Same-seed image outputs are preserved (deterministic per route; CLIP image similarity
-  ~0.993 for DQ32 vs the GPU route; full quality dataset in the report).
+- Same-seed image outputs are deterministic per route; quality metrics for the full
+  dataset are in the report (SSIM/PSNR/CLIP vs the GPU route, blind package).
 
 ### Context-required (must carry the qualifier)
 - "The hybrid pipeline is faster" — only by ~1.5–2% warm at 1024²/20 steps; the win is
   memory + cold start + GPU availability, not big wall-clock speed.
 - "Pipelining hides the encoder" — true and free for one prompt ahead; sustained CPU/GPU
-  concurrency is 2.05× slower (shared LPDDR5X bandwidth).
+  concurrency is 2.11× slower for the DiT (shared LPDDR5X bandwidth).
 
 ### Do not claim
 - ❌ "CPU beats GPU" (only ComfyUI's forced-fp32 GPU encoder path was measured)
