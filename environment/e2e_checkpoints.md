@@ -68,7 +68,7 @@ Protocol: each gate ends with an independent read-only subagent audit
 
 ## Gate 3+4 — core A/B, matrices, throughput/overlap/contention, DQ/cache (Phases 8–17, 26, 32)
 
-- **Verdict: FAIL → all findings fixed → re-audit queued** (2026-09-30).
+- **Verdict: FAIL → all findings fixed → RE-AUDIT PASS** (2026-09-30; all 10 checks verified, cold TTFI recomputed exactly 176.11, two sub-ms cosmetic cells corrected post-re-audit).
 - Auditor independently reproduced headline stats, cold TTFI, all matrix numbers, one
   DQ cosine from npys (0.997068 exact), determinism sha, kernel correction.
 - Findings & resolutions:

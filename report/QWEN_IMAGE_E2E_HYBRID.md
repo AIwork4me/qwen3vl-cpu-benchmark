@@ -149,7 +149,7 @@ counts (measured in Step matrix).
 | stage | G (s) | H (s) | note |
 |---|---:|---:|---|
 | tokenize+encode (pos+neg) | 2.618 | 0.993 | H = OV CPU; G = fp32 GEMM on GPU |
-| conditioning prep | ~0.00 | 0.005 | host tensor wrap |
+| conditioning prep | ~0.000 | 0.0003–0.0004 | host tensor wrap |
 | DiT (20 steps, AOTriton) | 149.05 | 147.95 | equal within thermal drift |
 | VAE decode | 2.43 | 2.25 | same VAE object/file |
 | postprocess (D2H+uint8) | 0.003–0.007 | 0.003–0.007 | |
@@ -157,7 +157,7 @@ counts (measured in Step matrix).
 
 ## GPU utilization
 
-DiT windows: GPU busy 99.4–99.7% on BOTH routes (GPU-bound pipeline).
+DiT windows: GPU busy 99.4–99.7% (per-image means; whole-run up to 99.8%) on BOTH routes (GPU-bound pipeline).
 Encode windows: G 83–90% GPU busy (warm mean range across runs; the TE occupies the GPU); H does the same work
 on 15.5 CPU cores with the GPU idle (cold-window sensor reads 13.5%; the warm-window
 43.7% figure is amdgpu busy-percent sensor decay after the preceding 150 s DiT — an
