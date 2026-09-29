@@ -16,3 +16,6 @@ results/openvino_root_cause/hidden_P*_dq_default_r2.npy
 results/openvino_root_cause/hidden_P*_dq_default_r3.npy
 results/openvino_root_cause/hidden_P*_fp16_r2.npy
 results/openvino_root_cause/hidden_P*_fp16_r3.npy
+# root-cause investigation: raw JIT binaries stay local (summaries/hashes committed)
+results/openvino_isa/jit_dump/*.bin
+runtime_model_*.bin

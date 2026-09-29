@@ -125,22 +125,44 @@ bash scripts/run_openvino_isa_matrix.sh && .venv-openvino/bin/python scripts/agg
 Follow-up (same day, branch `investigate/openvino-zen5-vnni-root-cause`): a 16-phase,
 independently-verified investigation of **what OpenVINO actually executes on the Zen 5 CPU**.
 Full report: **[report/OPENVINO_ZEN5_ROOT_CAUSE.md](report/OPENVINO_ZEN5_ROOT_CAUSE.md)** — every phase
-cross-checked by read-only subagents (`environment/root_cause_checkpoints.md`, 13 verifications, all PASS).
+cross-checked by read-only subagents (`environment/root_cause_checkpoints.md`, all PASS).
+
+**Two-host cross-validation**: the same protocol was run independently on a second machine
+(HOST B = 2× EPYC 9334 / Zen 4, byte-identical model + OpenVINO wheel, hidden-state cosine
+1.0000001 vs HOST A) — its report: [report/OPENVINO_ZEN5_ROOT_CAUSE.hostB.md](report/OPENVINO_ZEN5_ROOT_CAUSE.hostB.md).
+Both hosts independently reached the same verdict:
 
 - **AVX512_VNNI is executed** (runtime dispatch + JIT disassembly + knob counterfactual;
-  perf-level sampling unavailable on this host). The 253 weight-compressed FC nodes run
-  `vpdpbusd` (u8×s8→int32) MAC loops fed by dynamic activation quantization (group 32).
+  perf-level sampling unavailable on both hosts). The 253 weight-compressed FC nodes run
+  `vpdpbusd` (u8×s8→int32) MAC loops fed by dynamic activation quantization (group 32) —
+  HOST B additionally identified the dedicated `brgemm_src_quantization_kernel_t` JIT
+  kernels and the `vcvtneps2bf16` s32→bf16 epilogue.
 - **But VNNI is not the headline**: same-stack counterfactuals measure VNNI-vs-BF16 engine
-  **1.23–1.43×**, INT8-WC-vs-FP16 **1.41–1.67×**, AVX-512 width **1.38–1.55×**. The 22–69×
-  is dominated by never materializing a dequantized weight copy (8.5 GB vs 34.7 GB traffic
-  per encode) inside a precompiled inference pipeline.
+  **1.23–1.43×** (HOST A) / **1.37–1.47×** (HOST B); INT8-WC-vs-FP16 **1.41–1.67×** (A) /
+  **1.21–1.47×** (B); AVX-512 width **1.38–1.55×** (A; a hard requirement on B's build for
+  the compressed node). The 22–69× is dominated by never materializing a dequantized
+  weight copy (8.5 GB vs 34.7 GB traffic per encode) inside a precompiled inference
+  pipeline. HOST B also showed the u8 weights are repacked **once at load** into a blocked
+  layout (`AB4b32a4b`) and dequantization is fused into the JIT kernel.
 - The compute engine is chosen by `DYNAMIC_QUANTIZATION_GROUP_SIZE` (32 = int8/VNNI path,
-  0 = BF16-dot path) — the OpenVINO primitive name `brgemm_avx512_bf16` is an ISA label,
-  not a MAC-dtype statement. Bonus finding: group size 128 is another **11–21% faster**
-  (cosine ≥ 0.9959).
+  0 = BF16-dot path) — the OpenVINO primitive name `brgemm_avx512_bf16` labels the
+  activation dtype/ISA family, not the MAC dtype. Bonus finding: group size 128 is another
+  **11–21% faster** (HOST A) / **1.16–1.26×** (HOST B), cosine ≥ 0.9959.
 - Blocked evidence recorded honestly: oneDNN per-primitive verbose crashes on this build
   (compile-time constant-fold reorder, dtype-driven); perf/PMU blocked by
-  `perf_event_paranoid=4` + missing kernel-matched tools; no system settings were changed.
+  `perf_event_paranoid=4` + missing kernel-matched tools (both hosts); no system settings
+  were changed. `ONEDNN_MAX_CPU_ISA=AVX512_CORE` does **not** strip VNNI from the
+  compressed path on this build, so a "VNNI vs no-VNNI" ceiling ablation does not exist.
+
+### CPU-utilization figure clarification (~1332% vs ~1550–1570%)
+
+Both numbers are real, different aggregation windows: `~1332%` is the **whole-process**
+`proc_cpu_mean_pct` of the standalone `default` run (`openvino_default.json` `full_run`,
+start→stop including model load and idle gaps; the bridge run's whole-process figure is
+1312%). During the **warm-encode windows** the process averages **1509–1572%**
+(≈15.1–15.7 of 16 cores; per-prompt `interval_stats.proc_cpu_mean_pct`, also the
+`cpu_util_mean_pct` column of `results/comparison/summary.csv`). No historical number was
+changed; the headline table quotes the warm-interval figure with footnote 5.
 
 ## Verification
 

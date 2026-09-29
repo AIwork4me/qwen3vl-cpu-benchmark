@@ -1,0 +1,7 @@
+[inv] openvino 2026.4.0-22959-99c81491cc3-releases/2026/4 devices=['CPU', 'GPU']
+[inv] pre-norm node: __module.model.language_model.layers.35/aten::add/Add_1
+[inv] compile with DQ override FAILED: Exception from src/inference/src/cpp/core.cpp:117:
+Exception from src/inference/src/dev/plugin.cpp:54:
+Exception from src/plugins/intel_cpu/src/graph.cpp:1628:
+Node Constant_57349_u8_i32_Broadcast_123803 of type Reorder
+could not execute a primitive

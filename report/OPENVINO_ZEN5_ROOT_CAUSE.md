@@ -1,5 +1,11 @@
 # Why OpenVINO is Fast on Ryzen AI Max+ PRO 395
 
+> **双主机交叉验证**：同一 16-phase 协议已在第二台机器（HOST B = 2× EPYC 9334 / Zen 4，
+> 模型逐字节一致、OpenVINO wheel 相同、hidden-state cosine 1.0000001）独立执行并得到
+> 一致结论——见 [OPENVINO_ZEN5_ROOT_CAUSE.hostB.md](OPENVINO_ZEN5_ROOT_CAUSE.hostB.md)。
+> 本报告为 HOST A（Ryzen AI Max+ PRO 395 / Zen 5，原 benchmark 主机）的记录。
+
+
 Qwen3-VL-8B INT8 weight-compressed conditioning workload · root-cause investigation ·
 2026-09-29 · branch `investigate/openvino-zen5-vnni-root-cause`。
 
