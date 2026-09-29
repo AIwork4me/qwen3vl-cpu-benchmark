@@ -1,0 +1,692 @@
+{
+  "meta": {
+    "timestamp": "2026-09-29T19:21:28.730013",
+    "openvino_version": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+    "tag": "fp16_r1",
+    "model_dir": "models/qwen3vl-openvino-fp16",
+    "pre_norm_node": "__module.model.language_model.layers.35/aten::add/Add_1",
+    "compile_s": 0.904103462,
+    "execution_devices": "['CPU']",
+    "effective_properties": {
+      "PERF_COUNT": "YES",
+      "INFERENCE_NUM_THREADS": "16",
+      "NUM_STREAMS": "1",
+      "PERFORMANCE_HINT": "LATENCY",
+      "INFERENCE_PRECISION_HINT": "<Type: 'bfloat16'>",
+      "DYNAMIC_QUANTIZATION_GROUP_SIZE": "32",
+      "SCHEDULING_CORE_TYPE": "0",
+      "ENABLE_HYPER_THREADING": "False",
+      "TBB_PARTITIONER": "1"
+    },
+    "warm_iters": 2,
+    "measure_iters": 12,
+    "env": {}
+  },
+  "prompts": {
+    "P1": {
+      "n_tokens_full": 39,
+      "warm_p50_s": 0.260993116,
+      "warm_mean_s": 0.26070015825,
+      "warm_min_s": 0.256123683,
+      "warm_max_s": 0.264896105,
+      "warm_std_s": 0.0025307649982257473,
+      "cv": 0.009707569858085222,
+      "iterations": [
+        0.259139303,
+        0.25849506,
+        0.260120757,
+        0.256123683,
+        0.260993116,
+        0.262533952,
+        0.264165901,
+        0.264896105,
+        0.262201673,
+        0.258317581,
+        0.260045328,
+        0.26136944
+      ],
+      "top10_nodes": [
+        {
+          "node": "__module.lm_head/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 18607.0
+        },
+        {
+          "node": "__module.model.language_model.layers.23.mlp.up_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1688.0
+        },
+        {
+          "node": "__module.model.language_model.layers.20.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1682.0
+        },
+        {
+          "node": "__module.model.language_model.layers.6.mlp.gate_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1680.0
+        },
+        {
+          "node": "__module.model.language_model.layers.25.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1659.0
+        },
+        {
+          "node": "__module.model.language_model.layers.30.mlp.gate_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1656.0
+        },
+        {
+          "node": "__module.model.language_model.layers.23.mlp.gate_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1655.0
+        },
+        {
+          "node": "__module.model.language_model.layers.33.mlp.up_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1654.0
+        },
+        {
+          "node": "__module.model.language_model.layers.6.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1647.0
+        },
+        {
+          "node": "__module.model.language_model.layers.34.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 1643.0
+        }
+      ]
+    },
+    "P2": {
+      "n_tokens_full": 81,
+      "warm_p50_s": 0.623939123,
+      "warm_mean_s": 0.6226305829166667,
+      "warm_min_s": 0.611608364,
+      "warm_max_s": 0.632854134,
+      "warm_std_s": 0.007169468585790118,
+      "cv": 0.01151480313126489,
+      "iterations": [
+        0.62256327,
+        0.611608364,
+        0.61951519,
+        0.614596738,
+        0.62027443,
+        0.612778515,
+        0.632854134,
+        0.632141074,
+        0.625663951,
+        0.629738852,
+        0.623939123,
+        0.625893354
+      ],
+      "top10_nodes": [
+        {
+          "node": "__module.lm_head/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 27747.0
+        },
+        {
+          "node": "__module.model.language_model.layers.13.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 3035.0
+        },
+        {
+          "node": "__module.model.language_model.layers.25.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2945.0
+        },
+        {
+          "node": "__module.model.language_model.layers.14.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2943.0
+        },
+        {
+          "node": "__module.model.language_model.layers.11.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2916.0
+        },
+        {
+          "node": "__module.model.language_model.layers.7.mlp.up_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2903.0
+        },
+        {
+          "node": "__module.model.language_model.layers.33.mlp.up_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2888.0
+        },
+        {
+          "node": "__module.model.language_model.layers.17.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2885.0
+        },
+        {
+          "node": "__module.model.language_model.layers.16.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2882.0
+        },
+        {
+          "node": "__module.model.language_model.layers.23.mlp.up_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 2874.0
+        }
+      ]
+    },
+    "P3": {
+      "n_tokens_full": 185,
+      "warm_p50_s": 1.019936192,
+      "warm_mean_s": 1.0189018999166666,
+      "warm_min_s": 1.011037717,
+      "warm_max_s": 1.026755312,
+      "warm_std_s": 0.004835330372213214,
+      "cv": 0.0047456289684106815,
+      "iterations": [
+        1.011037717,
+        1.015168304,
+        1.025576183,
+        1.021020941,
+        1.014124967,
+        1.020114636,
+        1.012674025,
+        1.021279619,
+        1.019595438,
+        1.026755312,
+        1.019936192,
+        1.019539465
+      ],
+      "top10_nodes": [
+        {
+          "node": "__module.lm_head/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 39073.0
+        },
+        {
+          "node": "__module.model.language_model.layers.26.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4255.0
+        },
+        {
+          "node": "__module.model.language_model.layers.17.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4249.0
+        },
+        {
+          "node": "__module.model.language_model.layers.13.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4242.0
+        },
+        {
+          "node": "__module.model.language_model.layers.30.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4235.0
+        },
+        {
+          "node": "__module.model.language_model.layers.25.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4221.0
+        },
+        {
+          "node": "__module.model.language_model.layers.35.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4219.0
+        },
+        {
+          "node": "__module.model.language_model.layers.16.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4204.0
+        },
+        {
+          "node": "__module.model.language_model.layers.33.mlp.up_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4196.0
+        },
+        {
+          "node": "__module.model.language_model.layers.4.mlp.down_proj/aten::linear/MatMul",
+          "type": "FullyConnected",
+          "exec_type": "brgemm_avx512_bf16",
+          "us": 4189.0
+        }
+      ]
+    }
+  },
+  "profiling_aggregate": {
+    "P1": {
+      "total_us": 257352.0,
+      "n_nodes": 1294,
+      "by_exec_type_us": {
+        "brgemm_avx512_bf16": [
+          253,
+          237910.0,
+          92.45
+        ],
+        "jit_avx512_bf16": [
+          181,
+          4944.0,
+          1.92
+        ],
+        "jit_uni_bf16": [
+          73,
+          4186.0,
+          1.63
+        ],
+        "undef_bf16": [
+          35,
+          3251.0,
+          1.26
+        ],
+        "jit_avx512_f32": [
+          77,
+          2157.0,
+          0.84
+        ],
+        "jit_uni_f32": [
+          77,
+          1938.0,
+          0.75
+        ],
+        "unknown_bf16": [
+          216,
+          1151.0,
+          0.45
+        ],
+        "ref_any_bf16": [
+          72,
+          923.0,
+          0.36
+        ],
+        "unknown_f32": [
+          181,
+          445.0,
+          0.17
+        ],
+        "avx512_bf16": [
+          1,
+          150.0,
+          0.06
+        ],
+        "ref_any_i32": [
+          8,
+          71.0,
+          0.03
+        ],
+        "jit_avx512_i32": [
+          9,
+          41.0,
+          0.02
+        ],
+        "ref_i32": [
+          10,
+          39.0,
+          0.02
+        ],
+        "ref_f32": [
+          12,
+          34.0,
+          0.01
+        ],
+        "ref_i64": [
+          2,
+          29.0,
+          0.01
+        ],
+        "brgemm_avx512_f32": [
+          1,
+          25.0,
+          0.01
+        ],
+        "ref_boolean": [
+          1,
+          20.0,
+          0.01
+        ],
+        "ref_any_f32": [
+          8,
+          20.0,
+          0.01
+        ],
+        "jit_avx512_I8": [
+          1,
+          9.0,
+          0.0
+        ],
+        "ref_I8": [
+          3,
+          6.0,
+          0.0
+        ],
+        "ref_bf16": [
+          1,
+          3.0,
+          0.0
+        ],
+        "unknown_i32": [
+          24,
+          0.0,
+          0.0
+        ],
+        "unknown_i64": [
+          2,
+          0.0,
+          0.0
+        ],
+        "undef": [
+          42,
+          0.0,
+          0.0
+        ],
+        "unknown_I8": [
+          3,
+          0.0,
+          0.0
+        ],
+        "unknown_boolean": [
+          1,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "P2": {
+      "total_us": 434673.0,
+      "n_nodes": 1294,
+      "by_exec_type_us": {
+        "brgemm_avx512_bf16": [
+          253,
+          409665.0,
+          94.25
+        ],
+        "jit_avx512_bf16": [
+          181,
+          5810.0,
+          1.34
+        ],
+        "jit_uni_bf16": [
+          73,
+          5784.0,
+          1.33
+        ],
+        "undef_bf16": [
+          35,
+          4636.0,
+          1.07
+        ],
+        "jit_avx512_f32": [
+          77,
+          3154.0,
+          0.73
+        ],
+        "jit_uni_f32": [
+          77,
+          2172.0,
+          0.5
+        ],
+        "unknown_bf16": [
+          216,
+          1220.0,
+          0.28
+        ],
+        "ref_any_bf16": [
+          72,
+          1203.0,
+          0.28
+        ],
+        "unknown_f32": [
+          181,
+          573.0,
+          0.13
+        ],
+        "avx512_bf16": [
+          1,
+          153.0,
+          0.04
+        ],
+        "ref_any_i32": [
+          8,
+          73.0,
+          0.02
+        ],
+        "jit_avx512_i32": [
+          9,
+          41.0,
+          0.01
+        ],
+        "ref_i32": [
+          10,
+          38.0,
+          0.01
+        ],
+        "ref_f32": [
+          12,
+          34.0,
+          0.01
+        ],
+        "ref_i64": [
+          2,
+          30.0,
+          0.01
+        ],
+        "brgemm_avx512_f32": [
+          1,
+          25.0,
+          0.01
+        ],
+        "ref_boolean": [
+          1,
+          22.0,
+          0.01
+        ],
+        "ref_any_f32": [
+          8,
+          21.0,
+          0.0
+        ],
+        "jit_avx512_I8": [
+          1,
+          9.0,
+          0.0
+        ],
+        "ref_I8": [
+          3,
+          7.0,
+          0.0
+        ],
+        "ref_bf16": [
+          1,
+          3.0,
+          0.0
+        ],
+        "unknown_i32": [
+          24,
+          0.0,
+          0.0
+        ],
+        "unknown_i64": [
+          2,
+          0.0,
+          0.0
+        ],
+        "undef": [
+          42,
+          0.0,
+          0.0
+        ],
+        "unknown_I8": [
+          3,
+          0.0,
+          0.0
+        ],
+        "unknown_boolean": [
+          1,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "P3": {
+      "total_us": 624799.0,
+      "n_nodes": 1294,
+      "by_exec_type_us": {
+        "brgemm_avx512_bf16": [
+          253,
+          587947.0,
+          94.1
+        ],
+        "jit_uni_bf16": [
+          73,
+          8824.0,
+          1.41
+        ],
+        "jit_avx512_bf16": [
+          181,
+          8370.0,
+          1.34
+        ],
+        "undef_bf16": [
+          35,
+          7005.0,
+          1.12
+        ],
+        "jit_avx512_f32": [
+          77,
+          5090.0,
+          0.81
+        ],
+        "jit_uni_f32": [
+          77,
+          3126.0,
+          0.5
+        ],
+        "ref_any_bf16": [
+          72,
+          1534.0,
+          0.25
+        ],
+        "unknown_bf16": [
+          216,
+          1518.0,
+          0.24
+        ],
+        "unknown_f32": [
+          181,
+          850.0,
+          0.14
+        ],
+        "avx512_bf16": [
+          1,
+          201.0,
+          0.03
+        ],
+        "ref_any_i32": [
+          8,
+          87.0,
+          0.01
+        ],
+        "jit_avx512_i32": [
+          9,
+          44.0,
+          0.01
+        ],
+        "ref_i32": [
+          10,
+          40.0,
+          0.01
+        ],
+        "ref_f32": [
+          12,
+          35.0,
+          0.01
+        ],
+        "ref_i64": [
+          2,
+          32.0,
+          0.01
+        ],
+        "brgemm_avx512_f32": [
+          1,
+          27.0,
+          0.0
+        ],
+        "ref_any_f32": [
+          8,
+          25.0,
+          0.0
+        ],
+        "ref_boolean": [
+          1,
+          24.0,
+          0.0
+        ],
+        "jit_avx512_I8": [
+          1,
+          9.0,
+          0.0
+        ],
+        "ref_I8": [
+          3,
+          8.0,
+          0.0
+        ],
+        "ref_bf16": [
+          1,
+          3.0,
+          0.0
+        ],
+        "unknown_i32": [
+          24,
+          0.0,
+          0.0
+        ],
+        "unknown_i64": [
+          2,
+          0.0,
+          0.0
+        ],
+        "undef": [
+          42,
+          0.0,
+          0.0
+        ],
+        "unknown_I8": [
+          3,
+          0.0,
+          0.0
+        ],
+        "unknown_boolean": [
+          1,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  }
+}

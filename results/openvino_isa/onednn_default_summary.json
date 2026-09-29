@@ -1,0 +1,667 @@
+{
+  "logs": [
+    {
+      "file": "results/openvino_isa/onednn_verbose_exec_crash.log",
+      "header": {
+        "onednn_version": "oneDNN v3.13.0 (commit 1289c3b65dd6a119a5ed12a816517d9c3a21d81b)",
+        "cpu_runtime": "nthr:16",
+        "cpu_isa": "isa:Intel AVX-512 with Intel DL Boost and bfloat16 support",
+        "gpu": "gpu,runtime:none"
+      },
+      "create_lines": [
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:dispatch",
+          "raw": "reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292",
+          "engine": "",
+          "operation": "reorder",
+          "implementation": "",
+          "rejected_reason": "unsupported datatype"
+        },
+        {
+          "mode": "create:cache_miss",
+          "raw": "cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.0991211",
+          "engine": "cpu",
+          "operation": "reorder",
+          "implementation": "jit_direct_copy:uni",
+          "prop_kind": "undef",
+          "memory_descriptors": "src:u8::blocked:a::f0 dst:s32::blocked:a::f0"
+        }
+      ],
+      "exec_lines": [],
+      "template": "template:operation,engine,primitive,implementation,prop_kind,memory_descriptors,attributes,auxiliary,problem_desc,exec_time",
+      "other_lines": 0,
+      "crash": "RuntimeError: Exception from src/inference/src/cpp/core.cpp:117:"
+    }
+  ],
+  "combined": {
+    "create_by_operation_impl": {
+      "reorder:unsupported datatype": 79,
+      "reorder:jit_direct_copy:uni": 1
+    },
+    "exec_line_count": 0
+  }
+}

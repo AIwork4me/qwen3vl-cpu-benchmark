@@ -1,0 +1,446 @@
+{
+  "aggregates": {
+    "AVX2VNNI_F32|P1": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.242648899,
+      "p50_per_run_s": [
+        0.242648899,
+        0.243897039,
+        0.241198124
+      ],
+      "mean_of_means_s": 0.24178907569444444,
+      "pooled_min_s": 0.235335166,
+      "pooled_max_s": 0.249401809,
+      "run_p50_spread_pct": 1.1189618539487463,
+      "mean_cv_within_run": 0.018574280562222094,
+      "compile_s_runs": [
+        1.232,
+        1.192,
+        1.167
+      ]
+    },
+    "AVX2VNNI_F32|P2": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.518305452,
+      "p50_per_run_s": [
+        0.518305452,
+        0.525814362,
+        0.513745437
+      ],
+      "mean_of_means_s": 0.5209339830277778,
+      "pooled_min_s": 0.505673271,
+      "pooled_max_s": 0.542996074,
+      "run_p50_spread_pct": 2.349203346792939,
+      "mean_cv_within_run": 0.0215363198854482,
+      "compile_s_runs": [
+        1.232,
+        1.192,
+        1.167
+      ]
+    },
+    "AVX2VNNI_F32|P3": {
+      "runs": 3,
+      "p50_median_of_runs_s": 1.044783745,
+      "p50_per_run_s": [
+        1.044318686,
+        1.051546202,
+        1.044783745
+      ],
+      "mean_of_means_s": 1.0459260913055555,
+      "pooled_min_s": 1.011024774,
+      "pooled_max_s": 1.080400999,
+      "run_p50_spread_pct": 0.6920795440023308,
+      "mean_cv_within_run": 0.021503105137120226,
+      "compile_s_runs": [
+        1.232,
+        1.192,
+        1.167
+      ]
+    },
+    "AVX512_F32|P1": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.170108216,
+      "p50_per_run_s": [
+        0.171628902,
+        0.167833955,
+        0.170108216
+      ],
+      "mean_of_means_s": 0.16957312541666666,
+      "pooled_min_s": 0.164454165,
+      "pooled_max_s": 0.173847387,
+      "run_p50_spread_pct": 2.2611318430766842,
+      "mean_cv_within_run": 0.011097291298361393,
+      "compile_s_runs": [
+        1.125,
+        1.094,
+        1.221
+      ]
+    },
+    "AVX512_F32|P2": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.375769318,
+      "p50_per_run_s": [
+        0.375769318,
+        0.378034123,
+        0.370247893
+      ],
+      "mean_of_means_s": 0.37383368266666667,
+      "pooled_min_s": 0.364999833,
+      "pooled_max_s": 0.383372782,
+      "run_p50_spread_pct": 2.1029775313265606,
+      "mean_cv_within_run": 0.011230018678854734,
+      "compile_s_runs": [
+        1.125,
+        1.094,
+        1.221
+      ]
+    },
+    "AVX512_F32|P3": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.673975804,
+      "p50_per_run_s": [
+        0.672890491,
+        0.675214851,
+        0.673975804
+      ],
+      "mean_of_means_s": 0.6720881098888889,
+      "pooled_min_s": 0.654688598,
+      "pooled_max_s": 0.687523003,
+      "run_p50_spread_pct": 0.345429164342289,
+      "mean_cv_within_run": 0.01311188198531313,
+      "compile_s_runs": [
+        1.125,
+        1.094,
+        1.221
+      ]
+    },
+    "BF16CEIL|P1": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.186808525,
+      "p50_per_run_s": [
+        0.186808525,
+        0.189280588,
+        0.182714222
+      ],
+      "mean_of_means_s": 0.18581163469444445,
+      "pooled_min_s": 0.179288365,
+      "pooled_max_s": 0.191147815,
+      "run_p50_spread_pct": 3.593790307138757,
+      "mean_cv_within_run": 0.014180189772796892,
+      "compile_s_runs": [
+        1.223,
+        1.332,
+        1.24
+      ]
+    },
+    "BF16CEIL|P2": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.376746592,
+      "p50_per_run_s": [
+        0.376746592,
+        0.371818196,
+        0.377659781
+      ],
+      "mean_of_means_s": 0.37368658097222224,
+      "pooled_min_s": 0.354728448,
+      "pooled_max_s": 0.391929999,
+      "run_p50_spread_pct": 1.571086370393782,
+      "mean_cv_within_run": 0.024749661752282177,
+      "compile_s_runs": [
+        1.223,
+        1.332,
+        1.24
+      ]
+    },
+    "BF16CEIL|P3": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.714977951,
+      "p50_per_run_s": [
+        0.669513981,
+        0.714977951,
+        0.720998646
+      ],
+      "mean_of_means_s": 0.7020036907222222,
+      "pooled_min_s": 0.658048988,
+      "pooled_max_s": 0.730549666,
+      "run_p50_spread_pct": 7.689856591657931,
+      "mean_cv_within_run": 0.02276536831566825,
+      "compile_s_runs": [
+        1.223,
+        1.332,
+        1.24
+      ]
+    },
+    "DEFAULT|P1": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.176508069,
+      "p50_per_run_s": [
+        0.192350376,
+        0.176508069,
+        0.175609137
+      ],
+      "mean_of_means_s": 0.18231236836111112,
+      "pooled_min_s": 0.171888847,
+      "pooled_max_s": 0.198779077,
+      "run_p50_spread_pct": 9.53323915030685,
+      "mean_cv_within_run": 0.024410305117623165,
+      "compile_s_runs": [
+        1.108,
+        1.046,
+        1.131
+      ]
+    },
+    "DEFAULT|P2": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.376306502,
+      "p50_per_run_s": [
+        0.376306502,
+        0.380943082,
+        0.374683023
+      ],
+      "mean_of_means_s": 0.3751742065,
+      "pooled_min_s": 0.3583379,
+      "pooled_max_s": 0.386934407,
+      "run_p50_spread_pct": 1.6707613144244287,
+      "mean_cv_within_run": 0.020944951304922948,
+      "compile_s_runs": [
+        1.108,
+        1.046,
+        1.131
+      ]
+    },
+    "DEFAULT|P3": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.706969996,
+      "p50_per_run_s": [
+        0.663872118,
+        0.706969996,
+        0.710544191
+      ],
+      "mean_of_means_s": 0.6950599188055556,
+      "pooled_min_s": 0.651964676,
+      "pooled_max_s": 0.731591009,
+      "run_p50_spread_pct": 7.030280642091973,
+      "mean_cv_within_run": 0.026739483839643842,
+      "compile_s_runs": [
+        1.108,
+        1.046,
+        1.131
+      ]
+    },
+    "DEFAULT_F32|P1": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.182860597,
+      "p50_per_run_s": [
+        0.182860597,
+        0.185825723,
+        0.182343714
+      ],
+      "mean_of_means_s": 0.1834422215,
+      "pooled_min_s": 0.177501511,
+      "pooled_max_s": 0.192248683,
+      "run_p50_spread_pct": 1.909585432706503,
+      "mean_cv_within_run": 0.01715252368443548,
+      "compile_s_runs": [
+        1.245,
+        1.241,
+        1.225
+      ]
+    },
+    "DEFAULT_F32|P2": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.37663165,
+      "p50_per_run_s": [
+        0.37663165,
+        0.376371257,
+        0.378348454
+      ],
+      "mean_of_means_s": 0.37546477019444446,
+      "pooled_min_s": 0.36541905,
+      "pooled_max_s": 0.381434224,
+      "run_p50_spread_pct": 0.52533156111865,
+      "mean_cv_within_run": 0.011748965486034428,
+      "compile_s_runs": [
+        1.245,
+        1.241,
+        1.225
+      ]
+    },
+    "DEFAULT_F32|P3": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.728454675,
+      "p50_per_run_s": [
+        0.723076796,
+        0.732387945,
+        0.728454675
+      ],
+      "mean_of_means_s": 0.722997906388889,
+      "pooled_min_s": 0.705276536,
+      "pooled_max_s": 0.741626014,
+      "run_p50_spread_pct": 1.2877123220532822,
+      "mean_cv_within_run": 0.017183436834954918,
+      "compile_s_runs": [
+        1.245,
+        1.241,
+        1.225
+      ]
+    },
+    "VNNI512_F32|P1": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.184266579,
+      "p50_per_run_s": [
+        0.186143152,
+        0.184266579,
+        0.183510304
+      ],
+      "mean_of_means_s": 0.18514891275,
+      "pooled_min_s": 0.177414908,
+      "pooled_max_s": 0.19772811,
+      "run_p50_spread_pct": 1.4347139875044799,
+      "mean_cv_within_run": 0.018654363214226716,
+      "compile_s_runs": [
+        1.115,
+        1.253,
+        1.24
+      ]
+    },
+    "VNNI512_F32|P2": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.376341012,
+      "p50_per_run_s": [
+        0.372928547,
+        0.376341012,
+        0.378080985
+      ],
+      "mean_of_means_s": 0.37620309280555553,
+      "pooled_min_s": 0.367498236,
+      "pooled_max_s": 0.383299288,
+      "run_p50_spread_pct": 1.3816153366237156,
+      "mean_cv_within_run": 0.009643440495229728,
+      "compile_s_runs": [
+        1.115,
+        1.253,
+        1.24
+      ]
+    },
+    "VNNI512_F32|P3": {
+      "runs": 3,
+      "p50_median_of_runs_s": 0.727538407,
+      "p50_per_run_s": [
+        0.727538407,
+        0.736315321,
+        0.722184201
+      ],
+      "mean_of_means_s": 0.7259144842222223,
+      "pooled_min_s": 0.704433347,
+      "pooled_max_s": 0.748996977,
+      "run_p50_spread_pct": 1.9567196264377904,
+      "mean_cv_within_run": 0.020104450667650216,
+      "compile_s_runs": [
+        1.115,
+        1.253,
+        1.24
+      ]
+    }
+  },
+  "fc_dispatch_by_config": {
+    "AVX2VNNI_F32": {
+      "('FullyConnected', 'brgemm_avx2_f32', 'u8', 'f32')": 253
+    },
+    "AVX512_F32": {
+      "('FullyConnected', 'brgemm_avx512_f32', 'u8', 'f32')": 253
+    },
+    "BF16CEIL": {
+      "('FullyConnected', 'brgemm_avx512_bf16', 'u8', 'bf16')": 253
+    },
+    "DEFAULT_F32": {
+      "('FullyConnected', 'brgemm_avx512_f32', 'u8', 'f32')": 253
+    },
+    "DEFAULT": {
+      "('FullyConnected', 'brgemm_avx512_bf16', 'u8', 'bf16')": 253
+    },
+    "VNNI512_F32": {
+      "('FullyConnected', 'brgemm_avx512_f32', 'u8', 'f32')": 253
+    }
+  },
+  "comparisons_latency_ratio": {
+    "P1": {
+      "BF16_vs_F32_same_ISA": {
+        "latency_a_s": 0.182861,
+        "latency_b_s": 0.176508,
+        "speedup_a_over_b": 1.036,
+        "abs_delta_s": 0.006353
+      },
+      "AVX512_vs_AVX2VNNI_f32": {
+        "latency_a_s": 0.242649,
+        "latency_b_s": 0.170108,
+        "speedup_a_over_b": 1.4264,
+        "abs_delta_s": 0.072541
+      },
+      "VNNI512_vs_AVX512_f32": {
+        "latency_a_s": 0.170108,
+        "latency_b_s": 0.184267,
+        "speedup_a_over_b": 0.9232,
+        "abs_delta_s": -0.014158
+      },
+      "DEFAULT_vs_BF16CEIL": {
+        "latency_a_s": 0.186809,
+        "latency_b_s": 0.176508,
+        "speedup_a_over_b": 1.0584,
+        "abs_delta_s": 0.0103
+      }
+    },
+    "P2": {
+      "BF16_vs_F32_same_ISA": {
+        "latency_a_s": 0.376632,
+        "latency_b_s": 0.376307,
+        "speedup_a_over_b": 1.0009,
+        "abs_delta_s": 0.000325
+      },
+      "AVX512_vs_AVX2VNNI_f32": {
+        "latency_a_s": 0.518305,
+        "latency_b_s": 0.375769,
+        "speedup_a_over_b": 1.3793,
+        "abs_delta_s": 0.142536
+      },
+      "VNNI512_vs_AVX512_f32": {
+        "latency_a_s": 0.375769,
+        "latency_b_s": 0.376341,
+        "speedup_a_over_b": 0.9985,
+        "abs_delta_s": -0.000572
+      },
+      "DEFAULT_vs_BF16CEIL": {
+        "latency_a_s": 0.376747,
+        "latency_b_s": 0.376307,
+        "speedup_a_over_b": 1.0012,
+        "abs_delta_s": 0.00044
+      }
+    },
+    "P3": {
+      "BF16_vs_F32_same_ISA": {
+        "latency_a_s": 0.728455,
+        "latency_b_s": 0.70697,
+        "speedup_a_over_b": 1.0304,
+        "abs_delta_s": 0.021485
+      },
+      "AVX512_vs_AVX2VNNI_f32": {
+        "latency_a_s": 1.044784,
+        "latency_b_s": 0.673976,
+        "speedup_a_over_b": 1.5502,
+        "abs_delta_s": 0.370808
+      },
+      "VNNI512_vs_AVX512_f32": {
+        "latency_a_s": 0.673976,
+        "latency_b_s": 0.727538,
+        "speedup_a_over_b": 0.9264,
+        "abs_delta_s": -0.053563
+      },
+      "DEFAULT_vs_BF16CEIL": {
+        "latency_a_s": 0.714978,
+        "latency_b_s": 0.70697,
+        "speedup_a_over_b": 1.0113,
+        "abs_delta_s": 0.008008
+      }
+    }
+  }
+}

@@ -1,0 +1,262 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[ oneDNN ] register_jit_code: jit_has_special_value_base.0, jit_has_special_value_base
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_has_special_value_base.0.bin
+[ oneDNN ] register_jit_code: jit_has_special_value_base.1, jit_has_special_value_base
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_has_special_value_base.1.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.2, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.2.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.3, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.3.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.4, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.4.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.5, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.5.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.6, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.6.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.7, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.7.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.8, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.8.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.9, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.9.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.10, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.10.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.11, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.11.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.12, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.12.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.13, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.13.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.14, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.14.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.15, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.15.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.16, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.16.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.17, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.17.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.18, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.18.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.19, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.19.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.20, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.20.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.21, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.21.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.22, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.22.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.23, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.23.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.24, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.24.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.25, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.25.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.26, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.26.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.27, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.27.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.28, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.28.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.29, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.29.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.30, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.30.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.31, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.31.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.32, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.32.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.33, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.33.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.34, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.34.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.35, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.35.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.36, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.36.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.37, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.37.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.38, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.38.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.39, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.39.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.40, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.40.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.41, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.41.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.42, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.42.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.43, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.43.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.44, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.44.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.45, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.45.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.46, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.46.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.47, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.47.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.48, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.48.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.49, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.49.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.50, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.50.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.51, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.51.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.52, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.52.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.53, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.53.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.54, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.54.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.55, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.55.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.56, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.56.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.57, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.57.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.58, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.58.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.59, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.59.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.60, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.60.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.61, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.61.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.62, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.62.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.63, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.63.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.64, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.64.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.65, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.65.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.66, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.66.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.67, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.67.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.68, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.68.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.69, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.69.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.70, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.70.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.71, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.71.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.72, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.72.bin
+[ oneDNN ] register_jit_code: jit_rotary_kernel.73, jit_rotary_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rotary_kernel.73.bin
+[ oneDNN ] register_jit_code: direct_copy_kernel_t.74, direct_copy_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_direct_copy_kernel_t.74.bin
+[ oneDNN ] register_jit_code: jit_rms_kernel.75, jit_rms_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rms_kernel.75.bin
+[ oneDNN ] register_jit_code: jit_rms_kernel.76, jit_rms_kernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_rms_kernel.76.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.77, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.77.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.78, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.78.bin
+[ oneDNN ] register_jit_code: jit_uni_reduce_post_kernel_f32.79, jit_uni_reduce_post_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reduce_post_kernel_f32.79.bin
+[ oneDNN ] register_jit_code: jit_uni_reduce_kernel_f32.80, jit_uni_reduce_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reduce_kernel_f32.80.bin
+[ oneDNN ] register_jit_code: jit_uni_reduce_kernel_f32.81, jit_uni_reduce_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reduce_kernel_f32.81.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.82, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.82.bin
+[ oneDNN ] register_jit_code: jit_uni_reduce_kernel_f32.83, jit_uni_reduce_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reduce_kernel_f32.83.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.84, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.84.bin
+[ oneDNN ] register_jit_code: jit_uni_reduce_kernel_f32.85, jit_uni_reduce_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reduce_kernel_f32.85.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.86, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.86.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.87, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.87.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.88, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.88.bin
+[ oneDNN ] register_jit_code: jitUniGatherKernel.89, jitUniGatherKernel
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jitUniGatherKernel.89.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.90, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.90.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.91, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.91.bin
+[ oneDNN ] register_jit_code: jit_brgemm_src_quantization_kernel_t.92, jit_brgemm_src_quantization_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_src_quantization_kernel_t.92.bin
+[ oneDNN ] register_jit_code: jit_uni_reorder_kernel_f32.93, jit_uni_reorder_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reorder_kernel_f32.93.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.94, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.94.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.95, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.95.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.96, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.96.bin
+[ oneDNN ] register_jit_code: jit_uni_permute_kernel_f32.97, jit_uni_permute_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_permute_kernel_f32.97.bin
+[ oneDNN ] register_jit_code: direct_copy_kernel_t.98, direct_copy_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_direct_copy_kernel_t.98.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.99, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.99.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.100, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.100.bin
+[ oneDNN ] register_jit_code: jit_brgemm_src_quantization_kernel_t.101, jit_brgemm_src_quantization_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_src_quantization_kernel_t.101.bin
+[ oneDNN ] register_jit_code: jit_uni_reorder_kernel_f32.102, jit_uni_reorder_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reorder_kernel_f32.102.bin
+[ oneDNN ] register_jit_code: jit_uni_permute_kernel_f32.103, jit_uni_permute_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_permute_kernel_f32.103.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.104, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.104.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.105, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.105.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.106, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.106.bin
+[ oneDNN ] register_jit_code: jit_uni_permute_kernel_f32.107, jit_uni_permute_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_permute_kernel_f32.107.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.108, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.108.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.109, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.109.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.110, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.110.bin
+[ oneDNN ] register_jit_code: jit_brgemm_src_quantization_kernel_t.111, jit_brgemm_src_quantization_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_src_quantization_kernel_t.111.bin
+[ oneDNN ] register_jit_code: jit_uni_reorder_kernel_f32.112, jit_uni_reorder_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reorder_kernel_f32.112.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.113, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.113.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.114, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.114.bin
+[ oneDNN ] register_jit_code: jit_brgemm_src_quantization_kernel_t.115, jit_brgemm_src_quantization_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_src_quantization_kernel_t.115.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.116, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.116.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.117, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.117.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.118, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.118.bin
+[ oneDNN ] register_jit_code: jit_brgemm_src_quantization_kernel_t.119, jit_brgemm_src_quantization_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_src_quantization_kernel_t.119.bin
+[ oneDNN ] register_jit_code: jit_uni_reorder_kernel_f32.120, jit_uni_reorder_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reorder_kernel_f32.120.bin
+[ oneDNN ] register_jit_code: direct_copy_kernel_t.121, direct_copy_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_direct_copy_kernel_t.121.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.122, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.122.bin
+[ oneDNN ] register_jit_code: jit_brgemm_kernel_t.123, jit_brgemm_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_kernel_t.123.bin
+[ oneDNN ] register_jit_code: jit_brgemm_src_quantization_kernel_t.124, jit_brgemm_src_quantization_kernel_t
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_brgemm_src_quantization_kernel_t.124.bin
+[ oneDNN ] register_jit_code: jit_uni_reorder_kernel_f32.125, jit_uni_reorder_kernel_f32
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_reorder_kernel_f32.125.bin
+[ oneDNN ] register_jit_code: jit_uni_eltwise_generic.126, jit_uni_eltwise_generic
+[ oneDNN ] dump_jit_code: dnnl_dump_cpu_jit_uni_eltwise_generic.126.bin
+[inv] compile 1.258s props={"PERF_COUNT": "YES", "INFERENCE_NUM_THREADS": "16", "NUM_STREAMS": "1", "PERFORMANCE_HINT": "LATENCY", "INFERENCE_PRECISION_HINT": "<Type: 'float32'>", "DYNAMIC_QUANTIZATION_GROUP_SIZE": "32", "SCHEDULING_CORE_TYPE": "0", "ENABLE_HYPER_THREADING": "False", "TBB_PARTITIONER": "1"}
+[P1] n_tok=39 p50=0.2365s mean=0.2353 cv=0.0069
+[P1] top5: MatMul[brgemm_avx2_f32]17289us | MatMul[brgemm_avx2_f32]1774us | MatMul[brgemm_avx2_f32]1713us | MatMul[brgemm_avx2_f32]1690us | MatMul[brgemm_avx2_f32]1650us
+[saved] profiling_jitdump_avx2vnnif32_summary.json + runtime_nodes_jitdump_avx2vnnif32.json
+[digest] matmul-like runtime nodes: 254
+     253 x layerType=FullyConnected primitive=brgemm_avx2_f32 rtPrecision=u8
+       1 x layerType=MatMul primitive=brgemm_avx2_f32 rtPrecision=f32

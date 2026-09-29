@@ -1,0 +1,102 @@
+onednn_verbose,v1,info,oneDNN v3.13.0 (commit 1289c3b65dd6a119a5ed12a816517d9c3a21d81b)
+onednn_verbose,v1,info,cpu,runtime:threadpool,nthr:16
+onednn_verbose,v1,info,cpu,isa:Intel AVX-512 with Intel DL Boost and bfloat16 support
+onednn_verbose,v1,info,gpu,runtime:none
+onednn_verbose,v1,primitive,info,template:operation,engine,primitive,implementation,prop_kind,memory_descriptors,attributes,auxiliary,problem_desc,exec_time
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:dispatch,reorder,unsupported datatype,src/cpu/x64/matmul/brgemm_matmul_reorders.cpp:292
+onednn_verbose,v1,primitive,create:cache_miss,cpu,reorder,jit_direct_copy:uni,undef,src:u8::blocked:a::f0 dst:s32::blocked:a::f0,,,1,0.0991211
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/investigate_openvino_runtime.py", line 306, in <module>
+    main()
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/investigate_openvino_runtime.py", line 118, in main
+    compiled = core.compile_model(model, "CPU", cfg)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/_ov_api.py", line 646, in compile_model
+    super().compile_model(model, device_name, {} if config is None else config),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Exception from src/inference/src/cpp/core.cpp:117:
+Exception from src/inference/src/dev/plugin.cpp:54:
+Exception from src/plugins/intel_cpu/src/graph.cpp:1628:
+Node Constant_57349_u8_i32_Broadcast_123803 of type Reorder
+could not execute a primitive
+
+
+

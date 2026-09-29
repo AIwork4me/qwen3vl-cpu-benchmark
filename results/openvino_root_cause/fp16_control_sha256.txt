@@ -1,0 +1,2 @@
+98cda0315dc7effaec34b74c047307602559abaa9ba71d9861016cfe57f305a4  /root/models/qwen3vl-openvino-fp16/openvino_language_model.bin
+cc9e4c1eb754709e6a82a2565694f2c1727461bd84e0fd3d4384a5d4d9d0f3fe  /root/models/qwen3vl-openvino-fp16/openvino_text_embeddings_model.bin

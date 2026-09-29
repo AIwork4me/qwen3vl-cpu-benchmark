@@ -1,0 +1,46 @@
+{
+ "model_sizes_bytes": {
+  "ov_int8_lm_bin": 7573989065,
+  "ov_int8_emb_bin": 622633732,
+  "comfy_int8_safetensors": 9350798360,
+  "comfy_bf16_safetensors": 17534334616
+ },
+ "per_encode": {
+  "P1": {
+   "n_tokens_computed": 39,
+   "gflop": 661.0,
+   "ov_int8_weight_bytes_per_encode": 8474066944,
+   "comfyA2_traffic_bytes_per_encode": 34728837120,
+   "traffic_ratio_A2_over_OV": 4.1,
+   "ov_tflops_implied": 3.61,
+   "ov_implied_weight_stream_GBps": 46.3,
+   "comfyA2_implied_traffic_GBps": 2.7
+  },
+  "P2": {
+   "n_tokens_computed": 81,
+   "gflop": 1372.8,
+   "ov_int8_weight_bytes_per_encode": 8474066944,
+   "comfyA2_traffic_bytes_per_encode": 34728837120,
+   "traffic_ratio_A2_over_OV": 4.1,
+   "ov_tflops_implied": 3.69,
+   "ov_implied_weight_stream_GBps": 22.8,
+   "comfyA2_implied_traffic_GBps": 2.5
+  },
+  "P3": {
+   "n_tokens_computed": 185,
+   "gflop": 3135.4,
+   "ov_int8_weight_bytes_per_encode": 8474066944,
+   "comfyA2_traffic_bytes_per_encode": 34728837120,
+   "traffic_ratio_A2_over_OV": 4.1,
+   "ov_tflops_implied": 4.65,
+   "ov_implied_weight_stream_GBps": 12.6,
+   "comfyA2_implied_traffic_GBps": 2.3
+  }
+ },
+ "notes": {
+  "peak_int8_theory": "16 Zen5 cores @ ~3.1 GHz x 2 512-bit VNNI pipes x 64 int8 MACs/vpdpbusd x 2 ops/MAC ~= 12.7 TOPS envelope (theoretical only, NOT measured); implied utilization ~28-37%",
+  "a2_accounting": "ComfyUI A2 counters: 13,891,534,848 B dequant per encode from results/comfy_cpu/runtime_path.md; int8 payload 8,190,427,136 and embed/lm_head 622,329,856 verified from the safetensors header (cited in README.md / report/RESULTS.md); A2 latencies 12.98/13.73/15.43 s are run2 warm_means (run1-3 means 12.93/13.60/15.44 -> implied 2.7/2.6/2.3 GB/s, same conclusions)",
+  "rss": "OV bridge peak RSS 14.57-15.1 GiB (u8 weights 8.2 GiB + runtime scratch/allocator); ComfyUI A2 peak 7.59 GiB",
+  "assumptions": "Implied GB/s assume each weight byte is touched exactly once per encode (ideal streaming; copy-B repack caches ignored); real DRAM bandwidth NOT measured (perf blocked)"
+ }
+}
