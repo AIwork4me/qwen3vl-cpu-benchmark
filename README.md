@@ -30,12 +30,26 @@ A/B benchmark on **AMD Ryzen AI Max+ PRO 395** (Strix Halo, 16C/32T, AVX-512 + A
 | Model load | 0.30 s (mmap assign; real page-in lands in first encode 12.11 s) | same | 4.48 s (disk→GTT) | **1.26 s** (read+compile) |
 | First usable encode (cold) | 12.11 s | ~7.5 s | 0.60 s | **0.18 s** |
 | Memory | 7.59 GiB CPU RSS | 7.35 GiB | 16.63 GiB GPU (GTT, resident) | 14.57 GiB CPU RSS |
-| Compute unit busy | CPU ~1318% (16 thr) | CPU | **GPU 85%** (busy mean) | CPU ~1332% (GPU free) |
+| Compute unit busy | CPU ~1318% (16 thr) | CPU | **GPU 85%** (busy mean) | CPU ~1552–1572% warm-interval⁵ (GPU free) |
 | Model disk | 9.351 GB | same weights | 17.534 GB | 8.810 GB |
-| True INT8 GEMM | **NO** | **YES** | n/a (BF16 weights, fp32 GEMM) | UNKNOWN¹ |
+| True INT8 GEMM | **NO** | **YES** | n/a (BF16 weights, fp32 GEMM) | **YES — dynamic-quantization int8 dot (AVX512_VNNI `vpdpbusd`)**² |
 | Cosine vs BF16 reference | 0.9989–0.9993 | 0.9978–0.9986 | **1.000000** | 0.9972–0.9985 |
 
-¹ OpenVINO's internal oneDNN kernel choice was not dumped; what is proven: int8 weights resident, CPU execution asserted at runtime, accuracy consistent with int8 weight-only compute.
+¹² superscripts resolved by the root-cause investigation (below). **History preserved:**
+before that investigation this cell read `UNKNOWN¹` ("OpenVINO's internal oneDNN kernel
+choice was not dumped"). After it (evidence Levels B+C+E, no perf sampling available):
+the 253 weight-compressed FC nodes (91–92% of node time) dispatch to oneDNN brgemm JIT
+kernels whose machine code contains `vpdpbusd` (AVX-512 VNNI, u8×s8→int32) MAC loops with
+dynamic-quantization group scales — the model is INT8_ASYM weight-compressed **plus
+runtime dynamic activation quantization (group 32)**, i.e. NOT static W8A8, but the MACs
+do run int8 on VNNI. Setting `DYNAMIC_QUANTIZATION_GROUP_SIZE=0` switches the same nodes
+to pure BF16 dot (`vdpbf16ps`) and costs +23–43% latency. Full chain:
+`report/OPENVINO_ZEN5_ROOT_CAUSE.md`.
+
+⁵ Warm-encode interval process CPU (`proc_cpu_pct`, 20 Hz): 1552–1572% ≈ 15.5–15.7 of 16
+cores (results/comparison/summary.csv openvino rows). The earlier "~1332%" figure was the
+whole-run mean including model-load/idle phases (`openvino_default.json
+meta.full_run.proc_cpu_mean_pct` = 1331.9) — both trace to raw data, different windows.
 
 Thread sweep (both runtimes): **16 (default) is fastest**; 8 is clearly slower; 32 gives no gain.
 
@@ -101,7 +115,32 @@ modelscope download --model OpenVINO/Qwen3-VL-8B-Instruct-int8-ov --local_dir mo
 .venv-comfy/bin/python scripts/bench_bf16_reference.py
 python3 scripts/compare_embeddings.py && python3 scripts/aggregate_summary.py
 python3 scripts/classify_comfy_path.py run1 run2 run3 t8 t32 a1_t16 a1_t8 a1_t32
+
+# root-cause investigation (see report/OPENVINO_ZEN5_ROOT_CAUSE.md §Reproduce)
+bash scripts/run_openvino_isa_matrix.sh && .venv-openvino/bin/python scripts/aggregate_root_cause.py
 ```
+
+## Root-cause investigation
+
+Follow-up (same day, branch `investigate/openvino-zen5-vnni-root-cause`): a 16-phase,
+independently-verified investigation of **what OpenVINO actually executes on the Zen 5 CPU**.
+Full report: **[report/OPENVINO_ZEN5_ROOT_CAUSE.md](report/OPENVINO_ZEN5_ROOT_CAUSE.md)** — every phase
+cross-checked by read-only subagents (`environment/root_cause_checkpoints.md`, 13 verifications, all PASS).
+
+- **AVX512_VNNI is executed** (runtime dispatch + JIT disassembly + knob counterfactual;
+  perf-level sampling unavailable on this host). The 253 weight-compressed FC nodes run
+  `vpdpbusd` (u8×s8→int32) MAC loops fed by dynamic activation quantization (group 32).
+- **But VNNI is not the headline**: same-stack counterfactuals measure VNNI-vs-BF16 engine
+  **1.23–1.43×**, INT8-WC-vs-FP16 **1.41–1.67×**, AVX-512 width **1.38–1.55×**. The 22–69×
+  is dominated by never materializing a dequantized weight copy (8.5 GB vs 34.7 GB traffic
+  per encode) inside a precompiled inference pipeline.
+- The compute engine is chosen by `DYNAMIC_QUANTIZATION_GROUP_SIZE` (32 = int8/VNNI path,
+  0 = BF16-dot path) — the OpenVINO primitive name `brgemm_avx512_bf16` is an ISA label,
+  not a MAC-dtype statement. Bonus finding: group size 128 is another **11–21% faster**
+  (cosine ≥ 0.9959).
+- Blocked evidence recorded honestly: oneDNN per-primitive verbose crashes on this build
+  (compile-time constant-fold reorder, dtype-driven); perf/PMU blocked by
+  `perf_event_paranoid=4` + missing kernel-matched tools; no system settings were changed.
 
 ## Verification
 
@@ -111,7 +150,8 @@ Three independent read-only subagent checkpoints (setup/downloads → ComfyUI ro
 
 - OS page cache was **not** dropped (no root); "cold" = fresh process, model file may be page-cached. Warm numbers are unaffected.
 - ComfyUI `model_load_s=0.30 s` is the safetensors mmap-assign; the real disk page-in shows up inside the first encode (12.11 s).
-- OpenVINO internal GEMM dtype not dumped → marked UNKNOWN, deliberately **not** claimed as W8A8.
+- ~~OpenVINO internal GEMM dtype not dumped → marked UNKNOWN, deliberately **not** claimed as W8A8.~~ **Resolved by the root-cause investigation** (same day): dynamic-quantization int8 dot on AVX512_VNNI confirmed at dispatch+JIT+counterfactual level; NOT static W8A8 (activations are quantized at runtime, group 32). perf-sampling-level proof unavailable (host restrictions). See `report/OPENVINO_ZEN5_ROOT_CAUSE.md`.
+- Root-cause investigation caveats: no measured DRAM bandwidth/cache counters (perf blocked; GB/s figures are byte-accounting derivations); oneDNN per-primitive verbose unavailable on this build (documented crash); GPU comparison covers only ComfyUI's forced-fp32 product path — a bf16-compute GPU path was not measured.
 - End-to-end image-generation A/B was out of scope for this round (conditioning semantics verified; the 33 GB Qwen-Image-2.1 checkpoint was not pulled).
 
 ## Repo layout
@@ -122,7 +162,8 @@ scripts/       monitor + 6 benchmark/analysis scripts (see Reproduce)
 prompts/       unified P1/P2/P3
 models/        local ModelScope checkouts (gitignored, ~36 GB)
 results/       raw 20Hz sampling CSVs, per-run JSON/CSV, npy embeddings, comparison tables
-report/        RESULTS.md (full, 中文) + qwen_image_conditioning_semantics.md (中文)
+                + openvino_isa/ & openvino_root_cause/ (root-cause investigation artifacts)
+report/        RESULTS.md (full, 中文) + qwen_image_conditioning_semantics.md (中文) + OPENVINO_ZEN5_ROOT_CAUSE.md (root-cause, 中文)
 ComfyUI/       dedicated checkout used by the benchmark (gitignored)
 ```
 

@@ -1,0 +1,119 @@
+# Phase 1 — OpenVINO CPU backend linkage (2026-09-29)
+
+## OpenVINO runtime identity
+openvino: 2026.4.0-22959-99c81491cc3-releases/2026/4
+available_devices: ['CPU', 'GPU']
+
+## Shared libraries in wheel (openvino/libs)
+total 165672
+drwxrwxr-x  2 amd amd     4096  9月 29 13:42 .
+drwxrwxr-x 35 amd amd     4096  9月 29 13:42 ..
+-rw-rw-r--  2 amd amd  8840377  9月 29 13:42 cache.json
+-rw-rw-r--  2 amd amd   473321  9月 29 13:42 libhwloc.so.15
+-rw-rw-r--  2 amd amd   265129  9月 29 13:42 libopenvino_auto_batch_plugin.so
+-rw-rw-r--  2 amd amd   685129  9月 29 13:42 libopenvino_auto_plugin.so
+-rw-rw-r--  2 amd amd   377505  9月 29 13:42 libopenvino_c.so.2640
+-rw-rw-r--  2 amd amd  1519505  9月 29 13:42 libopenvino_gguf_frontend.so.2640
+-rw-rw-r--  2 amd amd   559265  9月 29 13:42 libopenvino_hetero_plugin.so
+-rw-rw-r--  2 amd amd 63691929  9月 29 13:42 libopenvino_intel_cpu_plugin.so
+-rw-rw-r--  2 amd amd 41724377  9月 29 13:42 libopenvino_intel_gpu_plugin.so
+-rw-rw-r--  2 amd amd 10587193  9月 29 13:42 libopenvino_intel_npu_plugin.so
+-rw-rw-r--  2 amd amd   640313  9月 29 13:42 libopenvino_ir_frontend.so.2640
+-rw-rw-r--  2 amd amd   530841  9月 29 13:42 libopenvino_jax_frontend.so.2640
+-rw-rw-r--  2 amd amd  6810865  9月 29 13:42 libopenvino_onnx_frontend.so.2640
+-rw-rw-r--  2 amd amd  1905353  9月 29 13:42 libopenvino_paddle_frontend.so.2640
+-rw-rw-r--  2 amd amd  3310169  9月 29 13:42 libopenvino_pytorch_frontend.so.2640
+-rw-rw-r--  2 amd amd 20514649  9月 29 13:42 libopenvino.so.2640
+-rw-rw-r--  2 amd amd  5227801  9月 29 13:42 libopenvino_tensorflow_frontend.so.2640
+-rw-rw-r--  2 amd amd  1338601  9月 29 13:42 libopenvino_tensorflow_lite_frontend.so.2640
+-rw-rw-r--  2 amd amd    33025  9月 29 13:42 libtbbbind_2_5.so.3
+-rw-rw-r--  2 amd amd    28377  9月 29 13:42 libtbbmalloc_proxy.so.2
+-rw-rw-r--  2 amd amd   159729  9月 29 13:42 libtbbmalloc.so.2
+-rw-rw-r--  2 amd amd   369313  9月 29 13:42 libtbb.so.12
+-rw-rw-r--  2 amd amd      896  9月 29 13:42 tbb.pc
+
+## ldd libopenvino_intel_cpu_plugin.so
+	linux-vdso.so.1 (0x000079326d78c000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x000079326d763000)
+	libopenvino.so.2640 => /home/amd/Desktop/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino.so.2640 (0x0000793268600000)
+	libtbb.so.12 => /home/amd/Desktop/qwen3vl-cpu-benchmark/.venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbb.so.12 (0x000079326858e000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x0000793268200000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007932684a5000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000079326d733000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x000079326d72e000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000793267e00000)
+	/lib64/ld-linux-x86-64.so.2 (0x000079326d78e000)
+
+## readelf -d (NEEDED)
+ 0x000000000000000f (RPATH)              Library rpath: [$ORIGIN]
+ 0x0000000000000001 (NEEDED)             Shared library: [libdl.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libopenvino.so.2640]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtbb.so.12]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libpthread.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]
+
+## oneDNN static-linkage evidence
+- No libdnnl.so in NEEDED; ldconfig has no dnnl; nm -D exported dnnl_* symbols = 0 (static, hidden visibility).
+- Binary strings contain oneDNN internals: 'info,oneDNN v%d.%d.%d (commit %s)', brgemm_desc_init/brgemm_kernel_create asserts, DnnlBlockedMemoryDesc, implementation suffixes like 'brdgmm_dw:avx512_core_vnni', 'brgconv_1x1:avx2_vnni', 'avx512_core_amx' ...
+- JIT dump file template present: 'dnnl_dump_cpu_%s.bin' + '[ oneDNN ] dump_jit_code: '
+- Env-var names stored WITHOUT prefix and resolved with runtime prefix (ONEDNN_/DNNL_): VERBOSE(13 refs), MAX_CPU_ISA, CPU_ISA_HINTS, JIT_DUMP, JIT_PROFILE
+
+## Threading runtime
+- libtbb.so.12 NEEDED by CPU plugin; bundled oneTBB VERSION 2021.13.1 (INTERFACE 12131); TbbPartitioner symbols present; NO OpenMP (no libgomp in ldd).
+
+## ISA implementation suffix strings present in CPU plugin (dispatch table evidence)
+brdgmm_dw:
+brdgmm_dw:avx
+brdgmm_dw:avx10_1_512
+brdgmm_dw:avx10_1_512_amx
+brdgmm_dw:avx10_1_512_amx_fp16
+brdgmm_dw:avx10_2
+brdgmm_dw:avx10_2_amx_2
+brdgmm_dw:avx2
+brdgmm_dw:avx2_vnni
+brdgmm_dw:avx2_vnni_2
+brdgmm_dw:avx512_core
+brdgmm_dw:avx512_core_bf16
+brdgmm_dw:avx512_core_vnni
+brdgmm_dw:sse41
+brdgmm_dw:undef
+brgconv_1x1:avx2
+brgconv_1x1:avx2_vnni
+brgconv_1x1:avx512_core
+brgconv_1x1:avx512_core_bf16
+brgconv_1x1:avx512_core_vnni
+brg_conv_bwd:avx2
+brg_conv_bwd:avx512_core
+brg_conv_bwd:avx512_core_bf16
+brg_conv_fwd:avx2
+brg_conv_fwd:avx2_vnni
+brg_conv_fwd:avx512_core
+brg_conv_fwd:avx512_core_bf16
+brg_conv_fwd:avx512_core_vnni
+brgconv_strided:avx2
+brgconv_strided:avx2_vnni
+brgconv_strided:avx512_core
+brgconv_strided:avx512_core_bf16
+brgconv_strided:avx512_core_vnni
+brg_deconv:avx2
+brg_deconv:avx2_vnni
+brg_deconv:avx512_core
+brg_deconv:avx512_core_bf16
+brg_deconv:avx512_core_vnni
+brgemm:
+brgemm:avx
+
+## SHA256 of key libs
+493c2febdacbffe3cf32996c0aa2dd8e9edc69844df849e9800307bf686ee361  .venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino_intel_cpu_plugin.so
+f13a529596831d118cd7bfe4f1bbb2ed005cef765c1ccee10bb555839b495c82  .venv-openvino/lib/python3.12/site-packages/openvino/libs/libopenvino.so.2640
+ac9518497a4f2cb6729792730f145ee58367316031511923fef263c9ac81ca61  .venv-openvino/lib/python3.12/site-packages/openvino/libs/libtbb.so.12
+
+## Conclusions
+1. The 'CPU' device is served by libopenvino_intel_cpu_plugin.so (OpenVINO intel_cpu plugin; same binary family serves x86-64 CPUs regardless of vendor).
+2. oneDNN is STATICALLY embedded in that plugin (no dynamic libdnnl anywhere on the process path; 0 exported dnnl_* symbols). Exact oneDNN version is printed by the ONEDNN_VERBOSE header (captured in Phase 3).
+3. CPU threading runtime = bundled oneTBB 2021.13.1 (libtbb.so.12); no OpenMP linked.
+4. Embedded oneDNN dispatch tables contain implementation suffixes incl. avx512_core_vnni, avx2_vnni, avx512_core, avx512_core_bf16, avx10_*; env knobs compiled in: ONEDNN_VERBOSE / ONEDNN_MAX_CPU_ISA / ONEDNN_JIT_DUMP / ONEDNN_JIT_PROFILE / ONEDNN_CPU_ISA_HINTS (names stored suffix-only in .rodata, runtime-prefixed).

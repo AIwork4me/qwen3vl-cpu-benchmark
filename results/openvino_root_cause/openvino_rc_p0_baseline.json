@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "timestamp": "2026-09-29T17:42:38.159192",
+    "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+    "variant": "OpenVINO INT8 weight-compressed + add_outputs conditioning bridge",
+    "pre_norm_node": "__module.model.language_model.layers.35/aten::add/Add_1",
+    "norm_node": "__module.model.language_model.norm/aten::pow/Power",
+    "device": "CPU",
+    "execution_devices": "['CPU']",
+    "hint": "LATENCY",
+    "threads": "default",
+    "tokenizer_init_s": 0.717263313,
+    "model_read_s": 0.102449789,
+    "model_compile_s": 1.180016364,
+    "model_load_s": 1.282466153,
+    "post_load_peak_rss_bytes": 373891072,
+    "model_inputs": [
+      "attention_mask",
+      "position_ids",
+      "inputs_embeds",
+      "visual_pos_masks",
+      "deepstack_visual_embeds",
+      "beam_idx"
+    ],
+    "full_run": {
+      "start_label": "start",
+      "end_label": "stop",
+      "wall_s": 17.650990441,
+      "peak_rss_bytes": 16151564288,
+      "peak_vms_bytes": 26861490176,
+      "sys_used_peak_bytes": 13612494848,
+      "sys_available_min_bytes": 87388762112,
+      "cpu_util_mean_pct": 49.16,
+      "cpu_util_max_pct": 86.2,
+      "proc_cpu_mean_pct": 1382.21,
+      "proc_cpu_max_pct": 1640.1,
+      "threads_max": 71,
+      "cpu_freq_mean_mhz": 3091.9,
+      "n_samples": 353
+    }
+  },
+  "prompts": {
+    "P1": {
+      "n_tokens_full": 39,
+      "trim_index": 14,
+      "n_tokens_kept": 25,
+      "hidden_shape": [
+        1,
+        25,
+        4096
+      ],
+      "hidden_mean": 0.13168394565582275,
+      "hidden_std": 12.052685737609863,
+      "warmup_s": 0.958675849,
+      "first_encode_s": 0.179503485,
+      "warm_encode_s": [
+        0.186334768,
+        0.183361787,
+        0.186329698,
+        0.18058741,
+        0.182902625,
+        0.180178612,
+        0.182056456,
+        0.182795223,
+        0.183904976,
+        0.180737018
+      ],
+      "interval_stats": {
+        "start_label": "P1_warmup",
+        "end_label": "P1_warm",
+        "wall_s": 2.009404696,
+        "peak_rss_bytes": 15644815360,
+        "peak_vms_bytes": 25925222400,
+        "sys_used_peak_bytes": 13007720448,
+        "sys_available_min_bytes": 87993536512,
+        "cpu_util_mean_pct": 54.52,
+        "cpu_util_max_pct": 57.2,
+        "proc_cpu_mean_pct": 1577.03,
+        "proc_cpu_max_pct": 1640.1,
+        "threads_max": 56,
+        "cpu_freq_mean_mhz": 3210.9,
+        "n_samples": 40
+      }
+    },
+    "P2": {
+      "n_tokens_full": 81,
+      "trim_index": 14,
+      "n_tokens_kept": 67,
+      "hidden_shape": [
+        1,
+        67,
+        4096
+      ],
+      "hidden_mean": 0.12706659734249115,
+      "hidden_std": 11.171878814697266,
+      "warmup_s": 0.393875447,
+      "first_encode_s": 0.373468211,
+      "warm_encode_s": [
+        0.373925097,
+        0.371622184,
+        0.374112399,
+        0.369481604,
+        0.369682601,
+        0.371953133,
+        0.367136571,
+        0.371804122,
+        0.374779054,
+        0.373021154
+      ],
+      "interval_stats": {
+        "start_label": "P2_warmup",
+        "end_label": "P2_warm",
+        "wall_s": 4.091639304,
+        "peak_rss_bytes": 15808290816,
+        "peak_vms_bytes": 26494357504,
+        "sys_used_peak_bytes": 13168578560,
+        "sys_available_min_bytes": 87832678400,
+        "cpu_util_mean_pct": 55.37,
+        "cpu_util_max_pct": 59.4,
+        "proc_cpu_mean_pct": 1554.38,
+        "proc_cpu_max_pct": 1626.9,
+        "threads_max": 71,
+        "cpu_freq_mean_mhz": 3193.7,
+        "n_samples": 82
+      }
+    },
+    "P3": {
+      "n_tokens_full": 185,
+      "trim_index": 14,
+      "n_tokens_kept": 171,
+      "hidden_shape": [
+        1,
+        171,
+        4096
+      ],
+      "hidden_mean": 0.09718064218759537,
+      "hidden_std": 11.00863265991211,
+      "warmup_s": 0.72265688,
+      "first_encode_s": 0.690781456,
+      "warm_encode_s": [
+        0.674911844,
+        0.677451149,
+        0.680714632,
+        0.671035591,
+        0.671681742,
+        0.681721024,
+        0.659745672,
+        0.68071498,
+        0.674789557,
+        0.671865134
+      ],
+      "interval_stats": {
+        "start_label": "P3_warmup",
+        "end_label": "P3_warm",
+        "wall_s": 7.436264651,
+        "peak_rss_bytes": 16151564288,
+        "peak_vms_bytes": 26861490176,
+        "sys_used_peak_bytes": 13612494848,
+        "sys_available_min_bytes": 87388762112,
+        "cpu_util_mean_pct": 55.54,
+        "cpu_util_max_pct": 86.2,
+        "proc_cpu_mean_pct": 1560.95,
+        "proc_cpu_max_pct": 1626.0,
+        "threads_max": 71,
+        "cpu_freq_mean_mhz": 3070.5,
+        "n_samples": 148
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # Qwen3-VL Ryzen AI Max+ 395 CPU Benchmark — 最终报告
 
+> **更新（2026-09-29 晚，root-cause investigation）**：本报告 §1/§7 中的
+
 日期: 2026-09-29 · 全部数据为真实测量（20 Hz psutil 采样 + `time.perf_counter_ns()`），
 原始数据见 `results/raw/` 与 `results/*/`，逐 iteration 数据完整保留。
 

@@ -1,0 +1,12 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[inv] compile 1.115s props={"PERF_COUNT": "YES", "INFERENCE_NUM_THREADS": "16", "NUM_STREAMS": "1", "PERFORMANCE_HINT": "LATENCY", "INFERENCE_PRECISION_HINT": "<Type: 'float32'>", "DYNAMIC_QUANTIZATION_GROUP_SIZE": "32", "SCHEDULING_CORE_TYPE": "0", "ENABLE_HYPER_THREADING": "False", "TBB_PARTITIONER": "1"}
+[P1] n_tok=39 p50=0.1861s mean=0.1872 cv=0.0243
+[P1] top5: MatMul[brgemm_avx512_f32]12361us | MatMul[brgemm_avx512_f32]1261us | MatMul[brgemm_avx512_f32]1232us | MatMul[brgemm_avx512_f32]1213us | MatMul[brgemm_avx512_f32]1213us
+[P2] n_tok=81 p50=0.3729s mean=0.3741 cv=0.0120
+[P2] top5: MatMul[brgemm_avx512_f32]20495us | MatMul[brgemm_avx512_f32]1848us | MatMul[brgemm_avx512_f32]1808us | MatMul[brgemm_avx512_f32]1806us | MatMul[brgemm_avx512_f32]1789us
+[P3] n_tok=185 p50=0.7275s mean=0.7246 cv=0.0203
+[P3] top5: MatMul[brgemm_avx512_f32]29910us | MatMul[brgemm_avx512_f32]2704us | MatMul[brgemm_avx512_f32]2669us | MatMul[brgemm_avx512_f32]2667us | MatMul[brgemm_avx512_f32]2666us
+[saved] profiling_isa_VNNI512_F32_r1_summary.json + runtime_nodes_isa_VNNI512_F32_r1.json
+[digest] matmul-like runtime nodes: 254
+     253 x layerType=FullyConnected primitive=brgemm_avx512_f32 rtPrecision=u8
+       1 x layerType=MatMul primitive=brgemm_avx512_f32 rtPrecision=f32
