@@ -1,0 +1,2 @@
+  [wall] ab_p1_native: 1006.8s
+scripts/run_e2e_suite.sh: line 165: syntax error near unexpected token `)'
