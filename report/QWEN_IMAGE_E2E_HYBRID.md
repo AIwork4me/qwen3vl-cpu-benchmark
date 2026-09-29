@@ -295,9 +295,53 @@ latency-vs-quality judgment the quality data informs.
 
 (filled from `results/e2e/quality/quality_metrics.csv` + blind package)
 
-## Failure cases
+## Failure cases (Phase 35) — where the hybrid is NOT better
 
-(dedicated section — see Failure cases below once matrix data lands)
+Actively looked for, honestly reported:
+
+1. **Sustained CPU-encode + GPU-DiT concurrency**: the hybrid's signature failure mode
+   on this UMA APU — DiT 2.05× slower under an encode storm (286.8–308.6 s vs 140.5–143.4 s
+   control, same prompt/seed/steps). Any product that overlaps long CPU encoder runs with
+   GPU generation will regress; one-prompt-ahead is safe (measured: no penalty).
+2. **Very short prompts**: at 15 tokens the hybrid saves only ~0.97 s/image (0.6%) — the
+   architecture's minimum win; not worth a migration if prompts are always short AND
+   memory is not a constraint.
+3. **DiT-heavy operating points**: at 40 steps the encoder share drops to 0.87% — the
+   warm E2E advantage decays toward zero as sampling work grows. (Memory advantages
+   persist.)
+4. **High resolution**: at 1328² both routes' DiT grows to ~375 s; the hybrid's relative
+   advantage shrinks further — but its absolute memory advantage becomes MORE valuable
+   (G peaks at 65.07 GiB of 100 GiB GTT).
+5. **Cold CPU-side pitfalls**: a fresh OpenVINO cache dir costs +2.8 s on the first
+   process start (3.45 vs 0.69 s compile) — negligible once cached, worth knowing for
+   one-shot containers.
+6. **Thermal drift**: ±3–5 s run-to-run DiT drift under sustained load exceeds the
+   hybrid's warm E2E margin — single-run comparisons of G vs H are meaningless at this
+   operating point; only paired/counterbalanced statistics separate them (this round's
+   headline uses median-of-fresh-process-medians with the drift documented).
+7. **The native CPU product path in the ROCm build**: 99.2–99.5 s per P3 encode (torch
+   2.12+rocm CPU kernels, ~3.2× the torch-cpu build's 15.4 s) — anyone running ComfyUI's
+   int8-convrot TE on CPU from a ROCm install pays this; the OV bridge avoids it.
+
+## "Is it more reasonable?" scorecard (Phase 34) — measured facts only
+
+| Dimension | GPU-heavy (G) | Hybrid (H) | Measured fact |
+|---|---|---|---|
+| Warm E2E latency | 154.17 s | **151.25 s** | median-of-medians, P3/1024²/20st |
+| Cold TTFI | 176.11 s | **168.82 s** | fresh process → first image |
+| 5-image throughput | 0.40 img/min | 0.39 img/min | equal within thermal drift |
+| Text-encoder latency (warm) | 2.618 s | **0.993 s** | P3 pos+neg |
+| DiT latency | 149.05 s | 147.95 s | statistically indistinguishable |
+| VAE latency | 2.43 s | 2.25 s | same path |
+| GPU busy during DiT | 99.7% | 99.4% | both saturated |
+| GPU busy during encode | 85–88% | ~idle (sensor-decay artifact documented) | |
+| GTT residency | 51.86 GiB | **35.40 GiB** | −16.46 GiB |
+| Physical UMA consumed | 52.7 GiB | **43.5 GiB** | −9.2 GiB |
+| CPU RSS | 32.0 GiB | 30.1 GiB | |
+| Conditioning cosine (pos/neg) | ref | 0.9985 / 0.9710 | DQ32 |
+| Image quality | ref | CLIP img-sim 0.993 (DQ32, same seed) | quality dataset below |
+| Startup complexity | 1 model load | + OV compile 0.7 s (cached) | |
+
 
 ## Thermal stability
 
