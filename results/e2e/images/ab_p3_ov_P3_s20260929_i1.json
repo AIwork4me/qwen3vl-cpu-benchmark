@@ -1,0 +1,31 @@
+{
+ "prompt": "A wide-angle editorial photograph of a modern robotics laboratory: in the foreground, a silver humanoid robot with exactly two blue LED eyes holds a red coffee mug in its left hand and a green circuit board in its right hand; behind it, three monitors on a dark wooden desk show, from left to right, a line graph titled 'Qwen3-VL Throughput', a Python code editor with syntax highlighting, and a photograph of a white Maltese dog; two ceiling-mounted studio softboxes light the scene from above, while a floor-to-ceiling window in the background reveals a night city skyline with neon signs reading 'AI EXPO 2026'; shallow depth of field, 35mm lens, photorealistic, high dynamic range, sharp focus on the robot, bokeh background.",
+ "prompt_id": "P3",
+ "seed": 20260929,
+ "route": "ov",
+ "dq": 32,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 1.049806733,
+ "dit_s": 149.678632423,
+ "vae_s": 2.240406664,
+ "postprocess_s": 0.004782474,
+ "png_save_s": 0.260758579,
+ "total_gen_s": 152.971138751,
+ "total_save_inclusive_s": 153.264291778,
+ "tag": "ab_p3_ov"
+}

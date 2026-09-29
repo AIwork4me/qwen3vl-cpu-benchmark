@@ -63,8 +63,7 @@ def main():
                    "dq": run["meta"].get("dq", "") if run["meta"]["route"] == "ov" else ""}
             # GTT / RSS / MemAvailable: after load vs whole-run peak vs baseline (first sample)
             base = rows[0] if rows else {}
-            for key, name in (("gtt_used_bytes", "gtt"), ("rss_bytes", "rss"),
-                              ("sys_available_bytes", "memavail")):
+            for key, name in (("gtt_used_bytes", "gtt"), ("rss_bytes", "rss")):
                 whole_mean, whole_max, n = window(rows, 0, float("inf"), key)
                 _, post_load, _ = window(rows, t_load1 or 0, float("inf"), key)
                 row[f"{name}_baseline"] = round(fnum(base.get(key)) / 2**30, 2) if fnum(base.get(key)) else None
@@ -72,6 +71,14 @@ def main():
                 row[f"{name}_peak_gib"] = round(whole_max / 2**30, 2) if whole_max else None
                 row[f"{name}_delta_peak_gib"] = (round((whole_max - fnum(base.get(key))) / 2**30, 2)
                                                  if whole_max and fnum(base.get(key)) else None)
+            # MemAvailable: consumption = baseline - MIN available (most-committed point)
+            mav = [fnum(r["sys_available_bytes"]) for r in rows if fnum(r.get("sys_available_bytes")) is not None]
+            if mav:
+                row["memavail_baseline"] = round(max(mav) / 2**30, 2)
+                row["memavail_min_gib"] = round(min(mav) / 2**30, 2)
+                row["memavail_consumed_gib"] = round((max(mav) - min(mav)) / 2**30, 2)
+            else:
+                row["memavail_baseline"] = row["memavail_min_gib"] = row["memavail_consumed_gib"] = None
             # GPU busy during all DiT windows combined vs whole run
             dit_windows = []
             for i in range(len(run.get("images", []))):
