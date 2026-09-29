@@ -47,3 +47,7 @@ scripts/run_e2e_suite.sh: line 170: syntax error near unexpected token `compare'
   [wall] pipe_ov10: 1684.7s
 [suite 06:06:15] stage pipelined done
 [chain3 06:06:15] ALL DONE
+  [wall] kn20_aot: 394.6s
+[suite 06:21:09] stage kernel_note20 done
+  [wall] det_test: 184.3s
+[suite 06:24:13] stage det_test done

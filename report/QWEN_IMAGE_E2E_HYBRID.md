@@ -308,6 +308,16 @@ encode bursts. Both routes share the drift symmetrically (counterbalanced order)
 headline comparisons are within-pair. Full per-image drift table:
 `results/e2e/summary/thermal_drift.csv` (quality long runs).
 
+### DiT kernel configuration note
+
+Back-to-back fresh processes, warmup-stabilized, P3/1024²/20 steps (`kn20_aot` vs
+`kn20_def`): **AOTriton 151.1 s vs default SDPA kernels 209.8 s (1.39× faster)** —
+consistent with the 4-step smoke (27.1 vs 40.3 s). All G and H main runs used AOTriton
+identically, so the A/B is unaffected. (An earlier note suspected an inversion at higher
+step counts; that was a comparison error — the default-kernel run was 20 steps, not 40.
+Corrected here for the record.) On this machine, ComfyUI's AOTriton recommendation is
+a real 1.39× DiT win and part of the recommended product configuration.
+
 ## What actually improved
 
 - GTT residency: −16.46 GiB (freed for the DiT or anything else)
@@ -333,10 +343,44 @@ pipelining asset in continuous generation.
 
 ## What we can claim / What we cannot claim
 
-(Social-media-safe conclusions section at the end consolidates this; the explicit list
-includes: no "CPU > GPU" generalization — the GPU route here is ComfyUI's forced-fp32
-conditioning path; no e2e multiplier claims — 69× belongs to the encoder stage only;
-no quality claim beyond the measured dataset.)
+**Can claim (measured on this machine, this round):**
+- Hybrid reduces GTT residency by 16.46 GiB and physical UMA consumption by ~9.2 GiB.
+- Hybrid cuts cold time-to-first-image by 7.3 s (4.1%) and warm E2E by ~2–3 s (~1.5–2%),
+  growing with prompt length (up to 3.5 s at ~300 tokens).
+- DiT and VAE latencies are unaffected by the architecture choice at 1024²/20 steps.
+- Sustained concurrent CPU-encoding + GPU-DiT is bandwidth-bound and 2.05× slower for
+  the DiT; single-prompt-ahead pipelining is free and hides the encoder.
+- Conditioning identity is numerically anchored to three independent rounds.
+
+**Cannot claim:**
+- "CPU is faster than GPU" — the GPU baseline here is ComfyUI's forced-fp32 conditioning
+  path; a bf16/tensor-core GPU encoder path was not measured.
+- Any end-to-end multiplier ("69× faster") — that number belongs to the encoder stage
+  only (prior round); e2e the pipeline is DiT-dominated (1.5–2%).
+- Throughput gains from pipelining on this APU (measured: none at this operating point).
+- Generalization beyond this SoC/config (torch 2.12+rocm7.14, ComfyUI 0.37.0, firmware
+  power management).
+
+## Social-media-safe conclusions
+
+### Confirmed (safe to state directly)
+- On Ryzen AI Max+ 395 (Strix Halo), running Qwen-Image 2.1's text encoder on the Zen 5
+  CPU via OpenVINO INT8 while the Radeon 8060S runs the DiT+VAE **frees 16.5 GiB of GPU
+  memory and ~9 GiB of physical RAM**, starts ~7 s faster cold, and is ~2 s faster per
+  warm image — with the GPU left completely free during conditioning.
+- Same-seed image outputs are preserved (deterministic per route; CLIP image similarity
+  ~0.993 for DQ32 vs the GPU route; full quality dataset in the report).
+
+### Context-required (must carry the qualifier)
+- "The hybrid pipeline is faster" — only by ~1.5–2% warm at 1024²/20 steps; the win is
+  memory + cold start + GPU availability, not big wall-clock speed.
+- "Pipelining hides the encoder" — true and free for one prompt ahead; sustained CPU/GPU
+  concurrency is 2.05× slower (shared LPDDR5X bandwidth).
+
+### Do not claim
+- ❌ "CPU beats GPU" (only ComfyUI's forced-fp32 GPU encoder path was measured)
+- ❌ "69× faster image generation" (encoder-stage number only)
+- ❌ "Pipelining multiplies throughput on APU" (measured: it doesn't)
 
 ## Reproduce
 

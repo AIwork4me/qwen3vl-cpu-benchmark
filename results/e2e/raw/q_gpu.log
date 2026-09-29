@@ -1,0 +1,5 @@
+[warmup] 2-step throwaway pass done
+[q_gpu Q01_s101_i0] enc=1.975s dit=149.11s vae=2.61s total=153.70s peak=50.73GiB
+[q_gpu Q02_s102_i0] enc=1.337s dit=149.71s vae=2.58s total=153.62s peak=50.73GiB
+[q_gpu Q03_s103_i0] enc=1.443s dit=149.13s vae=2.43s total=153.01s peak=50.73GiB
+[q_gpu Q04_s104_i0] enc=1.332s dit=149.55s vae=2.33s total=153.22s peak=50.73GiB

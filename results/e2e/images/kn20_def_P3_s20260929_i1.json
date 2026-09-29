@@ -19,13 +19,13 @@
  "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
  "comfyui_version": "0.37.0",
  "torch": "2.12.0+rocm7.14.0",
- "aotriton": "1",
- "encode_s": 1.036905765,
- "dit_s": 150.251756697,
- "vae_s": 2.654660068,
- "postprocess_s": 0.013732729,
- "png_save_s": 0.262764602,
- "total_gen_s": 153.944931908,
- "total_save_inclusive_s": 154.255692756,
- "tag": "det_test"
+ "aotriton": "0",
+ "encode_s": 0.99021776,
+ "dit_s": 209.788428419,
+ "vae_s": 4.10181661,
+ "postprocess_s": 0.008947006,
+ "png_save_s": 0.277809415,
+ "total_gen_s": 214.888267993,
+ "total_save_inclusive_s": 215.206799927,
+ "tag": "kn20_def"
 }

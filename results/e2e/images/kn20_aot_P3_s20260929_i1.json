@@ -20,12 +20,12 @@
  "comfyui_version": "0.37.0",
  "torch": "2.12.0+rocm7.14.0",
  "aotriton": "1",
- "encode_s": 1.036905765,
- "dit_s": 150.251756697,
- "vae_s": 2.654660068,
- "postprocess_s": 0.013732729,
- "png_save_s": 0.262764602,
- "total_gen_s": 153.944931908,
- "total_save_inclusive_s": 154.255692756,
- "tag": "det_test"
+ "encode_s": 1.413939623,
+ "dit_s": 151.095401724,
+ "vae_s": 3.711252736,
+ "postprocess_s": 0.004743234,
+ "png_save_s": 0.227537167,
+ "total_gen_s": 156.235286987,
+ "total_save_inclusive_s": 156.493222192,
+ "tag": "kn20_aot"
 }
