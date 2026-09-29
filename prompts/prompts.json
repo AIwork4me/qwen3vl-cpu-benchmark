@@ -15,6 +15,16 @@
       "id": "P3",
       "name": "long_structured",
       "text": "A wide-angle editorial photograph of a modern robotics laboratory: in the foreground, a silver humanoid robot with exactly two blue LED eyes holds a red coffee mug in its left hand and a green circuit board in its right hand; behind it, three monitors on a dark wooden desk show, from left to right, a line graph titled 'Qwen3-VL Throughput', a Python code editor with syntax highlighting, and a photograph of a white Maltese dog; two ceiling-mounted studio softboxes light the scene from above, while a floor-to-ceiling window in the background reveals a night city skyline with neon signs reading 'AI EXPO 2026'; shallow depth of field, 35mm lens, photorealistic, high dynamic range, sharp focus on the robot, bokeh background."
+    },
+    {
+      "id": "P4",
+      "name": "very_short",
+      "text": "A red cube on white sand."
+    },
+    {
+      "id": "P5",
+      "name": "very_long",
+      "text": "An ultra-detailed panoramic editorial photograph of a sprawling neon-lit cyberpunk night market set inside a converted Victorian train station: in the immediate foreground, a young woman in a translucent rain-poncho with glowing cyan fiber-optic trim holds a steaming bowl of ramen topped with a soft-boiled egg, exactly two chopsticks, and three sheets of nori; to her left, a robotic street vendor with brass gears and four articulated arms juggles six skewers of grilled squid over a blue plasma grill; behind them, a row of nine hanging paper lanterns in alternating vermilion and jade green illuminates handwritten kanji signs advertising fake noodle prices; the station's original wrought-iron ribs are wrapped in holographic advertisements that cycle between a retro pixel-art cat, a rotating geodesic automobile, and scrolling stock tickers; on the mezzanine balcony above, a five-piece band with laser harps and an analog synthesizer plays to a crowd of commuters, cyborgs, and at least two cats wearing tiny headphones; rain falls through the broken glass ceiling in visible silver shafts, pooling on the wet platform tiles where reflections double every light source; shot on 85mm lens at f/1.8, cinematic color grade with teal shadows and amber highlights, volumetric fog, razor-sharp focus on the woman's face, every background element still legible, photorealistic, 8k detail."
     }
   ]
 }

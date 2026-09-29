@@ -47,9 +47,21 @@ Reason: exact artifacts exist on ModelScope mirrors; HF unreachable on this netw
 - 用途: 仅作为数值 reference（cosine/RMSE 对比），不参与主 benchmark 表
 - SHA256: 见 `environment/model_sha256.txt`
 
+## D. Qwen-Image 2.1 DiT + VAE（端到端实验，2026-09-29 晚补全）
+
+- ModelScope repo ID: `Comfy-Org/Qwen-Image-2.1`
+- Local:
+  - `models/qwen-image-2.1-full/diffusion_models/qwen_image_2.1_bf16.safetensors`
+    （14,230,280,616 B = 14.23 GB decimal，与 ModelScope API 声明逐字节一致）
+  - `models/qwen-image-2.1-full/vae/qwen_image_2.1_vae_bf16.safetensors`
+    （675,509,688 B = 0.676 GB decimal，与 API 一致）
+- SHA256: `environment/model_sha256.txt`（ModelScope API 不提供文件哈希，故记录本地
+  实测 SHA256 + 大小对账；下载命令见 logs/dl_qwen_image_dit.log）
+- 下载命令: `modelscope download --model Comfy-Org/Qwen-Image-2.1 diffusion_models/qwen_image_2.1_bf16.safetensors vae/qwen_image_2.1_vae_bf16.safetensors --local_dir models/qwen-image-2.1-full`
+- 同仓库还有 `qwen3vl_8b_w4a8`、`qwen3.5_9b` prompt-enhancer TE 与 DiT int8_convrot 变体，本轮不使用。
+
 ## 校验与复用规则
 
 - benchmark 一律从上述本地路径加载，禁止运行时联网。
-- `test -d` / 文件大小 / SHA256 三重校验已执行。
-- 未下载完整 `Qwen/Qwen-Image-2.1`（33 GB），因端到端 sanity test 仅在 text-encoder
-  阶段全部 PASS 后才考虑，且非必需。
+- `test -d` / 文件大小 / SHA256 三重校验已执行（D 项为大小+SHA256，API 无哈希可比）。
+- ~~未下载完整 Qwen-Image-2.1~~ 已于 2026-09-29 补全（DiT+VAE，见 D 项）。
