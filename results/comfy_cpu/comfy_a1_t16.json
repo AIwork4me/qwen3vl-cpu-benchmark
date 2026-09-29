@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "timestamp": "2026-09-29T15:15:46.432445",
+    "model_path": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-comfy-int8/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
+    "model_disk_bytes": 9350798360,
+    "comfyui_version": "0.37.0",
+    "torch_version": "2.9.1+cpu",
+    "comfy_kitchen_backends": {
+      "ascend": false,
+      "eager": true,
+      "triton": false,
+      "hip": false,
+      "cuda": false
+    },
+    "threads": {
+      "torch_num_threads": 16,
+      "torch_num_interop_threads": 8,
+      "omp_num_threads_env": null,
+      "requested": null
+    },
+    "force_quant_mm": true,
+    "force_quant_mm_modules_flipped": 575,
+    "tokenizer_init_and_tokenize_s": 0.001490226,
+    "model_load_s": 0.315127302,
+    "post_load_peak_rss_bytes": 572575744,
+    "baseline_rss_bytes": null,
+    "audit": {
+      "quant_formats": {
+        "int8_tensorwise": 254
+      },
+      "layouts": {
+        "TensorWiseINT8Layout": 254
+      },
+      "n_quantized_weights": 254,
+      "n_total_modules": 778,
+      "weight_devices": [
+        "cpu"
+      ],
+      "convrot_layers": 254,
+      "quantized_layer_names_first10": [
+        "qwen3vl_8b.transformer.model.embed_tokens",
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.q_proj",
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.k_proj",
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.v_proj",
+        "qwen3vl_8b.transformer.model.layers.0.self_attn.o_proj",
+        "qwen3vl_8b.transformer.model.layers.0.mlp.gate_proj",
+        "qwen3vl_8b.transformer.model.layers.0.mlp.up_proj",
+        "qwen3vl_8b.transformer.model.layers.0.mlp.down_proj",
+        "qwen3vl_8b.transformer.model.layers.1.self_attn.q_proj",
+        "qwen3vl_8b.transformer.model.layers.1.self_attn.k_proj"
+      ],
+      "max_weight_dtype": [
+        "int8_storage(orig=torch.bfloat16)",
+        "torch.bfloat16"
+      ],
+      "patcher_load_device": "cpu",
+      "patcher_offload_device": "cpu"
+    },
+    "page_cache_note": "NOT cleared (no root); 'cold' = fresh process, file may be in OS page cache",
+    "post_first_encode_rss_bytes": 8033984512,
+    "full_run": {
+      "start_label": "start",
+      "end_label": "stop",
+      "wall_s": 185.030180483,
+      "peak_rss_bytes": 8033984512,
+      "peak_vms_bytes": 16994861056,
+      "sys_used_peak_bytes": 9021755392,
+      "sys_available_min_bytes": 91979501568,
+      "cpu_util_mean_pct": 27.31,
+      "cpu_util_max_pct": 100.0,
+      "proc_cpu_mean_pct": 768.39,
+      "proc_cpu_max_pct": 19663.9,
+      "threads_max": 112,
+      "cpu_freq_mean_mhz": 3428.1,
+      "n_samples": 3700
+    }
+  },
+  "prompts": {
+    "P1": {
+      "n_tokens": 39,
+      "first_encode_s": 7.450240428,
+      "warm_encode_s": [
+        7.444556703,
+        7.437738859,
+        7.127820982,
+        7.286993334,
+        7.313663785
+      ],
+      "warmup_s": null,
+      "interval_stats": {
+        "start_label": "P1_warmup",
+        "end_label": "P1_warm",
+        "wall_s": 44.06288135,
+        "peak_rss_bytes": 7692423168,
+        "peak_vms_bytes": 16646238208,
+        "sys_used_peak_bytes": 6847582208,
+        "sys_available_min_bytes": 94153674752,
+        "cpu_util_mean_pct": 24.06,
+        "cpu_util_max_pct": 52.8,
+        "proc_cpu_mean_pct": 658.99,
+        "proc_cpu_max_pct": 1278.8,
+        "threads_max": 111,
+        "cpu_freq_mean_mhz": 3396.9,
+        "n_samples": 881
+      },
+      "peak_rss_bytes": 7692423168,
+      "output": {
+        "shape": [
+          1,
+          25,
+          4096
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "compute_counters": {
+        "int_mm": 504,
+        "dequant": 0,
+        "dequant_bytes": 0
+      },
+      "profiler_top_ops": {
+        "aten::copy_": 5824858.887999972,
+        "comfy_kitchen::int8_linear": 415890.58299999346,
+        "aten::_int_mm": 330445.51699999627,
+        "aten::mul": 78913.23200001268,
+        "aten::mm": 74396.47000000573,
+        "aten::_to_copy": 29485.02900002789,
+        "aten::cat": 22025.780000005638,
+        "aten::pow": 14049.855999994403,
+        "aten::abs": 11084.620999981566,
+        "aten::add": 9116.465000002921,
+        "aten::div": 8908.840000002072,
+        "comfy_kitchen::apply_rope_split_half": 8577.794000010977,
+        "aten::empty_strided": 7624.029999988006,
+        "aten::t": 7521.046000000491,
+        "aten::sum": 6720.546000000214,
+        "aten::empty": 5983.224000003618,
+        "aten::amax": 5166.452000009009,
+        "aten::view": 4810.13599998205,
+        "aten::matmul": 4722.827999994796,
+        "aten::to": 4529.825999987304,
+        "aten::reshape": 3356.5470000114883,
+        "aten::bmm": 3109.976000002449,
+        "aten::addcmul_": 3022.1639999958097,
+        "aten::round_": 2969.0589999991116,
+        "aten::linear": 2961.825999986677
+      }
+    },
+    "P2": {
+      "n_tokens": 81,
+      "first_encode_s": null,
+      "warm_encode_s": [
+        7.287815051,
+        7.619056482,
+        7.391565067,
+        7.476707616,
+        7.510613275
+      ],
+      "warmup_s": null,
+      "interval_stats": {
+        "start_label": "P2_warmup",
+        "end_label": "P2_warm",
+        "wall_s": 44.65017413,
+        "peak_rss_bytes": 7849918464,
+        "peak_vms_bytes": 16876019712,
+        "sys_used_peak_bytes": 6894010368,
+        "sys_available_min_bytes": 94107246592,
+        "cpu_util_mean_pct": 25.81,
+        "cpu_util_max_pct": 58.0,
+        "proc_cpu_mean_pct": 709.03,
+        "proc_cpu_max_pct": 1434.2,
+        "threads_max": 112,
+        "cpu_freq_mean_mhz": 3395.6,
+        "n_samples": 893
+      },
+      "peak_rss_bytes": 7849918464,
+      "output": {
+        "shape": [
+          1,
+          67,
+          4096
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "compute_counters": {
+        "int_mm": 504,
+        "dequant": 0,
+        "dequant_bytes": 0
+      }
+    },
+    "P3": {
+      "n_tokens": 185,
+      "first_encode_s": null,
+      "warm_encode_s": [
+        8.36003096,
+        8.314757278,
+        8.405991228,
+        8.246721682,
+        8.480527322
+      ],
+      "warmup_s": null,
+      "interval_stats": {
+        "start_label": "P3_warmup",
+        "end_label": "P3_warm",
+        "wall_s": 50.094867619,
+        "peak_rss_bytes": 7896449024,
+        "peak_vms_bytes": 16906985472,
+        "sys_used_peak_bytes": 7429865472,
+        "sys_available_min_bytes": 93571391488,
+        "cpu_util_mean_pct": 28.31,
+        "cpu_util_max_pct": 57.4,
+        "proc_cpu_mean_pct": 786.1,
+        "proc_cpu_max_pct": 1409.4,
+        "threads_max": 112,
+        "cpu_freq_mean_mhz": 3419.1,
+        "n_samples": 1002
+      },
+      "peak_rss_bytes": 7896449024,
+      "output": {
+        "shape": [
+          1,
+          171,
+          4096
+        ],
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "compute_counters": {
+        "int_mm": 504,
+        "dequant": 0,
+        "dequant_bytes": 0
+      }
+    }
+  }
+}

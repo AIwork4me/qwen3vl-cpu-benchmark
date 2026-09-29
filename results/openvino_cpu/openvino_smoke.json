@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "timestamp": "2026-09-29T15:28:50.596265",
+    "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+    "model_variant": "OpenVINO/Qwen3-VL-8B-Instruct-int8-ov (INT8_ASYM weight compression, group_size=-1)",
+    "device": "CPU",
+    "device_hard_pinned": true,
+    "hint": "LATENCY",
+    "threads": "default",
+    "streams": "default",
+    "extract_hidden": false,
+    "hidden_node": null,
+    "tokenizer_ready_s": 0.246288985,
+    "model_read_s": 0.111251872,
+    "model_compile_s": 1.146733971,
+    "model_load_s": 1.257985843,
+    "post_load_rss_bytes": 363282432,
+    "baseline_rss_bytes": 192180224,
+    "openvino_properties": {
+      "openvino_version": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+      "available_devices": [
+        "CPU",
+        "GPU"
+      ],
+      "requested_device": "CPU",
+      "INFERENCE_NUM_THREADS": "16",
+      "NUM_STREAMS": "1",
+      "PERFORMANCE_HINT": "LATENCY",
+      "PERFORMANCE_HINT_NUM_REQUESTS": "0",
+      "execution_devices": [
+        "CPU"
+      ]
+    },
+    "model_io": {
+      "inputs": [
+        {
+          "names": [
+            "attention_mask"
+          ],
+          "pshape": "[?,?]",
+          "dtype": "<Type: 'int64_t'>"
+        },
+        {
+          "names": [
+            "position_ids"
+          ],
+          "pshape": "[3,?,?]",
+          "dtype": "<Type: 'int64_t'>"
+        },
+        {
+          "names": [
+            "inputs_embeds"
+          ],
+          "pshape": "[?,?,4096]",
+          "dtype": "<Type: 'float32'>"
+        },
+        {
+          "names": [
+            "visual_pos_masks"
+          ],
+          "pshape": "[?,?]",
+          "dtype": "<Type: 'char'>"
+        },
+        {
+          "names": [
+            "deepstack_visual_embeds"
+          ],
+          "pshape": "[?,?,4096]",
+          "dtype": "<Type: 'float32'>"
+        },
+        {
+          "names": [
+            "beam_idx"
+          ],
+          "pshape": "[?]",
+          "dtype": "<Type: 'int32_t'>"
+        }
+      ],
+      "outputs": [
+        {
+          "names": [
+            "logits"
+          ],
+          "pshape": "[?,?,151936]",
+          "dtype": "<Type: 'float32'>"
+        }
+      ]
+    },
+    "full_run": {
+      "start_label": "start",
+      "end_label": "stop",
+      "wall_s": 6.800894088,
+      "peak_rss_bytes": 16286842880,
+      "peak_vms_bytes": 24434163712,
+      "sys_used_peak_bytes": 13979512832,
+      "sys_available_min_bytes": 87021744128,
+      "cpu_util_mean_pct": 42.61,
+      "cpu_util_max_pct": 65.0,
+      "proc_cpu_mean_pct": 1196.65,
+      "proc_cpu_max_pct": 1625.9,
+      "threads_max": 24,
+      "cpu_freq_mean_mhz": 3179.5,
+      "n_samples": 136
+    },
+    "torch_num_threads": null,
+    "openvino_num_threads_reported": "16"
+  },
+  "prompts": {
+    "P1": {
+      "n_tokens": 25,
+      "embed_ms": 1.215534,
+      "iters": {
+        "warmup_s": 0.72969127,
+        "first_s": 0.135914977,
+        "warm_s": [
+          0.136898788,
+          0.135891082
+        ],
+        "embed_ms": 1.215534
+      },
+      "interval_stats": {
+        "start_label": "P1_warmup_done",
+        "end_label": "P1_warm_done",
+        "wall_s": 0.42493875,
+        "peak_rss_bytes": 15568805888,
+        "peak_vms_bytes": 23703838720,
+        "sys_used_peak_bytes": 13260210176,
+        "sys_available_min_bytes": 87741046784,
+        "cpu_util_mean_pct": 52.25,
+        "cpu_util_max_pct": 55.1,
+        "proc_cpu_mean_pct": 1528.19,
+        "proc_cpu_max_pct": 1624.9,
+        "threads_max": 24,
+        "cpu_freq_mean_mhz": 3401.4,
+        "n_samples": 8
+      },
+      "peak_rss_bytes": 15568805888,
+      "outputs": {
+        "logits": {
+          "shape": [
+            1,
+            25,
+            151936
+          ],
+          "dtype": "float32",
+          "mean": 1.0751958135386777,
+          "std": 4.656374945793108,
+          "finite": true
+        }
+      }
+    },
+    "P2": {
+      "n_tokens": 67,
+      "embed_ms": 0.562342,
+      "iters": {
+        "warmup_s": 0.417470097,
+        "first_s": 0.368591917,
+        "warm_s": [
+          0.392904546,
+          0.408067046
+        ],
+        "embed_ms": 0.562342
+      },
+      "interval_stats": {
+        "start_label": "P2_warmup_done",
+        "end_label": "P2_warm_done",
+        "wall_s": 1.208729098,
+        "peak_rss_bytes": 15706353664,
+        "peak_vms_bytes": 23890464768,
+        "sys_used_peak_bytes": 13348294656,
+        "sys_available_min_bytes": 87652962304,
+        "cpu_util_mean_pct": 52.99,
+        "cpu_util_max_pct": 65.0,
+        "proc_cpu_mean_pct": 1457.74,
+        "proc_cpu_max_pct": 1581.9,
+        "threads_max": 24,
+        "cpu_freq_mean_mhz": 3444.0,
+        "n_samples": 25
+      },
+      "peak_rss_bytes": 15706353664,
+      "outputs": {
+        "logits": {
+          "shape": [
+            1,
+            67,
+            151936
+          ],
+          "dtype": "float32",
+          "mean": 0.7102631697224153,
+          "std": 3.741559795818796,
+          "finite": true
+        }
+      }
+    },
+    "P3": {
+      "n_tokens": 171,
+      "embed_ms": 0.55554,
+      "iters": {
+        "warmup_s": 0.623837184,
+        "first_s": 0.59859546,
+        "warm_s": [
+          0.603531176,
+          0.570069861
+        ],
+        "embed_ms": 0.55554
+      },
+      "interval_stats": {
+        "start_label": "P3_warmup_done",
+        "end_label": "P3_warm_done",
+        "wall_s": 1.869022378,
+        "peak_rss_bytes": 16286842880,
+        "peak_vms_bytes": 24434163712,
+        "sys_used_peak_bytes": 13979512832,
+        "sys_available_min_bytes": 87021744128,
+        "cpu_util_mean_pct": 52.11,
+        "cpu_util_max_pct": 58.2,
+        "proc_cpu_mean_pct": 1476.75,
+        "proc_cpu_max_pct": 1625.9,
+        "threads_max": 24,
+        "cpu_freq_mean_mhz": 3037.2,
+        "n_samples": 37
+      },
+      "peak_rss_bytes": 16286842880,
+      "outputs": {
+        "logits": {
+          "shape": [
+            1,
+            171,
+            151936
+          ],
+          "dtype": "float32",
+          "mean": -0.2799674097897972,
+          "std": 4.60949125539351,
+          "finite": true
+        }
+      }
+    }
+  }
+}

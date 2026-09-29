@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "timestamp": "2026-09-29T15:29:48.196129",
+    "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+    "model_variant": "OpenVINO/Qwen3-VL-8B-Instruct-int8-ov (INT8_ASYM weight compression, group_size=-1)",
+    "device": "CPU",
+    "device_hard_pinned": true,
+    "hint": "LATENCY",
+    "threads": 16,
+    "streams": "default",
+    "extract_hidden": false,
+    "hidden_node": null,
+    "tokenizer_ready_s": 0.230390003,
+    "model_read_s": 0.091168247,
+    "model_compile_s": 1.111189133,
+    "model_load_s": 1.20235738,
+    "post_load_rss_bytes": 348295168,
+    "baseline_rss_bytes": 192348160,
+    "openvino_properties": {
+      "openvino_version": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+      "available_devices": [
+        "CPU",
+        "GPU"
+      ],
+      "requested_device": "CPU",
+      "INFERENCE_NUM_THREADS": "16",
+      "NUM_STREAMS": "1",
+      "PERFORMANCE_HINT": "LATENCY",
+      "PERFORMANCE_HINT_NUM_REQUESTS": "0",
+      "execution_devices": [
+        "CPU"
+      ]
+    },
+    "model_io": {
+      "inputs": [
+        {
+          "names": [
+            "attention_mask"
+          ],
+          "pshape": "[?,?]",
+          "dtype": "<Type: 'int64_t'>"
+        },
+        {
+          "names": [
+            "position_ids"
+          ],
+          "pshape": "[3,?,?]",
+          "dtype": "<Type: 'int64_t'>"
+        },
+        {
+          "names": [
+            "inputs_embeds"
+          ],
+          "pshape": "[?,?,4096]",
+          "dtype": "<Type: 'float32'>"
+        },
+        {
+          "names": [
+            "visual_pos_masks"
+          ],
+          "pshape": "[?,?]",
+          "dtype": "<Type: 'char'>"
+        },
+        {
+          "names": [
+            "deepstack_visual_embeds"
+          ],
+          "pshape": "[?,?,4096]",
+          "dtype": "<Type: 'float32'>"
+        },
+        {
+          "names": [
+            "beam_idx"
+          ],
+          "pshape": "[?]",
+          "dtype": "<Type: 'int32_t'>"
+        }
+      ],
+      "outputs": [
+        {
+          "names": [
+            "logits"
+          ],
+          "pshape": "[?,?,151936]",
+          "dtype": "<Type: 'float32'>"
+        }
+      ]
+    },
+    "full_run": {
+      "start_label": "start",
+      "end_label": "stop",
+      "wall_s": 10.04648704,
+      "peak_rss_bytes": 16080674816,
+      "peak_vms_bytes": 24580509696,
+      "sys_used_peak_bytes": 13849071616,
+      "sys_available_min_bytes": 87152185344,
+      "cpu_util_mean_pct": 46.44,
+      "cpu_util_max_pct": 58.1,
+      "proc_cpu_mean_pct": 1316.21,
+      "proc_cpu_max_pct": 1624.2,
+      "threads_max": 38,
+      "cpu_freq_mean_mhz": 3122.8,
+      "n_samples": 200
+    },
+    "torch_num_threads": null,
+    "openvino_num_threads_reported": "16"
+  },
+  "prompts": {
+    "P1": {
+      "n_tokens": 25,
+      "embed_ms": 1.134583,
+      "iters": {
+        "warmup_s": 0.713894846,
+        "first_s": 0.13893438,
+        "warm_s": [
+          0.144364761,
+          0.148324801,
+          0.144569735,
+          0.144665854,
+          0.146798966
+        ],
+        "embed_ms": 1.134583
+      },
+      "interval_stats": {
+        "start_label": "P1_warmup_done",
+        "end_label": "P1_warm_done",
+        "wall_s": 0.883463222,
+        "peak_rss_bytes": 15569985536,
+        "peak_vms_bytes": 24031354880,
+        "sys_used_peak_bytes": 13238239232,
+        "sys_available_min_bytes": 87763017728,
+        "cpu_util_mean_pct": 54.87,
+        "cpu_util_max_pct": 58.0,
+        "proc_cpu_mean_pct": 1556.16,
+        "proc_cpu_max_pct": 1622.3,
+        "threads_max": 38,
+        "cpu_freq_mean_mhz": 3569.4,
+        "n_samples": 17
+      },
+      "peak_rss_bytes": 15569985536,
+      "outputs": {
+        "logits": {
+          "shape": [
+            1,
+            25,
+            151936
+          ],
+          "dtype": "float32",
+          "mean": 1.0751958135386777,
+          "std": 4.656374945793108,
+          "finite": true
+        }
+      }
+    },
+    "P2": {
+      "n_tokens": 67,
+      "embed_ms": 0.487312,
+      "iters": {
+        "warmup_s": 0.41164649,
+        "first_s": 0.392617403,
+        "warm_s": [
+          0.390509218,
+          0.380801484,
+          0.383994279,
+          0.381252489,
+          0.378782668
+        ],
+        "embed_ms": 0.487312
+      },
+      "interval_stats": {
+        "start_label": "P2_warmup_done",
+        "end_label": "P2_warm_done",
+        "wall_s": 2.346772884,
+        "peak_rss_bytes": 15748624384,
+        "peak_vms_bytes": 24217976832,
+        "sys_used_peak_bytes": 13394694144,
+        "sys_available_min_bytes": 87606562816,
+        "cpu_util_mean_pct": 52.31,
+        "cpu_util_max_pct": 56.0,
+        "proc_cpu_mean_pct": 1495.36,
+        "proc_cpu_max_pct": 1586.5,
+        "threads_max": 38,
+        "cpu_freq_mean_mhz": 3324.9,
+        "n_samples": 47
+      },
+      "peak_rss_bytes": 15748624384,
+      "outputs": {
+        "logits": {
+          "shape": [
+            1,
+            67,
+            151936
+          ],
+          "dtype": "float32",
+          "mean": 0.7102631697224153,
+          "std": 3.741559795818796,
+          "finite": true
+        }
+      }
+    },
+    "P3": {
+      "n_tokens": 171,
+      "embed_ms": 0.719927,
+      "iters": {
+        "warmup_s": 0.59360215,
+        "first_s": 0.614710351,
+        "warm_s": [
+          0.601893028,
+          0.60171219,
+          0.572608612,
+          0.577371275,
+          0.569585837
+        ],
+        "embed_ms": 0.719927
+      },
+      "interval_stats": {
+        "start_label": "P3_warmup_done",
+        "end_label": "P3_warm_done",
+        "wall_s": 3.640528051,
+        "peak_rss_bytes": 16080674816,
+        "peak_vms_bytes": 24580509696,
+        "sys_used_peak_bytes": 13849071616,
+        "sys_available_min_bytes": 87152185344,
+        "cpu_util_mean_pct": 53.65,
+        "cpu_util_max_pct": 58.1,
+        "proc_cpu_mean_pct": 1511.06,
+        "proc_cpu_max_pct": 1620.5,
+        "threads_max": 38,
+        "cpu_freq_mean_mhz": 3021.2,
+        "n_samples": 72
+      },
+      "peak_rss_bytes": 16080674816,
+      "outputs": {
+        "logits": {
+          "shape": [
+            1,
+            171,
+            151936
+          ],
+          "dtype": "float32",
+          "mean": -0.2799674097897972,
+          "std": 4.60949125539351,
+          "finite": true
+        }
+      }
+    }
+  }
+}

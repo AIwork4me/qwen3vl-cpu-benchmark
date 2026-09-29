@@ -1,0 +1,15 @@
+{
+  "openvino_version": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+  "available_devices": [
+    "CPU",
+    "GPU"
+  ],
+  "requested_device": "CPU",
+  "INFERENCE_NUM_THREADS": "16",
+  "NUM_STREAMS": "1",
+  "PERFORMANCE_HINT": "LATENCY",
+  "PERFORMANCE_HINT_NUM_REQUESTS": "0",
+  "execution_devices": [
+    "CPU"
+  ]
+}

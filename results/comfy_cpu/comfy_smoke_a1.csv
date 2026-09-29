@@ -1,0 +1,8 @@
+prompt_id,phase,iter,latency_s
+P1,first,7.331080864
+P1,warm_0,7.476127331
+P1,warm_1,7.4880002
+P2,warm_0,7.569301347
+P2,warm_1,7.560398215
+P3,warm_0,8.742621422
+P3,warm_1,8.494218817
