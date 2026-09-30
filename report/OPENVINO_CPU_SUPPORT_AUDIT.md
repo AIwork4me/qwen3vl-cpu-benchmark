@@ -144,8 +144,8 @@ taskset -c 0-15 .venv-openvino/bin/python scripts/investigate_openvino_runtime.p
   (HOST A) and `.hostB.md` (HOST B)
 
 Host scoping: all direct measurements above are HOST B (Zen 4). HOST A
-(Zen 5 / Ryzen AI Max+ 395) shares the wheel, the ISA family, and the
-dispatch-relevant CPU capabilities; its own 16-phase run is in the main
-report. ISA-ceiling behavior at the AVX2 boundary and the silent-ignore
-behavior are properties of the build and are expected to transfer, but were
-not re-measured on HOST A.
+(Zen 5 / Ryzen AI Max+ 395) has since been re-measured with the same protocol —
+**every ISA-ceiling row, the silent-ignore behavior, the f16→bf16 aliasing, the f64
+downgrade and the op-smoke kernel families reproduce row-for-row**; see
+[OPENVINO_CPU_SUPPORT_AUDIT.hostA.md](OPENVINO_CPU_SUPPORT_AUDIT.hostA.md) and
+`results/openvino_cpu_support_hostA/` (added 2026-09-30).

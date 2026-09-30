@@ -1,0 +1,663 @@
+{
+ "section1_device": {
+  "timestamp": "2026-09-30T15:14:49.811346",
+  "openvino_version": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+  "cpu": "AMD RYZEN AI MAX+ PRO 395 w/ Radeon 8060S",
+  "kernel": "6.17.0-1032-oem",
+  "device_properties": {
+   "available_devices": [
+    "CPU",
+    "GPU"
+   ],
+   "SUPPORTED_PROPERTIES": "{'SUPPORTED_PROPERTIES': 'RO', 'AVAILABLE_DEVICES': 'RO', 'RANGE_FOR_ASYNC_INFER_REQUESTS': 'RO', 'RANGE_FOR_STREAMS': 'RO', 'EXECUTION_DEVICES': 'RO', 'FULL_DEVICE_NAME': 'RO', 'OPTIMIZATION_CAPABILITIES': 'RO', 'DEVICE_TYPE': 'RO', 'DEVICE_ARCHITECTURE': 'RO', 'COMPATIBILITY_CHECK': 'RO', 'NUM_STREAMS': 'RW', 'INFERENCE_NUM_THREADS': 'RW', 'PERF_COUNT': 'RW', 'INFERENCE_PRECISION_HINT': 'RW', 'PERFORMANCE_HINT': 'RW', 'EXECUTION_MODE_HINT': 'RW', 'PERFORMANCE_HINT_NUM_REQUESTS': 'RW', 'ENABLE_CPU_PINNING': 'RW', 'ENABLE_CPU_RESERVATION': 'RW', 'SCHEDULING_CORE_TYPE': 'RW', 'MODEL_DISTRIBUTION_POLICY': 'RW', 'ENABLE_HYPER_THREADING': 'RW', 'DEVICE_ID': 'RW', 'CPU_DENORMALS_OPTIMIZATION': 'RW', 'LOG_LEVEL': 'RW', 'CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE': 'RW', 'ENABLE_TENSOR_PARALLEL': 'RW', 'TBB_PARTITIONER': 'RW', 'DYNAMIC_QUANTIZATION_GROUP_SIZE': 'RW', 'KV_CACHE_PRECISION': 'RW', 'KEY_CACHE_PRECISION': 'RW', 'VALUE_CACHE_PRECISION': 'RW', 'KEY_CACHE_GROUP_SIZE': 'RW', 'VALUE_CACHE_GROUP_SIZE': 'RW', 'ENABLE_WEIGHTLESS': 'RW', 'WEIGHTS_PATH': 'WO'}",
+   "AVAILABLE_DEVICES": [
+    ""
+   ],
+   "RANGE_FOR_ASYNC_INFER_REQUESTS": "(1, 1, 1)",
+   "RANGE_FOR_STREAMS": "(1, 32)",
+   "EXECUTION_DEVICES": [
+    "CPU"
+   ],
+   "FULL_DEVICE_NAME": "AMD RYZEN AI MAX+ PRO 395 w/ Radeon 8060S      ",
+   "OPTIMIZATION_CAPABILITIES": [
+    "BF16",
+    "WINOGRAD",
+    "FP32",
+    "INT8",
+    "BIN",
+    "EXPORT_IMPORT"
+   ],
+   "DEVICE_TYPE": "Type.INTEGRATED",
+   "DEVICE_ARCHITECTURE": "intel64",
+   "COMPATIBILITY_CHECK": "<error Unable to convert function return value to a Python type! The signature was\n\t(self: openvino._pyopenvino.Core, device_name: str, property: str) -> object>",
+   "NUM_STREAMS": 1,
+   "INFERENCE_NUM_THREADS": 0,
+   "PERF_COUNT": false,
+   "INFERENCE_PRECISION_HINT": "<Type: 'bfloat16'>",
+   "PERFORMANCE_HINT": "PerformanceMode.LATENCY",
+   "EXECUTION_MODE_HINT": "ExecutionMode.PERFORMANCE",
+   "PERFORMANCE_HINT_NUM_REQUESTS": 0,
+   "ENABLE_CPU_PINNING": true,
+   "ENABLE_CPU_RESERVATION": false,
+   "SCHEDULING_CORE_TYPE": "SchedulingCoreType.ANY_CORE",
+   "MODEL_DISTRIBUTION_POLICY": "set()",
+   "ENABLE_HYPER_THREADING": true,
+   "DEVICE_ID": "",
+   "CPU_DENORMALS_OPTIMIZATION": false,
+   "LOG_LEVEL": "Level.NO",
+   "CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE": 1.0,
+   "ENABLE_TENSOR_PARALLEL": false,
+   "TBB_PARTITIONER": "TbbPartitioner.???",
+   "DYNAMIC_QUANTIZATION_GROUP_SIZE": 32,
+   "KV_CACHE_PRECISION": "<Type: 'uint8_t'>",
+   "KEY_CACHE_PRECISION": "<Type: 'uint8_t'>",
+   "VALUE_CACHE_PRECISION": "<Type: 'uint8_t'>",
+   "KEY_CACHE_GROUP_SIZE": 0,
+   "VALUE_CACHE_GROUP_SIZE": 0,
+   "ENABLE_WEIGHTLESS": false,
+   "WEIGHTS_PATH": ""
+  },
+  "compiled_model_defaults": {
+   "SUPPORTED_PROPERTIES": "{'SUPPORTED_PROPERTIES': 'RO', 'NETWORK_NAME': 'RO', 'OPTIMAL_NUMBER_OF_INFER_REQUESTS': 'RO', 'NUM_STREAMS': 'RO', 'INFERENCE_NUM_THREADS': 'RO', 'PERF_COUNT': 'RO', 'INFERENCE_PRECISION_HINT': 'RO', 'PERFORMANCE_HINT': 'RO', 'EXECUTION_MODE_HINT': 'RO', 'PERFORMANCE_HINT_NUM_REQUESTS': 'RO', 'ENABLE_CPU_PINNING': 'RO', 'ENABLE_CPU_RESERVATION': 'RO', 'SCHEDULING_CORE_TYPE': 'RO', 'MODEL_DISTRIBUTION_POLICY': 'RO', 'ENABLE_HYPER_THREADING': 'RO', 'EXECUTION_DEVICES': 'RO', 'CPU_DENORMALS_OPTIMIZATION': 'RO', 'LOG_LEVEL': 'RO', 'CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE': 'RO', 'ENABLE_TENSOR_PARALLEL': 'RO', 'TBB_PARTITIONER': 'RO', 'DYNAMIC_QUANTIZATION_GROUP_SIZE': 'RO', 'KV_CACHE_PRECISION': 'RO', 'KEY_CACHE_PRECISION': 'RO', 'VALUE_CACHE_PRECISION': 'RO', 'KEY_CACHE_GROUP_SIZE': 'RO', 'VALUE_CACHE_GROUP_SIZE': 'RO', 'RUNTIME_REQUIREMENTS': 'RO'}",
+   "NETWORK_NAME": "tiny_mm",
+   "OPTIMAL_NUMBER_OF_INFER_REQUESTS": 1,
+   "NUM_STREAMS": 1,
+   "INFERENCE_NUM_THREADS": 16,
+   "PERF_COUNT": "NO",
+   "INFERENCE_PRECISION_HINT": "<Type: 'bfloat16'>",
+   "PERFORMANCE_HINT": "LATENCY",
+   "EXECUTION_MODE_HINT": "ExecutionMode.PERFORMANCE",
+   "PERFORMANCE_HINT_NUM_REQUESTS": "0",
+   "ENABLE_CPU_PINNING": true,
+   "ENABLE_CPU_RESERVATION": false,
+   "SCHEDULING_CORE_TYPE": "SchedulingCoreType.ANY_CORE",
+   "MODEL_DISTRIBUTION_POLICY": "set()",
+   "ENABLE_HYPER_THREADING": false,
+   "EXECUTION_DEVICES": [
+    "CPU"
+   ],
+   "CPU_DENORMALS_OPTIMIZATION": false,
+   "LOG_LEVEL": "Level.NO",
+   "CPU_SPARSE_WEIGHTS_DECOMPRESSION_RATE": 1.0,
+   "ENABLE_TENSOR_PARALLEL": false,
+   "TBB_PARTITIONER": "TbbPartitioner.STATIC",
+   "DYNAMIC_QUANTIZATION_GROUP_SIZE": 32,
+   "KV_CACHE_PRECISION": "<Type: 'uint8_t'>",
+   "KEY_CACHE_PRECISION": "<Type: 'uint8_t'>",
+   "VALUE_CACHE_PRECISION": "<Type: 'uint8_t'>",
+   "KEY_CACHE_GROUP_SIZE": 0,
+   "VALUE_CACHE_GROUP_SIZE": 0,
+   "RUNTIME_REQUIREMENTS": "meta=1.0;ov=2026.4.0;isa=Intel AVX-512 with Intel DL Boost and bfloat16 support"
+  }
+ },
+ "section2_isa_matrix": [
+  {
+   "isa_setting": "SSE41",
+   "default_run_ok": false,
+   "default_correct": null,
+   "default_exec_types": null,
+   "default_error": "RuntimeError('Exception from src/inference/src/cpp/core.cpp:117:\\nException from src/inference/src/dev/plugin.cpp:54:\\ncould not create a primitive descriptor for the inner product forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.\\n\\n')",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX",
+   "default_run_ok": false,
+   "default_correct": null,
+   "default_exec_types": null,
+   "default_error": "RuntimeError('Exception from src/inference/src/cpp/core.cpp:117:\\nException from src/inference/src/dev/plugin.cpp:54:\\ncould not create a primitive descriptor for the inner product forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.\\n\\n')",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX2",
+   "default_run_ok": false,
+   "default_correct": null,
+   "default_exec_types": null,
+   "default_error": "RuntimeError('Exception from src/inference/src/cpp/core.cpp:117:\\nException from src/inference/src/dev/plugin.cpp:54:\\ncould not create a primitive descriptor for the inner product forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.\\n\\n')",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX2",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX2_VNNI",
+   "default_run_ok": false,
+   "default_correct": null,
+   "default_exec_types": null,
+   "default_error": "RuntimeError('Exception from src/inference/src/cpp/core.cpp:117:\\nException from src/inference/src/dev/plugin.cpp:54:\\ncould not create a primitive descriptor for the inner product forward propagation primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.\\n\\n')",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX2 with Intel DL Boost",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX512_CORE",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "jit_gemm_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX512_CORE_VNNI",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "jit_gemm_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX-512 with Intel DL Boost",
+   "verbose_impl_f32": "jit:uni"
+  },
+  {
+   "isa_setting": "AVX512_CORE_BF16",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX-512 with Intel DL Boost and bfloat16 support",
+   "verbose_impl_f32": "jit:uni"
+  },
+  {
+   "isa_setting": "AVX512_CORE_FP16",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX512_CORE_AMX",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX-512 with Intel DL Boost and bfloat16 support",
+   "verbose_impl_f32": "jit:uni"
+  },
+  {
+   "isa_setting": "AVX512_CORE_AMX_INT8",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "AVX512_CORE_AMX_BF16",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX-512 with Intel DL Boost and bfloat16 support",
+   "verbose_impl_f32": "jit:uni"
+  },
+  {
+   "isa_setting": "BEST",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "ALL",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "Intel AVX-512 with Intel DL Boost and bfloat16 support",
+   "verbose_impl_f32": "jit:uni"
+  },
+  {
+   "isa_setting": "NOT_A_REAL_ISA",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  },
+  {
+   "isa_setting": "(none)",
+   "default_run_ok": true,
+   "default_correct": true,
+   "default_exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   },
+   "default_error": "",
+   "f32_run_ok": true,
+   "f32_correct": true,
+   "f32_exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   },
+   "f32_error": "",
+   "verbose_isa_header": "",
+   "verbose_impl_f32": ""
+  }
+ ],
+ "section3_precision": {
+  "hint_matrix": [
+   {
+    "hint": "f32",
+    "rc": 0,
+    "compile_ok": true,
+    "correct": true,
+    "max_abs_err": 1.9073486328125e-05,
+    "ref_scale": 42.85158920288086,
+    "exec_types": {
+     "unknown_f32": 2,
+     "gemm_mlas_f32": 1
+    },
+    "error": ""
+   },
+   {
+    "hint": "bf16",
+    "rc": 0,
+    "compile_ok": true,
+    "correct": true,
+    "max_abs_err": 0.13666439056396484,
+    "ref_scale": 42.85158920288086,
+    "exec_types": {
+     "unknown_f32": 2,
+     "jit_uni_f32": 1,
+     "brgemm_avx512_bf16": 1
+    },
+    "error": ""
+   },
+   {
+    "hint": "f16",
+    "rc": 0,
+    "compile_ok": true,
+    "correct": true,
+    "max_abs_err": 0.13666439056396484,
+    "ref_scale": 42.85158920288086,
+    "exec_types": {
+     "unknown_f32": 2,
+     "jit_uni_f32": 1,
+     "brgemm_avx512_bf16": 1
+    },
+    "error": ""
+   },
+   {
+    "hint": "i8",
+    "rc": 0,
+    "compile_ok": false,
+    "correct": null,
+    "max_abs_err": null,
+    "ref_scale": null,
+    "exec_types": null,
+    "error": "RuntimeError('Exception from src/inference/src/cpp/core.cpp:117:\\nException from src/inference/src/dev/plugin.cpp:54:\\nException from src/plugins/intel_cpu/src/config.cpp:266:\\nWrong value i8 for property key INFERENCE_PRECISION_HINT. Supported values: bf16, f16, f32, undefined\\n\\n\\n')"
+   },
+   {
+    "hint": "__default__",
+    "rc": 0,
+    "compile_ok": true,
+    "correct": true,
+    "max_abs_err": 0.13666439056396484,
+    "ref_scale": 42.85158920288086,
+    "exec_types": {
+     "unknown_f32": 2,
+     "jit_uni_f32": 1,
+     "brgemm_avx512_bf16": 1
+    },
+    "error": ""
+   }
+  ],
+  "f64_model": {
+   "compile_ok": true,
+   "out_dtype": "float64",
+   "rel_err": 0.002833896106031044,
+   "exec_types": {
+    "unknown_f64": 2,
+    "ref_f64": 1,
+    "brgemm_avx512_bf16": 1,
+    "jit_uni_bf16": 1,
+    "ref_f32": 1
+   }
+  },
+  "i8_input_model": {
+   "compile_ok": true,
+   "out_dtype": "float32",
+   "correct": true,
+   "exec_types": {
+    "unknown_i8": 1,
+    "jit_avx512_i8": 1,
+    "brgemm_avx512_bf16": 1,
+    "unknown_f32": 1
+   }
+  }
+ },
+ "section4_op_smoke": [
+  {
+   "op": "matmul_f32",
+   "mode": "default",
+   "exec_ok": true,
+   "max_abs_err": 0.08313941955566406,
+   "correct": true,
+   "strict_pass": false,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 1
+   }
+  },
+  {
+   "op": "matmul_f32",
+   "mode": "f32hint",
+   "exec_ok": true,
+   "max_abs_err": 9.5367431640625e-06,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 2,
+    "gemm_mlas_f32": 1
+   }
+  },
+  {
+   "op": "conv2d_f32",
+   "mode": "default",
+   "exec_ok": true,
+   "max_abs_err": 0.05818665027618408,
+   "correct": true,
+   "strict_pass": false,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgconv_avx512_bf16": 1,
+    "jit_f32": 1
+   }
+  },
+  {
+   "op": "conv2d_f32",
+   "mode": "f32hint",
+   "exec_ok": true,
+   "max_abs_err": 3.814697265625e-06,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 2,
+    "jit_uni_f32": 1,
+    "brgconv_avx512_f32": 1,
+    "jit_f32": 1
+   }
+  },
+  {
+   "op": "sdpa_lite_f32",
+   "mode": "default",
+   "exec_ok": true,
+   "max_abs_err": 0.014490962028503418,
+   "correct": true,
+   "strict_pass": false,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 6,
+    "jit_uni_f32": 1,
+    "brgemm_avx512_bf16": 2,
+    "jit_avx512_bf16": 1
+   }
+  },
+  {
+   "op": "sdpa_lite_f32",
+   "mode": "f32hint",
+   "exec_ok": true,
+   "max_abs_err": 3.5762786865234375e-07,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 6,
+    "gemm_mlas_f32": 2,
+    "jit_avx512_f32": 1
+   }
+  },
+  {
+   "op": "add_mul_f32",
+   "mode": "default",
+   "exec_ok": true,
+   "max_abs_err": 0.0,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 3,
+    "jit_avx512_f32": 1
+   }
+  },
+  {
+   "op": "add_mul_f32",
+   "mode": "f32hint",
+   "exec_ok": true,
+   "max_abs_err": 0.0,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 3,
+    "jit_avx512_f32": 1
+   }
+  },
+  {
+   "op": "rmsnorm_chain_f32",
+   "mode": "default",
+   "exec_ok": true,
+   "max_abs_err": 1.1920928955078125e-07,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 2,
+    "jit_avx512_f32": 1
+   }
+  },
+  {
+   "op": "rmsnorm_chain_f32",
+   "mode": "f32hint",
+   "exec_ok": true,
+   "max_abs_err": 1.1920928955078125e-07,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_f32": 2,
+    "jit_avx512_f32": 1
+   }
+  },
+  {
+   "op": "gather_f32",
+   "mode": "default",
+   "exec_ok": true,
+   "max_abs_err": 0.0,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_i64": 1,
+    "ref_i64": 1,
+    "jit_avx512_f32": 1,
+    "unknown_f32": 1
+   }
+  },
+  {
+   "op": "gather_f32",
+   "mode": "f32hint",
+   "exec_ok": true,
+   "max_abs_err": 0.0,
+   "correct": true,
+   "strict_pass": true,
+   "out_dtype": "float32",
+   "exec_types": {
+    "unknown_i64": 1,
+    "ref_i64": 1,
+    "jit_avx512_f32": 1,
+    "unknown_f32": 1
+   }
+  }
+ ],
+ "section5_threading": [
+  {
+   "nthr": "1",
+   "mean_ms": 0.023147190004237927,
+   "requested": 1
+  },
+  {
+   "nthr": "4",
+   "mean_ms": 0.026194220044999383,
+   "requested": 4
+  },
+  {
+   "nthr": "16",
+   "mean_ms": 0.030384405035874806,
+   "requested": 16
+  },
+  {
+   "nthr": "16",
+   "mean_ms": 0.03140404005534947,
+   "requested": "default"
+  }
+ ]
+}
