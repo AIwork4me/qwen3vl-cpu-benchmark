@@ -612,11 +612,9 @@ python3 scripts/analyze_e2e_resources.py             # GTT/UMA/thermal/power
 ## Raw evidence index
 
 ```
-(Evidence tiering: run JSONs, per-image sidecars, summary CSVs, the ab/contend/pipe/
-dq/det 20 Hz monitor CSVs, the server/ab/dq/det PNGs and the blind package are
-committed. Quality/repeated-seed/matrix PNGs and their monitor CSVs are local-only —
-integrity is preserved by the img_sha16 recorded in every committed JSON and by the
-determinism of the pipeline (warmup-stabilized images are bit-reproducible).)
+(All evidence is committed: every run JSON, every per-image sidecar, every 20 Hz
+monitor CSV, every generated PNG, and the blind package. Integrity anchors: img_sha16
+in every record; warmup-stabilized images are bit-reproducible.)
 results/e2e/gpu_baseline/  server workflow JSONs, log, PNGs, server_run.json
 results/e2e/ab/            core A/B run JSONs (6 runs × 4 images)
 results/e2e/matrix/        prompt/step/resolution matrix runs
