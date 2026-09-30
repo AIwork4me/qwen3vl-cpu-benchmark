@@ -1,0 +1,8 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Traceback (most recent call last):
+  File "/workspace/qwen3vl-cpu-benchmark/scripts/investigate_openvino_runtime.py", line 337, in <module>
+    main()
+  File "/workspace/qwen3vl-cpu-benchmark/scripts/investigate_openvino_runtime.py", line 133, in main
+    cfg["INFERENCE_PRECISION_HINT"] = {"f32": ov.Type.f32, "bf16": ov.Type.bf16,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'f16'
