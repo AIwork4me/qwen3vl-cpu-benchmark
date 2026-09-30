@@ -401,14 +401,35 @@ Actively looked for, honestly reported:
 | Startup complexity | 1 model load | + OV compile 0.7 s (cached) | |
 
 
-## Thermal stability
+## Thermal stability (Phase 36) and power (Phase 37)
 
-Sustained generation exhibits real thermal/power drift: DiT warms from ~137 s (first
-process, cold machine) to ~149 s steady-state across the 6-run core A/B (GPU busy
-constant at 99.5%, power capped 52–60 W). k10temp reaches 99–100 °C during 16-core CPU
-encode bursts. Both routes share the drift symmetrically (counterbalanced order); all
-headline comparisons are within-pair. Full per-image drift table:
-`results/e2e/summary/thermal_drift.csv` (quality long runs).
+30-image sustained runs (the quality dataset, `results/e2e/summary/thermal_drift.csv`):
+
+| run | DiT first-3 → last-3 (s) | GPU temp max | CPU temp max | CPU freq mean |
+|---|---|---|---|---|
+| q_gpu (G) | 149.3 → 147.2 | 71.0 °C (stable) | 76.4 °C | ~1.85 GHz |
+| q_dq32 (H) | 145.6 → 148.5 | 70.0 → 71.0 °C | 84.5 °C | ~1.82 GHz |
+
+**No thermal runaway**: GPU temperature plateaus at 70–71 °C and DiT latency stays
+within ±2% across 30 consecutive images (~75 min sustained) on both routes. The larger
+core-A/B drift (137 → 149 s across the session) is machine warm-up from cold, not
+continuous degradation — the 30-image runs prove steady state is flat. The hybrid runs
+its CPU hotter (84.5 vs 76.4 °C max — 16-core AVX-512 encode bursts; k10temp touches
+99–100 °C only in the dedicated encode-storm test), at stable frequency.
+
+**Power**: GPU power during DiT is 52–60 W on both routes (firmware-managed; dpm=auto,
+no writable cap on this SKU). CPU package energy (RAPL) is **unavailable** — the sysfs
+energy counter is root-only (mode 0400); recorded as unavailable, never estimated.
+GPU-side energy is likewise not exposed by this firmware (only instantaneous power).
+
+## Model residency (Phase 25)
+
+GPU-heavy route: TE (16.7 GiB), DiT (13.6 GiB) and VAE stay **GTT-resident** through
+warm generation (ComfyUI `NORMAL_VRAM`, no forced offload observed; GTT-free flat at
+55.4 GiB across cont_ov10's sequential run and 55.5 GiB after loads in G runs — nothing
+is evicted or reloaded between images). Hybrid: the OV encoder stays CPU-resident
+(process RSS stable, no reload between images); DiT/VAE resident as above. The pipelined
+prototype is the exception (GTT accumulation, see overlap section).
 
 ### DiT kernel configuration note
 
