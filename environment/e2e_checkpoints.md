@@ -93,3 +93,18 @@ Protocol: each gate ends with an independent read-only subagent audit
   9. LOW: DQ32 0.993-vs-1.02 s divergence footnoted; contention ratio unified to 2.11×
      (DiT-mean based, conservative).
   10. LOW: ab_p1_ov sidecars total_gen_s null → backfill re-run (129 sidecars).
+
+## Gate 5+6 — quality dataset, repeated seeds, custom node, analyses (Phases 18–39, 40–41)
+
+- **Status: complete 2026-09-30; final audit pending.** Quality dataset 30 prompts ×
+  {gpu, dq32} + 12-prompt {dq64, dq128} subset (documented reduction), warmup-
+  deterministic generation; SSIM/PSNR/CLIP (chunked ViT-L/14) + blind package; quality
+  acceptance PASS at the pre-declared gate. Repeated seeds 5×5 (gpu vs dq128) after
+  fixing a per-prompt-seed override bug (--force-seeds). Custom node benchmarked
+  through the real server (warm parity 141 s both routes; symlink depth + realpath
+  fixes). Same-route nondeterminism floor measured (SSIM ≥ 0.993) — DQ divergences are
+  conditioning-driven. Dynamic-vs-full weight residency config note measured
+  (dynload_probe: dynamic ~7% faster; A/B unaffected). Thermal: no runaway over
+  30-image runs. Aggregate hardened (non-run JSONs skipped); route labels fixed for
+  dq64/128. Totals: 271 real images (265 harness + 6 server); headline routes
+  gpu=88, ov_dq32=107, ov_dq128=41 images.
