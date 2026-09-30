@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Full-scope audit of the OpenVINO CPU Plugin support on the local CPU (HOST B).
+"""Full-scope audit of the OpenVINO CPU Plugin support on the local CPU.
+
+Used first on HOST B (EPYC 9334 / Zen 4), then HOST A (Ryzen AI Max+ 395 / Zen 5) —
+pass --out-dir results/openvino_cpu_support_hostA to keep per-host artifacts apart.
 
 Sections (all evidence written to results/openvino_cpu_support/):
   1. environment + device-level property census
@@ -13,6 +16,7 @@ Sections (all evidence written to results/openvino_cpu_support/):
 The real Qwen3-VL workload capstone runs separately via
 scripts/investigate_openvino_runtime.py (see audit shell steps in the report).
 """
+import argparse
 import csv
 import json
 import os
@@ -26,9 +30,7 @@ import numpy as np
 import openvino as ov
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "results", "openvino_cpu_support")
 PY = sys.executable
-os.makedirs(OUT, exist_ok=True)
 
 TINY_ISA_VALUES = [
     "SSE41", "AVX", "AVX2", "AVX2_VNNI", "AVX512_CORE", "AVX512_CORE_VNNI",
@@ -373,6 +375,14 @@ print("AUDIT_RESULT", json.dumps({"nthr": str(nthr), "mean_ms": (time.perf_count
 
 
 def main():
+    global OUT
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out-dir", default="results/openvino_cpu_support",
+                    help="artifact dir (use ..._hostA / ..._hostB to keep hosts apart)")
+    args = ap.parse_args()
+    OUT = os.path.join(ROOT, args.out_dir)
+    os.makedirs(OUT, exist_ok=True)
+    print(f"[audit] artifacts -> {OUT}", flush=True)
     print("[audit] section 1: device properties", flush=True)
     s1 = section1_device_properties()
     print("[audit] section 2: ISA ceiling matrix (fresh subprocess per value)", flush=True)

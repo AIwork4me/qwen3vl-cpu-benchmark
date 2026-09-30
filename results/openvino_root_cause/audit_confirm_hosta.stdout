@@ -1,0 +1,9 @@
+HOST A capstone (audit_openvino_cpu_plugin --out-dir ..._hostA + investigate_openvino_runtime)
+command: .venv-openvino/bin/python scripts/investigate_openvino_runtime.py --tag audit_confirm_hosta --threads 16 --warm-iters 1 --measure-iters 3 --prompts P1 --save-hidden
+note: NO taskset — HOST A cpu0-15 are 8 cores x 2 SMT siblings (topology/thread_siblings_list),
+      unlike HOST B where taskset -c 0-15 = 16 physical cores; a taskset 0-15 run here clamps
+      INFERENCE_NUM_THREADS to 8 and gives P1 p50 0.209 s (recorded as a portability gotcha).
+effective: INFERENCE_NUM_THREADS=16 NUM_STREAMS=1 DQ=32 execution_devices=['CPU']
+P1 warm p50 = 0.1837 s (253/253 FC = brgemm_avx512_bf16 rtPrecision=u8, 73 reorder jit_uni_bf16)
+cos(hidden_P1_audit_confirm_hosta, hidden_P1_audit_confirm[HOST B]) = 1.0000000
+bit-identical to HOST A round-1 hidden_P1_dq_default_r1.npy: True
