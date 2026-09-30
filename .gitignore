@@ -19,3 +19,34 @@ results/openvino_root_cause/hidden_P*_fp16_r3.npy
 # root-cause investigation: raw JIT binaries stay local (summaries/hashes committed)
 results/openvino_isa/jit_dump/*.bin
 runtime_model_*.bin
+# e2e evidence tiering (see report/QWEN_IMAGE_E2E_HYBRID.md Raw evidence index):
+# committed: run JSONs, sidecars, summary CSVs, ab/contend/pipe/dq/det raw monitor CSVs,
+#            server+ab+dq+det PNGs, blind package. Local-only (integrity via img_sha16
+#            in JSONs + deterministic reproduction): quality/repeated-seed/matrix PNGs
+#            and their 20Hz raw CSVs.
+results/e2e/raw/q_*.csv
+results/e2e/raw/rs_*.csv
+results/e2e/raw/pm_*.csv
+results/e2e/raw/sm_*.csv
+results/e2e/raw/cont_*.csv
+results/e2e/raw/contd*.csv
+results/e2e/raw/ovcache*.csv
+results/e2e/raw/kn20*.csv
+results/e2e/raw/rm1328*.csv
+results/e2e/raw/sm40*.csv
+results/e2e/raw/cfg_*.csv
+results/e2e/raw/dynload*.csv
+results/e2e/raw/*.log
+results/e2e/images/q_*.png
+results/e2e/images/rs_*.png
+results/e2e/images/pm_*.png
+results/e2e/images/sm_*.png
+results/e2e/images/cont_*.png
+results/e2e/images/cont_ov10_*.png
+results/e2e/images/pipe_*.png
+results/e2e/images/sm40_*.png
+results/e2e/images/rm1328_*.png
+results/e2e/images/cfg_*.png
+results/e2e/images/dynload_*.png
+results/e2e/images/kn20_*.png
+results/e2e/images/ovcache_*.png

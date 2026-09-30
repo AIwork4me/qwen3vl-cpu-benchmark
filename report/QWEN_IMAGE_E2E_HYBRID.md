@@ -304,7 +304,7 @@ Warm encode (P3 pos+neg, median of in-process iterations, `results/e2e/dq/`):
 | DQ group | warm encode (s) | cos vs GPU-route, pos P3 (this round) | cos vs BF16-ref (root-cause round) | cos vs GPU-route, neg (9 tok) |
 |---:|---:|---:|---:|---:|
 | 0 (disabled, BF16-dot engine) | 1.44 | **0.998786** | 0.99879 | — |
-| 32 (default) | 1.02 | 0.998451 | 0.99845 | 0.971018 |
+| 32 (default) | 1.02* | 0.998451 | 0.99845 | 0.971018 |
 | 64 | 0.88 | 0.998209 | 0.99821 | 0.944117 |
 | 128 | 0.835 | 0.997068 | 0.99707 | 0.956907 |
 
@@ -313,9 +313,10 @@ root-cause round to 5 decimals — three independent numerical paths agree. The 
 prompt (" ", 9 tokens) diverges more and non-monotonically across DQ groups — small-
 sequence quantization noise, disclosed; the quality dataset arbitrates its effect.)
 
-DiT/VAE are unaffected by DQ (same 149–150 s). (DQ32 warm encode appears as 0.993 s in
-the core A/B median and 1.02 s in the DQ-matrix runs — both are real measurements of
-the same configuration on different processes, within run-to-run variance.) Real-image quality per DQ group is
+DiT/VAE are unaffected by DQ (same 149–150 s). (*DQ32 has no dedicated dq-group run —
+the 1.02 s is the median of warm ov_dq32 encodes measured inside the pm_ov/cont_ov
+processes (0.988/1.030); the core A/B median is 0.993 s — same configuration,
+run-to-run variance.) Real-image quality per DQ group is
 measured in the quality dataset (below) — the e2e round generates actual images for
 every DQ config, not just conditioning cosines. DQ128 saves a further ~0.19 s per
 encode vs DQ32; whether that is worth the (root-cause-round) cosine drop is a
@@ -330,7 +331,7 @@ latency-vs-quality judgment the quality data informs.
 
 5 representative prompts (Q02 photo / Q05 text / Q10 counting / Q18 Chinese / Q23 long)
 × 5 seeds (11–55), DQ128 (the most aggressive quantization) vs GPU route —
-`results/e2e/quality/repeated_seeds.json`, 25 same-seed pairs:
+`results/e2e/analysis/repeated_seeds.json`, 25 same-seed pairs:
 
 | prompt | SSIM med (min over seeds) | PSNR med |
 |---|---|---:|
@@ -611,6 +612,11 @@ python3 scripts/analyze_e2e_resources.py             # GTT/UMA/thermal/power
 ## Raw evidence index
 
 ```
+(Evidence tiering: run JSONs, per-image sidecars, summary CSVs, the ab/contend/pipe/
+dq/det 20 Hz monitor CSVs, the server/ab/dq/det PNGs and the blind package are
+committed. Quality/repeated-seed/matrix PNGs and their monitor CSVs are local-only —
+integrity is preserved by the img_sha16 recorded in every committed JSON and by the
+determinism of the pipeline (warmup-stabilized images are bit-reproducible).)
 results/e2e/gpu_baseline/  server workflow JSONs, log, PNGs, server_run.json
 results/e2e/ab/            core A/B run JSONs (6 runs × 4 images)
 results/e2e/matrix/        prompt/step/resolution matrix runs

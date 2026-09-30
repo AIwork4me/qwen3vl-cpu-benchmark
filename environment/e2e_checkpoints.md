@@ -108,3 +108,20 @@ Protocol: each gate ends with an independent read-only subagent audit
   30-image runs. Aggregate hardened (non-run JSONs skipped); route labels fixed for
   dq64/128. Totals: 271 real images (265 harness + 6 server); headline routes
   gpu=88, ov_dq32=107, ov_dq128=41 images.
+
+## Final 20-point audit (task-spec gate before commit)
+
+- **FINAL E2E AUDIT: PASS** (2026-09-30, read-only agent; all 20 points PASS, every
+  headline/quality/memory/failure number independently recomputed from raw artifacts:
+  warm E2E 154.173/151.254, cold TTFI 176.11/168.82, GTT 51.86/35.40, SSIM med
+  0.9299, rs-pair table reproduced exactly, contention 2.11x, pipe_ov10 +8.7%).
+- Residual LOW/INFO fixes applied post-audit: repeated_seeds.json path corrected to
+  results/e2e/analysis/; 10 orphan sidecars from the seed-override bug removed;
+  DQ32 1.02 s cell now footnoted with its actual sources (pm_ov/cont_ov medians);
+  PSNR rounding 26.22→26.23.
+- Orchestration-failure note (disclosed): an early run_e2e_suite.sh edit while a
+  consuming bash loop was mid-read caused one-off "stage FAILED" lines in
+  suite_chain.log (continuous/pipelined/dq_matrix first attempts); every affected
+  stage was re-run to completion — all committed run JSONs/PNGs are from the
+  completed re-runs. The ON_DETACH tracebacks in raw logs are benign interpreter-exit
+  noise (symmetric across routes, after [saved]).
