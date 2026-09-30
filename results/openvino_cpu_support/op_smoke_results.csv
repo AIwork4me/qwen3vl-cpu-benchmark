@@ -1,0 +1,13 @@
+op,mode,exec_ok,correct,strict_pass,max_abs_err,out_dtype,exec_types,error
+matmul_f32,default,True,True,False,0.08313941955566406,float32,"{'unknown_f32': 2, 'jit_uni_f32': 1, 'brgemm_avx512_bf16': 1}",
+matmul_f32,f32hint,True,True,True,9.5367431640625e-06,float32,"{'unknown_f32': 2, 'gemm_mlas_f32': 1}",
+conv2d_f32,default,True,True,False,0.05818665027618408,float32,"{'unknown_f32': 2, 'jit_uni_f32': 1, 'brgconv_avx512_bf16': 1, 'jit_f32': 1}",
+conv2d_f32,f32hint,True,True,True,3.814697265625e-06,float32,"{'unknown_f32': 2, 'jit_uni_f32': 1, 'brgconv_avx512_f32': 1, 'jit_f32': 1}",
+sdpa_lite_f32,default,True,True,False,0.014490962028503418,float32,"{'unknown_f32': 6, 'jit_uni_f32': 1, 'brgemm_avx512_bf16': 2, 'jit_avx512_bf16': 1}",
+sdpa_lite_f32,f32hint,True,True,True,3.5762786865234375e-07,float32,"{'unknown_f32': 6, 'gemm_mlas_f32': 2, 'jit_avx512_f32': 1}",
+add_mul_f32,default,True,True,True,0.0,float32,"{'unknown_f32': 3, 'jit_avx512_f32': 1}",
+add_mul_f32,f32hint,True,True,True,0.0,float32,"{'unknown_f32': 3, 'jit_avx512_f32': 1}",
+rmsnorm_chain_f32,default,True,True,True,1.1920928955078125e-07,float32,"{'unknown_f32': 2, 'jit_avx512_f32': 1}",
+rmsnorm_chain_f32,f32hint,True,True,True,1.1920928955078125e-07,float32,"{'unknown_f32': 2, 'jit_avx512_f32': 1}",
+gather_f32,default,True,True,True,0.0,float32,"{'unknown_i64': 1, 'ref_i64': 1, 'jit_avx512_f32': 1, 'unknown_f32': 1}",
+gather_f32,f32hint,True,True,True,0.0,float32,"{'unknown_i64': 1, 'ref_i64': 1, 'jit_avx512_f32': 1, 'unknown_f32': 1}",
