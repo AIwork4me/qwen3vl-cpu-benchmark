@@ -30,6 +30,8 @@ def load_runs():
                 r = json.load(open(f))
             except Exception:
                 continue
+            if not isinstance(r, dict) or "meta" not in r:
+                continue
             r["_group"] = g
             r["_tag"] = os.path.basename(f)[:-5]
             runs.append(r)
