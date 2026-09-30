@@ -133,3 +133,19 @@ Protocol: each gate ends with an independent read-only subagent audit
   expectations. This closes the last open evidence item (Phase 19D was designed as a
   user task; no machine-invented subjective scores).
 - **PR #4 reviewed by user and approved for merge.**
+
+## Documentation consistency sweep (2026-09-30, post-PR #5)
+
+- Three independent read-only subagents reviewed ALL docs vs latest data:
+  53 findings (7 HIGH / 24 MED / 22 LOW) — handoff docs presented superseded plans as
+  current, README contained one contradiction and encoder-stage figures without e2e
+  scoping, RESULTS.md's update note was truncated mid-sentence, root-cause reports
+  lacked DQ128 supersession pointers, several script self-descriptions were wrong
+  (venv, outputs, usage list), Reproduce section had bash-vs-python and
+  multi-stage-invocation errors.
+- All fixed in 8d85cbf + regression-fix b1efd1b (27 files, additions-only banners for
+  history docs). Verification: DOCS-SWEEP initially FAIL — one fix itself introduced a
+  factual error (kernel-note attribution; both 4-step smoke runs ARE committed) +
+  missing checkpoints pointer + rounding nit; all three corrected; re-check PASS
+  (DOCS-SWEEP-RECHECK: PASS, 4/4). Historical documents keep original text under
+  archive banners; E2E_TASK_SPEC.md untouched (verbatim archive by design).
