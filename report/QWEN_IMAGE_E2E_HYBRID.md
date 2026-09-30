@@ -507,9 +507,9 @@ behavior is already optimal — no tuning needed.
 ### DiT kernel configuration note
 
 Back-to-back fresh processes, warmup-stabilized, P3/1024²/20 steps (`kn20_aot` vs
-`kn20_def`): **AOTriton 151.1 s vs default SDPA kernels 209.8 s (1.39× faster)** — directionally
-consistent with the 4-step AOTriton smoke (smoke_ov DiT 27.1 s; no default-kernel 4-step
-counterpart was committed — the 20-step pair above is the traceable evidence). All G and H main runs used AOTriton
+`kn20_def`): **AOTriton 151.1 s vs default SDPA kernels 209.8 s (1.39× faster)** — consistent with
+the committed 4-step smoke pair (`smoke_ov` default kernels DiT 40.3 s vs `smoke_ov_aot`
+27.1 s warm). All G and H main runs used AOTriton
 identically, so the A/B is unaffected. (An earlier note suspected an inversion at higher
 step counts; that was a comparison error — the default-kernel run was 20 steps, not 40.
 Corrected here for the record.) On this machine, ComfyUI's AOTriton recommendation is

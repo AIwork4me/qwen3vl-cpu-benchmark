@@ -20,7 +20,7 @@ avx512_fp16 ✗ (absent), amx ✗ (absent)**.
 | Area | Status | Key evidence |
 |---|---|---|
 | Device discovery (CPU) | ✅ | `FULL_DEVICE_NAME = AMD RYZEN AI MAX+ PRO 395 w/ Radeon 8060S`, exec on CPU asserted |
-| FP32 compute | ✅ strict-correct | `gemm_mlas_f32`, `jit_avx512_f32`, `brgconv_avx512_f32` (f32 hint strict: op-smoke ≤9.5e-6, tiny-FC 1.9e-5) |
+| FP32 compute | ✅ strict-correct | `gemm_mlas_f32`, `jit_avx512_f32`, `brgconv_avx512_f32` (f32 hint strict: op-smoke ≈9.5e-6, tiny-FC 1.9e-5) |
 | BF16 auto-conversion (default) | ✅ | f32 matmul/conv/sdpa default to `brgemm_avx512_bf16` / `brgconv_avx512_bf16`; rel-err ≈0.32% @ \|ref\|≈43 — bf16 rounding, same magnitude as HOST B |
 | BF16 via hint | ✅ | identical to default |
 | FP16 via hint | ⚠ accepted, **no FP16 kernel** | legal hint; result **bit-identical to the bf16 path** (max_abs_err 0.13666439056396484 — the exact HOST B value); `OPTIMIZATION_CAPABILITIES = ['BF16','WINOGRAD','FP32','INT8','BIN','EXPORT_IMPORT']` has no FP16 entry; consistent with no `avx512_fp16` cpuinfo flag on this Zen 5 SKU |
