@@ -150,10 +150,10 @@ repeated_seeds() {
   QS="Q02,Q05,Q10,Q18,Q23"
   run rs_gpu scripts/e2e_pipeline.py --tag rs_gpu --group quality --route gpu \
     --dq 32 --prompt-file prompts/prompts_quality.json --prompts "$QS" \
-    --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2
+    --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2 --force-seeds
   run rs_dq128 scripts/e2e_pipeline.py --tag rs_dq128 --group quality --route ov \
     --dq 128 --prompt-file prompts/prompts_quality.json --prompts "$QS" \
-    --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2
+    --seeds 11,22,33,44,55 --steps 20 --iters 1 --warmup-steps 2 --force-seeds
 }
 
 # ---- controlled 20-step kernel head-to-head (AOTriton vs default), back-to-back ----

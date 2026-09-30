@@ -99,6 +99,8 @@ def main():
     ap.add_argument("--contend-text", default=None)
     ap.add_argument("--no-dit-preload", action="store_true",
                     help="do not force_full_load the DiT before sampling (probe streaming behavior)")
+    ap.add_argument("--force-seeds", action="store_true",
+                    help="use --seeds even when the prompt file carries per-prompt seeds")
     ap.add_argument("--warmup-steps", type=int, default=0,
                     help="throwaway sampling pass at N steps before the plan (triggers kernel "
                          "compilation/autotune so the FIRST plan image matches steady-state determinism); "
@@ -234,7 +236,7 @@ def main():
     seeds = [int(s) for s in args.seeds.split(",")]
     plan = []
     for pi in prompt_items:
-        seed_list = [pi["seed"]] if "seed" in pi else seeds
+        seed_list = seeds if args.force_seeds or "seed" not in pi else [pi["seed"]]
         for seed in seed_list:
             for k in range(args.iters):
                 plan.append({"id": pi["id"], "text": pi["text"], "seed": seed, "iter": k})
