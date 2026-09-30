@@ -1,0 +1,31 @@
+{
+ "prompt": "A single dew-covered red rose in a crystal vase against a black background, studio product photography, razor-sharp petals, soft rim light, high contrast, fine detail, photorealistic.",
+ "prompt_id": "Q25",
+ "seed": 125,
+ "route": "ov",
+ "dq": 32,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 0.429747351,
+ "dit_s": 147.137919924,
+ "vae_s": 2.232550067,
+ "postprocess_s": 0.002787317,
+ "png_save_s": 0.091288519,
+ "total_gen_s": 149.801591612,
+ "total_save_inclusive_s": 149.914080963,
+ "tag": "q_dq32"
+}

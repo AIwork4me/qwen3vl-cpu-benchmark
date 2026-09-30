@@ -69,8 +69,11 @@ class Qwen3VLOpenVINOCPUEncoder:
         key = (mdir, dq_group, cdir, cpu_threads)
         if _ENCODER is None or _ENCODER_KEY != key:
             import sys
-            sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(
-                os.path.dirname(os.path.abspath(__file__)))), "scripts"))
+            here = os.path.dirname(os.path.realpath(__file__))  # resolve symlink
+            repo_root = os.path.dirname(os.path.dirname(here))
+            scripts_dir = os.path.join(repo_root, "scripts")
+            if os.path.isdir(scripts_dir) and scripts_dir not in sys.path:
+                sys.path.insert(0, scripts_dir)
             from ov_encoder import OVQwenEncoder  # repo bridge module
             if cpu_threads > 0:
                 os.environ["OV_CPU_THREADS_NUM"] = str(cpu_threads)

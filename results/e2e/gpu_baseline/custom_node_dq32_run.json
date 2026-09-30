@@ -1,0 +1,19 @@
+{
+ "gen0": {
+  "success": true,
+  "wall_s": 154.53
+ },
+ "gen1": {
+  "success": true,
+  "wall_s": 142.14
+ },
+ "gen2": {
+  "success": true,
+  "wall_s": 142.13
+ },
+ "_server_prompt_exec_s": [
+  154.12,
+  140.88,
+  141.07
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "prompt": "Close-up portrait of an elderly fisherman with deep wrinkles, salt-and-pepper beard, and sea-blue eyes, wearing a yellow raincoat, soft overcast light, shallow depth of field, photorealistic, 85mm lens.",
+ "prompt_id": "Q01",
+ "seed": 101,
+ "route": "ov",
+ "dq": 128,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 0.604246571,
+ "dit_s": 148.124121156,
+ "vae_s": 2.624966562,
+ "postprocess_s": 0.006490545,
+ "png_save_s": 0.282641968,
+ "total_gen_s": 151.35485733,
+ "total_save_inclusive_s": 151.669520497,
+ "tag": "q_dq128"
+}

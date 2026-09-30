@@ -1,0 +1,31 @@
+{
+ "prompt": "Street sign at a Tokyo intersection that reads 'SAKURA STREET 3' in English with Japanese below, neon reflections on wet asphalt at night, photorealistic.",
+ "prompt_id": "Q06",
+ "seed": 106,
+ "route": "ov",
+ "dq": 64,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 0.375750132,
+ "dit_s": 149.831309533,
+ "vae_s": 2.367603435,
+ "postprocess_s": 0.003969832,
+ "png_save_s": 0.347183998,
+ "total_gen_s": 152.575993585,
+ "total_save_inclusive_s": 152.950961077,
+ "tag": "q_dq64"
+}

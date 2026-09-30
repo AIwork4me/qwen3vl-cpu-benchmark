@@ -51,3 +51,43 @@ scripts/run_e2e_suite.sh: line 170: syntax error near unexpected token `compare'
 [suite 06:21:09] stage kernel_note20 done
   [wall] det_test: 184.3s
 [suite 06:24:13] stage det_test done
+  [wall] q_gpu: 4598.4s
+  [wall] q_dq32: 4556.5s
+[suite 08:56:48] stage quality done
+  [wall] q_dq64: 1874.2s
+  [wall] q_dq128: 1859.0s
+[suite 09:59:01] stage quality_dq_subset done
+  [wall] rs_gpu: 830.1s
+  [wall] rs_dq128: 799.0s
+[suite 10:26:10] stage repeated_seeds done
+[chain4 10:26:11] ALL DONE
+[server] ready
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/run_custom_node_benchmark.py", line 125, in <module>
+    main()
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/run_custom_node_benchmark.py", line 102, in main
+    pid = post_prompt(wf)
+          ^^^^^^^^^^^^^^^
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/scripts/run_custom_node_benchmark.py", line 63, in post_prompt
+    with urllib.request.urlopen(req, timeout=30) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+[chain5] custom node FAILED
+[chain5 10:26:41] ALL DONE

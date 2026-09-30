@@ -1,0 +1,9 @@
+  [wall] rs_gpu: 3816.1s
+  [wall] rs_dq128: 3940.9s
+[suite 12:42:53] stage repeated_seeds done
+[server] ready
+[gen0] success=False wall=2.0s
+[gen1] success=False wall=2.0s
+[gen2] success=False wall=2.0s
+[done] {'gen0': {'success': False, 'wall_s': 2.01}, 'gen1': {'success': False, 'wall_s': 2.0}, 'gen2': {'success': False, 'wall_s': 2.0}, '_server_prompt_exec_s': [0.63, 0.0, 0.0]}
+[chain6 12:43:19] ALL DONE
