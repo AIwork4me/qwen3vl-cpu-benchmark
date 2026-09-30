@@ -271,3 +271,25 @@ Same bridge semantics (cos vs HOST-A int8 npy = 0.9971, within the repo's
 known int8-vs-reference range). 3 procs: P1 0.232 / P2 0.645 / P3 1.149 s;
 RSS 28.7 GiB; execType brgemm_avx512_bf16 but ZERO vpdpbusd in JIT dump →
 int8+DQ-VNNI default is 1.21×/1.47×/1.23× faster than the FP16 control.
+
+---
+
+## Post-merge correction (HOST B, follow-up branch fix/hostb-dq-cosine)
+
+Verifier: independent read-only subagent ses_f125369f (PASS)
+Verdict: PASS (correction applied to merged main state)
+
+Self-audit found the Phase 5 claim "cosine unchanged across DQ settings" was
+not backed by measurement (original dq_* runs recorded cos=None). Follow-up
+runs with --compare-npy (investigate_dqcos_*.json, this branch):
+
+- DQ=32 (default): cos 1.0000001/1.0000001/1.0 vs HOST-A npy — bit-faithful
+- DQ=64: 0.99897/0.99916/0.99925
+- DQ=128: 0.99807/0.99791/0.99818
+- DQ=0 (bf16 kernels): 0.99911/0.99928/0.99939
+
+Group size is numerics-relevant (NOT numerically equivalent). Same band as
+the repo's accepted variants; HOST-A (Zen 5) main report independently
+measured the same trade-off vs BF16 reference (DQ=128 0.9959–0.9971).
+Corrected in report/OPENVINO_ZEN5_ROOT_CAUSE.hostB.md (Phase 5 table+answer
+5, TL;DR #6, factor table, social-media bullet).
