@@ -49,7 +49,10 @@ def load_walls():
 def route_name(r):
     m = r["meta"]
     if m["route"] == "ov":
-        return f"ov_dq{m.get('dq', 32)}"
+        dq = m.get("dq")
+        if dq is None and isinstance(m.get("ov"), dict):
+            dq = m["ov"].get("dq_requested", 32)
+        return f"ov_dq{dq if dq is not None else 32}"
     return m["route"]
 
 
@@ -74,8 +77,11 @@ def main():
     per_image = []
     for r in runs:
         m = r["meta"]
+        dqv = m.get("dq")
+        if dqv is None and m["route"] == "ov" and isinstance(m.get("ov"), dict):
+            dqv = m["ov"].get("dq_requested")
         base = {"group": r["_group"], "tag": r["_tag"], "route": route_name(r),
-                "dq": m.get("dq") if m["route"] == "ov" else "",
+                "dq": dqv if m["route"] == "ov" else "",
                 "steps": m["steps"], "res": f'{m["width"]}x{m["height"]}',
                 "aotriton": m.get("aotriton", "?")}
         for im in r.get("images", []):
