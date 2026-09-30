@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Frozen HOST-B snapshot — paths assume this file lives at scripts/<name>;
+# copy there (or adjust ROOT) before running.
 """Scan oneDNN JIT-dump binaries for AVX-512 VNNI instructions.
 
 Usage: analyze_jit_vnni.py <jit_dump_dir> [--out-dir DIR]

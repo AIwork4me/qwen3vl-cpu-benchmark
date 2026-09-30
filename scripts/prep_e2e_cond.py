@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""E2E step: compute OpenVINO conditioning tensors for the Qwen-Image 2.1 e2e A/B.
+"""Standalone OV conditioning pre-computation (.venv-openvino).
+
+Superseded FOR THE E2E A/B by scripts/ov_encoder.py (in-process, used by
+e2e_pipeline.py --route ov); kept as an independent tokenizer/trim cross-check.
+Original purpose: compute OpenVINO conditioning tensors for the Qwen-Image 2.1 e2e A/B.
 
 Runs in .venv-openvino. Replicates ComfyUI's TextEncodeQwenImage21 t2i semantics
 EXACTLY (same T2I template incl. system turn, same tokenizer files, same trim from

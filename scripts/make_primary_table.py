@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Phase 33: the spec's final primary-metrics table (auto-generated)."""
+"""Phase 33: the spec's final primary-metrics table (auto-generated).
+
+Note: throughput, GPU-busy, peak-alloc, RSS/MemAvailable/GTT and cosine rows are
+pinned constants sourced from cont_*/per_image.csv/resources.csv/dq cond runs
+(values match the data; latency rows are computed)."""
 import csv
 import json
 import os

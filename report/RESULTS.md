@@ -1,6 +1,12 @@
 # Qwen3-VL Ryzen AI Max+ 395 CPU Benchmark — 最终报告
 
 > **更新（2026-09-29 晚，root-cause investigation）**：本报告 §1/§7 中的
+> "True INT8 GEMM: UNKNOWN" 与 ~1332% CPU-util 口径已由后续 root-cause 调查解决/澄清
+> （int8 动态量化 VNNI dot 证实执行；warm 区间 1509–1572%），见
+> `report/OPENVINO_ZEN5_ROOT_CAUSE.md`（及 `.hostB.md`）与 README 对应脚注。
+> 后续轮次：e2e 端到端验证见 `report/QWEN_IMAGE_E2E_HYBRID.md`（PR #4，271 张图）；
+> CPU 插件全量审计见 `report/OPENVINO_CPU_SUPPORT_AUDIT.md`（HOST B，PR #3）与
+> `OPENVINO_CPU_SUPPORT_AUDIT.hostA.md`（HOST A，PR #5）。本文为第一轮历史记录，原文未改。
 
 日期: 2026-09-29 · 全部数据为真实测量（20 Hz psutil 采样 + `time.perf_counter_ns()`），
 原始数据见 `results/raw/` 与 `results/*/`，逐 iteration 数据完整保留。
@@ -186,7 +192,7 @@ ComfyUI 产品路径不变（load_clip / QwenImage21TEModel），load_device=off
   中期工程项是让 conditioning 路径走 comfy-kitchen 的 eager int8_linear（A1-forced 已证明可行且 1.77× 加速、精度 0.997+）。
 
 **下一步工程项**（bridge 已验证，剩余为产品化）：
-1. end-to-end sanity（需下载 33 GB Qwen-Image-2.1 本体 + Radeon GPU 侧环境）——本轮按任务要求未做；
+1. end-to-end sanity（需下载 33 GB Qwen-Image-2.1 本体 + Radeon GPU 侧环境）——本轮按任务要求未做（已于 e2e 轮完成，见 report/QWEN_IMAGE_E2E_HYBRID.md，PR #4）；
 2. ComfyUI 侧若走 A1：需要上游接受"conditioning 路径关闭 force_cast_weights"的改动或提供开关；
 3. OpenVINO IR 的 logits 输出对 conditioning 无用，可裁掉再省 ~0.6 GB/次分配（可选微优化）。
 
@@ -195,7 +201,7 @@ ComfyUI 产品路径不变（load_clip / QwenImage21TEModel），load_device=off
 ```
 environment/system.json|system.md   硬件/软件基线
 environment/model_inventory.md      ModelScope 下载清单 + SHA256 + 优先级声明
-environment/model_sha256.txt        4 个主权重校验和
+environment/model_sha256.txt        4 个主权重校验和（后续轮次增至 6 条：DiT/VAE 已加入）
 scripts/resource_monitor.py         20Hz 统一监控器
 scripts/bench_comfy_qwen3vl_cpu.py  实验 A（产品路径 + A1 强制变体 + profiler）
 scripts/bench_openvino_qwen3vl_cpu.py  实验 B standalone
@@ -221,4 +227,4 @@ report/RESULTS.md                   本报告
   可比基准一律使用 bridge（§1 主表）。
 - OpenVINO 内部是否 oneDNN 真 INT8 GEMM 未做内部 dump 定性（标 UNKNOWN），
   但权重 int8 常驻 + CPU 执行 + 与 A1 的精度差异（cos 0.997 vs 0.998，同数量级）一致。
-- 本轮未做 end-to-end 生成质量对比（conditioning 语义一致性已证明，但按任务 §18 属可选且需 33 GB 本体模型）。
+- 本轮未做 end-to-end 生成质量对比（已于 e2e 轮完成：30 提示质量数据集 + 盲评包，见 report/QWEN_IMAGE_E2E_HYBRID.md）（conditioning 语义一致性已证明，但按任务 §18 属可选且需 33 GB 本体模型）。

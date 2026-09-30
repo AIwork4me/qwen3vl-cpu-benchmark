@@ -1,5 +1,14 @@
 # HANDOVER — OpenVINO Zen 5 VNNI Root-Cause Investigation
 
+> **[Archived 2026-09-30]** Root-cause round closed via PR #1 (merge `3ee1388`;
+> note: this doc's line below saying "merge head `2b7b786`" mislabels the earlier
+> direct two-host merge `2b7b786` as PR #1 — GitHub PR #1 is `3ee1388`).
+> Later rounds: CPU-plugin audits (PR #3 HOST B, PR #5 HOST A) and the full
+> end-to-end validation (PR #4, `report/QWEN_IMAGE_E2E_HYBRID.md`, 271 images).
+> The open item below "end-to-end image sanity test (33 GB DiT not yet pulled)"
+> is **DONE** (PR #4 — DiT+VAE downloaded, hashed, full pipeline measured).
+> Original text unchanged below.
+
 Written: 2026-09-29 (session stop). Author: HOST-B investigation session.
 Read this fully before touching the branch/repo.
 
@@ -78,8 +87,8 @@ HOST-A DQ=32 outputs, hence 1.0000001 at default).
 2. ~~Check HOST-A Level D~~ CHECKED: not obtained on HOST A either (`results/openvino_isa/phase7_perf_findings.md`: paranoid=4 + perf/kernel 6.17.0-1032-oem mismatch, no sudo) — Level D remains the only open evidence level, requires a perf-enabled machine or one-time sudo on the Ryzen host (commands ready in phase7 files).
 3. ~~DQ productization decision data~~ AVAILABLE on both hosts; the *decision* itself (default DQ for `bench_openvino_bridge.py`) is still open — recommend adding `--dq-group-size` with default None (historical behavior) and documenting DQ=64/128 trade-off.
 4. Longer term: ComfyUI upstream conversation about the conditioning-path
-   force-cast (A1 evidence in README), end-to-end image sanity test (33 GB
-   DiT not yet pulled).
+   force-cast (A1 evidence in README), ~~end-to-end image sanity test (33 GB
+   DiT not yet pulled)~~ **DONE: PR #4** (`report/QWEN_IMAGE_E2E_HYBRID.md`).
 
 (Original numbering preserved below for reference; items 2–4 were renumbered above.)
 X. **Check whether HOST-A run obtained Level D (perf hotspot) evidence** —
@@ -95,8 +104,8 @@ X. **Check whether HOST-A run obtained Level D (perf hotspot) evidence** —
    option). Decide default for `scripts/bench_openvino_bridge.py` follow-up
    (add `--dq-group-size`; do NOT silently change historical defaults).
 4. Longer term: ComfyUI upstream conversation about the conditioning-path
-   force-cast (A1 evidence in README), end-to-end image sanity test (33 GB
-   DiT not yet pulled).
+   force-cast (A1 evidence in README), ~~end-to-end image sanity test (33 GB
+   DiT not yet pulled)~~ **DONE: PR #4** (`report/QWEN_IMAGE_E2E_HYBRID.md`).
 
 ## 5. Findings summary (both hosts, final)
 

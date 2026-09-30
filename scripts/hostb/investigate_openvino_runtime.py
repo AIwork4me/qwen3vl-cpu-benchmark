@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Frozen HOST-B snapshot — paths assume this file lives at scripts/<name>;
+# copy there (or adjust ROOT) before running.
 """Root-cause investigation runner for the OpenVINO Qwen3-VL INT8 conditioning workload.
 
 Reuses the exact token/bridge semantics of scripts/bench_openvino_bridge.py

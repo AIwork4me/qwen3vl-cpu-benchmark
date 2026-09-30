@@ -1,5 +1,5 @@
 {
-  "description": "Unified prompts for ComfyUI-INT8-ConvRot-CPU vs OpenVINO-INT8-CPU benchmark. All runtimes must use these exact strings.",
+  "description": "Unified prompt set for all rounds: the encoder-only ComfyUI-INT8-ConvRot-CPU vs OpenVINO-INT8-CPU benchmark and the e2e hybrid pipeline (GPU/native/OV routes). All runtimes use these exact strings. P4 (very_short) and P5 (very_long) were added for the e2e prompt-length matrix (15/299 kept tokens).",
   "prompts": [
     {
       "id": "P1",

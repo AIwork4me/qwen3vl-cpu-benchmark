@@ -6,6 +6,13 @@
 > scripts/bench_openvino_bridge.py, scripts/bench_comfy_bf16_gpu.py, HANDOFF.md, and the
 > three untracked e2e scripts from the previous session).
 > Branch: `experiment/qwen-image-e2e-hybrid` (from main `3ee1388`).
+>
+> **状态（2026-09-30，PR #4 已合并）**：本计划已全部执行完毕 — Gate 1–7 + Final
+> 20-point audit 全部 PASS，用户盲评 PASS（`environment/e2e_checkpoints.md`）；最终
+> 结论见 `report/QWEN_IMAGE_E2E_HYBRID.md`。与本文预案的差异：质量数据集实际为
+> 30 prompts × {gpu, dq32} 全量 + 12-prompt dq64/128 子集；repeated seeds 实际
+> 5×5 × 2 路线（gpu vs dq128，25 对）；KNOWN 表中 "DQ=128 free 11–21%" 的产品化
+> 建议在 e2e 尺度被推翻（最终推荐 DQ 32）。以下原文未改动。
 
 ## North-star question
 

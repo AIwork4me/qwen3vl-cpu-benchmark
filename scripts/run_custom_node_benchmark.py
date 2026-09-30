@@ -7,7 +7,7 @@ Workflow: UNETLoader + custom node (OV CPU encoder, dq configurable) + KSampler 
 VAEDecode + SaveImage — NO CLIPLoader at all. P3, 20 steps, 1024², same seed as the
 GPU server baseline for a true product-stack A/B.
 
-Results -> results/e2e/gpu_baseline/custom_node_run.json (+ PNGs, log)
+Results -> results/e2e/gpu_baseline/custom_node_dq{dq}_run.json (+ PNGs, workflow JSON, log)
 """
 import json
 import os

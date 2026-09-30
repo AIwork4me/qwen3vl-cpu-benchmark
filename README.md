@@ -6,16 +6,17 @@ A/B benchmark on **AMD Ryzen AI Max+ PRO 395** (Strix Halo, 16C/32T, AVX-512 + A
 
 1. **ComfyUI's `qwen3vl_8b_int8_convrot` on CPU does NOT run INT8 GEMM.** It is **INT8 storage → full dequant every forward (252 layers, 13.9 GB/encode) → FP32 compute** ("A2"). Proven by zero `torch._int_mm` calls, byte-exact dequant accounting, profiler, and the source chain.
 2. **True INT8 CPU GEMM works on this chip** (`torch._int_mm` / oneDNN-VNNI). Forcing ComfyUI's own int8 kernels (A1 variant) gives **1.77×** speedup — the capability exists, the conditioning path just disables it.
-3. **OpenVINO INT8 weight-compressed wins by an order of magnitude**: with a zero-recompute `add_outputs` bridge that exactly matches Qwen-Image 2.1 conditioning semantics (cosine ≥ 0.997 vs BF16 reference), it is **22–69× faster** than ComfyUI's product path and loads ~10× faster.
+3. **OpenVINO INT8 weight-compressed wins by an order of magnitude**: with a zero-recompute `add_outputs` bridge that exactly matches Qwen-Image 2.1 conditioning semantics (cosine ≥ 0.997 vs BF16 reference), it is **22–69× faster** than ComfyUI's product path and loads ~10× faster *(encode stage only — end-to-end the pipeline is DiT-dominated: ~1.5–2% warm; see item 6 and the E2E section)*.
 4. **Putting the BF16 encoder on the Radeon 8060S GPU does NOT help** — measured: 0.60/1.23/1.83 s (P1/P2/P3). ComfyUI's conditioning path forces **fp32 GEMM on GPU too** (all 252 linears measured `fp32×fp32`), so the OpenVINO INT8 CPU bridge is still **2.7–3.3× faster** than the GPU route, while the GPU route parks 16.6 GiB in GTT and keeps the GPU 85% busy — competing with the DiT.
 5. **Recommendation for `CPU → Qwen3-VL conditioning → Radeon GPU → Qwen-Image 2.1 DiT`:** run the encoder with **OpenVINO INT8 + the `add_outputs` bridge** (scripts included). Cost: ~2× peak RAM (15 vs 7.6 GiB, still only 16% of 94 GiB), zero GPU occupancy.
+6. **End-to-end (PR #4)**: the complete pipeline is DiT-dominated — the hybrid's warm win is small (~2% harness, statistical parity through the real ComfyUI server); the decisive, measured wins are **−16.46 GiB GTT, −9.2 GiB physical UMA, −4.1% cold start, GPU idle during conditioning**, with statistically indistinguishable image quality. Recommended DQ group: **32**.
 
 ## Decision table
 
 | You are… | Use | Why |
 |---|---|---|
 | Building a Qwen-Image 2.1 pipeline on Ryzen AI Max+ 395 / Strix Halo | **OpenVINO INT8 + bridge** (scripts/bench_openvino_bridge.py) | 0.19–0.69 s conditioning, 1.26 s load, semantics verified, GPU left free for the DiT |
-| "Just put the encoder on the GPU" | Don't — measured 0.60–1.83 s (BF16→fp32 compute) and 85% GPU busy | OV INT8 CPU bridge is 2.7–3.3× faster and uses 0% GPU |
+| "Just put the encoder on the GPU" | Don't — measured 0.60–1.83 s (BF16→fp32 compute) and 85% GPU busy | OV INT8 CPU bridge is 2.7–3.3× faster and uses 0% GPU *(encoder-stage figures; end-to-end the two are latency-equal through the real server — the decisive win is 16.5 GiB GTT freed, see E2E section)* |
 | Locked into the ComfyUI ecosystem | ComfyUI product path works, but 22–69× slower; consider upstream patch to enable int8 path (A1) | A1 measured: 1.77×, cos 0.9978, kernels already ship |
 | RAM-constrained (UMA shared with GPU) | ComfyUI route uses less peak RAM | 7.6 vs 15.1 GiB |
 | Wanting TRUE int8 on CPU in ComfyUI | Flip `comfy_force_cast_weights` + `use_quantized_matmul` | See A1 evidence below; needs upstream acceptance |
@@ -143,7 +144,8 @@ is **16.5 GiB of GPU memory freed, 9 GiB less physical RAM, faster cold start, a
 that stays fully available to the DiT during conditioning**. Two honest negatives:
 sustained CPU-encoding during GPU-DiT is 2.11× slower (DiT mean) (shared LPDDR5X bandwidth), and
 pipelining hides the encoder but does not multiply throughput. Recommended on this
-machine: Hybrid with DQ 32/64 (see report for the DQ trade-off and quality dataset).
+machine: Hybrid with DQ 32 (64 acceptable; 128 not recommended — see report §DQ group
+and the quality dataset).
 
 ## Root-cause investigation
 
@@ -169,6 +171,9 @@ Both hosts independently reached the same verdict:
   weight copy (8.5 GB vs 34.7 GB traffic per encode) inside a precompiled inference
   pipeline. HOST B also showed the u8 weights are repacked **once at load** into a blocked
   layout (`AB4b32a4b`) and dequantization is fused into the JIT kernel.
+  *(encoder-stage only; the e2e round recommends keeping **DQ 32** — 64/128 save
+  ≤0.16 s per ~153 s image while image similarity degrades monotonically; see the
+  E2E section / report §DQ group.)*
 - The compute engine is chosen by `DYNAMIC_QUANTIZATION_GROUP_SIZE` (32 = int8/VNNI path,
   0 = BF16-dot path) — the OpenVINO primitive name `brgemm_avx512_bf16` labels the
   activation dtype/ISA family, not the MAC dtype. Bonus finding: group size 128 is another
@@ -191,7 +196,7 @@ changed; the headline table quotes the warm-interval figure with footnote 5.
 
 ## Verification
 
-Three independent read-only subagent checkpoints (setup/downloads → ComfyUI route → final report fidelity) all **PASS**; every headline number in this README can be re-derived from the committed JSON/CSV. Record: `environment/checkpoints.md`. Classification: `results/comfy_cpu/runtime_path.md`.
+Three independent read-only subagent checkpoints (setup/downloads → ComfyUI route → final report fidelity) all **PASS**; every headline number in this README can be re-derived from the committed JSON/CSV. Record: `environment/checkpoints.md`. Later rounds carry their own gate records: `environment/root_cause_checkpoints.md` (root-cause, 13 PASS), `environment/e2e_checkpoints.md` (e2e, 6 gates + 20-point final audit + user blind-eval), and the subagent-verified PR #3/#5 CPU-plugin audits. Classification: `results/comfy_cpu/runtime_path.md`.
 
 ## Honest caveats
 
@@ -199,18 +204,25 @@ Three independent read-only subagent checkpoints (setup/downloads → ComfyUI ro
 - ComfyUI `model_load_s=0.30 s` is the safetensors mmap-assign; the real disk page-in shows up inside the first encode (12.11 s).
 - ~~OpenVINO internal GEMM dtype not dumped → marked UNKNOWN, deliberately **not** claimed as W8A8.~~ **Resolved by the root-cause investigation** (same day): dynamic-quantization int8 dot on AVX512_VNNI confirmed at dispatch+JIT+counterfactual level; NOT static W8A8 (activations are quantized at runtime, group 32). perf-sampling-level proof unavailable (host restrictions). See `report/OPENVINO_ZEN5_ROOT_CAUSE.md`.
 - Root-cause investigation caveats: no measured DRAM bandwidth/cache counters (perf blocked; GB/s figures are byte-accounting derivations); oneDNN per-primitive verbose unavailable on this build (documented crash); GPU comparison covers only ComfyUI's forced-fp32 product path — a bf16-compute GPU path was not measured.
-- End-to-end image-generation A/B was out of scope for this round (conditioning semantics verified; the 33 GB Qwen-Image-2.1 checkpoint was not pulled).
+- ~~End-to-end image-generation A/B was out of scope for this round (conditioning semantics verified; the 33 GB Qwen-Image-2.1 checkpoint was not pulled).~~ **Done in the follow-up round (PR #4)**: full pipeline measured, 271 images — see the E2E section above and [report/QWEN_IMAGE_E2E_HYBRID.md](report/QWEN_IMAGE_E2E_HYBRID.md); DiT+VAE downloaded and SHA256-hashed.
 
 ## Repo layout
 
 ```
-environment/   system baseline, model inventory + SHA256, checkpoint records
-scripts/       monitor + 6 benchmark/analysis scripts (see Reproduce)
-prompts/       unified P1/P2/P3
-models/        local ModelScope checkouts (gitignored, ~36 GB)
-results/       raw 20Hz sampling CSVs, per-run JSON/CSV, npy embeddings, comparison tables
-                + openvino_isa/ & openvino_root_cause/ (root-cause investigation artifacts)
-report/        RESULTS.md (full, 中文) + qwen_image_conditioning_semantics.md (中文) + OPENVINO_ZEN5_ROOT_CAUSE.md (root-cause, 中文)
+environment/   system baseline, model inventory + SHA256, checkpoint records (round-1 / root-cause / e2e)
+scripts/       monitor + benchmark/analysis scripts (round 1, Reproduce) + e2e harness & suite
+               (e2e_pipeline / ov_encoder / run_e2e_suite / aggregators) + CPU-plugin audit script
+prompts/       unified P1–P5 (P4/P5 added for the e2e prompt-length matrix) + prompts_quality.json (Q01–Q30)
+models/        local ModelScope checkouts (gitignored, ~86 GB incl. DiT/VAE/CLIP evaluator)
+custom_nodes/  qwen3vl_openvino_cpu — the Hybrid productization node for ComfyUI (e2e round)
+results/       round 1: raw 20Hz CSVs, JSON/npys, comparison tables
+               root-cause: openvino_isa/ + openvino_root_cause/
+               CPU-plugin audits: openvino_cpu_support/ (HOST B) + openvino_cpu_support_hostA/
+               end-to-end: e2e/ (271 images + sidecars, monitor CSVs, quality dataset, summaries)
+report/        RESULTS.md (round 1, 中文) + qwen_image_conditioning_semantics.md (中文)
+               + OPENVINO_ZEN5_ROOT_CAUSE.md (+ .hostB.md) (中文)
+               + OPENVINO_CPU_SUPPORT_AUDIT.md (+ .hostA.md)
+               + QWEN_IMAGE_E2E_HYBRID.md (e2e final) + E2E_EXPERIMENT_PLAN.md + E2E_TASK_SPEC.md (archive)
 ComfyUI/       dedicated checkout used by the benchmark (gitignored)
 ```
 

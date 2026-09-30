@@ -60,6 +60,16 @@ Reason: exact artifacts exist on ModelScope mirrors; HF unreachable on this netw
 - 下载命令: `modelscope download --model Comfy-Org/Qwen-Image-2.1 diffusion_models/qwen_image_2.1_bf16.safetensors vae/qwen_image_2.1_vae_bf16.safetensors --local_dir models/qwen-image-2.1-full`
 - 同仓库还有 `qwen3vl_8b_w4a8`、`qwen3.5_9b` prompt-enhancer TE 与 DiT int8_convrot 变体，本轮不使用。
 
+## E. OpenVINO FP16 对照模型（root-cause 轮，gitignored）
+
+- ModelScope `OpenVINO/Qwen3-VL-8B-Instruct-fp16-ov` → `models/qwen3vl-openvino-fp16/`（17 GB，
+  与 int8-ov 的 config.json 逐字节相同的受控对照；见 report/OPENVINO_ZEN5_ROOT_CAUSE.md Phase 10）。
+
+## F. CLIP 质量评估器（e2e 轮，gitignored）
+
+- ModelScope `AI-ModelScope/clip-vit-large-patch14` → `models/clip-vit-large-patch14/`（1.71 GB，
+  30 提示质量数据集的统一 prompt-image 评分器，77-token 分块打分；见 scripts/evaluate_quality.py）。
+
 ## 校验与复用规则
 
 - benchmark 一律从上述本地路径加载，禁止运行时联网。

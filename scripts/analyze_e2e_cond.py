@@ -5,8 +5,7 @@ Compares the saved cond npys (results/e2e/cond/cond_<tag>_<PID>_pos.npy):
 shape equality, token-count equality, cosine, RMSE, relative L2, max abs,
 mean/std per tensor — NOT cosine alone (task rule).
 
-Reference = the ComfyUI product path on the same machine. If a native (CPU TE)
-npy exists for the prompt it is the reference; else gpu.
+Reference = the gpu (product-path) npy when present; else native (CPU TE).
 
 Output: results/e2e/cond/identity.csv + identity.md
 """

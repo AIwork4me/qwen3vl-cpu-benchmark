@@ -20,7 +20,7 @@ reason one might expect, and not by a large wall-clock margin:
   CPU INT8 graph in 0.6–0.7 s (cached).
 - **The GPU-side win is the real story**: hybrid frees **16.46 GiB of GTT** (51.86 →
   35.40 GiB resident) and **~9.2 GiB of physical UMA RAM** (MemAvailable 52.7 → 43.5 GiB
-  consumed), and removes the only non-DiT GPU consumer (encode windows: 85–88% GPU busy
+  consumed), and removes the only non-DiT GPU consumer (encode windows: 83–90% GPU busy
   on the GPU route vs CPU-side 15-core work with the GPU idle on hybrid).
 - **DiT latency is statistically indistinguishable** between the two architectures at
   1024²/20 steps on this 100 GiB-GTT configuration (147.95 vs 149.05 s medians, within
@@ -148,8 +148,7 @@ marks; disclosed because the two runs written before the explicit epoch field us
 `meta.timestamp` anchor, accurate to ±1 s). Composition: the GPU route pays TE
 disk→GTT staging before the first encode (te_read 5.8–10.3 s + first encode 2.99–3.21 s
 vs warm 2.5–2.8 s) while the hybrid pays the OV compile — 4.4–4.7 s in the core A/B
-processes (partially warm cache), 3.45 s against a cold cache dir, 0.69 s fully warm
-(dedicated `ovcache_*` runs). Note: fresh-process cold, not disk-cold — the OS page
+processes (partially warm cache), 3.45 s against a cold cache dir, 0.63–0.69 s warm across processes (ovcache_cold2 0.689; the run named ovcache_warm measured 1.03 s). Note: fresh-process cold, not disk-cold — the OS page
 cache is not droppable without root (recorded).
 
 ## Warm end-to-end latency
@@ -204,9 +203,9 @@ Strix Halo shares one physical pool; GPU address-space savings ≠ physical savi
 | | G | H |
 |---|---:|---:|
 | process RSS peak | 32.0 GiB | 30.1 GiB |
-| MemAvailable consumed (baseline − min) | 52.7 GiB | 43.5 GiB |
+| MemAvailable consumed (baseline − min) | 52.7 GiB (median) | 43.3 GiB (median; 43.5 first process) |
 
-Physical saving ≈ 9.2 GiB (not 16.46): the GPU route's BF16 TE file is mmap'd and its
+Physical saving ≈ 9.4 GiB by medians (9.2 comparing first processes; not 16.46): the GPU route's BF16 TE file is mmap'd and its
 pages also sit in page cache, part of which MemAvailable still counts as reclaimable;
 the OV route keeps a separate 8.8 GB INT8 copy resident instead. Both figures reported;
 neither is rounded up.
@@ -315,14 +314,14 @@ sequence quantization noise, disclosed; the quality dataset arbitrates its effec
 
 DiT/VAE are unaffected by DQ (same 149–150 s). (*DQ32 has no dedicated dq-group run —
 the 1.02 s is the median of warm ov_dq32 encodes measured inside the pm_ov/cont_ov
-processes (0.988/1.030); the core A/B median is 0.993 s — same configuration,
+processes (1.016/1.025); the core A/B median is 0.993 s — same configuration,
 run-to-run variance.) Real-image quality per DQ group is
 measured in the quality dataset (below) — the e2e round generates actual images for
 every DQ config, not just conditioning cosines. DQ128 saves a further ~0.19 s per
 encode vs DQ32; whether that is worth the (root-cause-round) cosine drop is a
 latency-vs-quality judgment the quality data informs.
 
-**OpenVINO compile cache**: fresh cache dir compile = 3.45 s; warm cache = 0.69 s
+**OpenVINO compile cache**: fresh cache dir compile = 3.45 s; warm cache = 0.63–0.69 s across processes (ovcache_cold2 0.689 s; the dedicated ovcache_warm run measured 1.03 s)
 (~2.8 s saved on every process start). Cached compile is the default product behavior
 (cache persists at `models/.ov_cache`).
 
@@ -434,7 +433,7 @@ Actively looked for, honestly reported:
 | DiT latency | 149.05 s | 147.95 s | statistically indistinguishable |
 | VAE latency | 2.43 s | 2.25 s | same path |
 | GPU busy during DiT | 99.7% | 99.4% | both saturated |
-| GPU busy during encode | 85–88% | ~idle (sensor-decay artifact documented) | |
+| GPU busy during encode | 83–90% | ~idle (sensor-decay artifact documented) | |
 | GTT residency | 51.86 GiB | **35.40 GiB** | −16.46 GiB |
 | Physical UMA consumed | 52.7 GiB | **43.5 GiB** | −9.2 GiB |
 | CPU RSS | 32.0 GiB | 30.1 GiB | |
@@ -449,15 +448,17 @@ Actively looked for, honestly reported:
 
 | run | DiT first-3 → last-3 (s) | GPU temp max | CPU temp max | CPU freq mean |
 |---|---|---|---|---|
-| q_gpu (G) | 149.3 → 147.2 | 71.0 °C (stable) | 76.4 °C | ~1.85 GHz |
+| q_gpu (G) | 149.3 → 147.2 | 71.0 °C (stable) | 76.9 °C | ~1.85 GHz |
 | q_dq32 (H) | 145.6 → 148.5 | 70.0 → 71.0 °C | 84.5 °C | ~1.82 GHz |
 
 **No thermal runaway**: GPU temperature plateaus at 70–71 °C and DiT latency stays
 within ±2% across 30 consecutive images (~75 min sustained) on both routes. The larger
 core-A/B drift (137 → 149 s across the session) is machine warm-up from cold, not
 continuous degradation — the 30-image runs prove steady state is flat. The hybrid runs
-its CPU hotter (84.5 vs 76.4 °C max — 16-core AVX-512 encode bursts; k10temp touches
-99–100 °C only in the dedicated encode-storm test), at stable frequency.
+its CPU hotter (84.5 vs 76.9 °C max — 16-core AVX-512 encode bursts; k10temp
+transiently touches 99–100.5 °C during first-encode/compile bursts of OV processes and
+throughout the dedicated encode-storm test; the 30-image steady-state max is 84.5 °C),
+at stable frequency.
 
 **Power**: GPU power during DiT is 52–60 W on both routes (firmware-managed; dpm=auto,
 no writable cap on this SKU). CPU package energy (RAPL) is **unavailable** — the sysfs
@@ -506,8 +507,9 @@ behavior is already optimal — no tuning needed.
 ### DiT kernel configuration note
 
 Back-to-back fresh processes, warmup-stabilized, P3/1024²/20 steps (`kn20_aot` vs
-`kn20_def`): **AOTriton 151.1 s vs default SDPA kernels 209.8 s (1.39× faster)** —
-consistent with the 4-step smoke (27.1 vs 40.3 s). All G and H main runs used AOTriton
+`kn20_def`): **AOTriton 151.1 s vs default SDPA kernels 209.8 s (1.39× faster)** — directionally
+consistent with the 4-step AOTriton smoke (smoke_ov DiT 27.1 s; no default-kernel 4-step
+counterpart was committed — the 20-step pair above is the traceable evidence). All G and H main runs used AOTriton
 identically, so the A/B is unaffected. (An earlier note suspected an inversion at higher
 step counts; that was a comparison error — the default-kernel run was 20 steps, not 40.
 Corrected here for the record.) On this machine, ComfyUI's AOTriton recommendation is
@@ -519,7 +521,7 @@ a real 1.39× DiT win and part of the recommended product configuration.
 - Physical UMA: −9.2 GiB
 - Cold TTFI: −7.3 s (−4.1%)
 - Warm E2E: −2.9 s (−1.9%) [encoder-stage effect only]
-- GPU occupancy during conditioning: 85–88% → idle
+- GPU occupancy during conditioning: 83–90% → idle
 - CPU utilization put to work: 15.5 cores × ~1 s/image (the encoder) at zero GPU cost
 
 ## What did not improve
@@ -597,12 +599,13 @@ benchmark results in the Custom-node section.
 ## Reproduce
 
 ```bash
-bash scripts/run_comfy_server_baseline.py            # Phase 2 product baseline (server)
-bash scripts/run_e2e_suite.sh core_ab                # core A/B (6 fresh processes)
-bash scripts/run_e2e_suite.sh continuous pipelined contention
-bash scripts/run_e2e_suite.sh prompt_matrix step_matrix res_matrix dit_kernel_note
-bash scripts/run_e2e_suite.sh dq_matrix ov_cache det_test
-bash scripts/run_e2e_suite.sh quality quality_dq_subset repeated_seeds
+.venv-comfy-rocm/bin/python scripts/run_comfy_server_baseline.py   # Phase 2 product baseline (server)
+# NOTE: the suite takes ONE stage per invocation
+for s in core_ab core_native; do bash scripts/run_e2e_suite.sh "$s"; done
+for s in continuous pipelined contention; do bash scripts/run_e2e_suite.sh "$s"; done
+for s in prompt_matrix step_matrix res_matrix dit_kernel_note kernel_note20; do bash scripts/run_e2e_suite.sh "$s"; done
+for s in dq_matrix ov_cache det_test; do bash scripts/run_e2e_suite.sh "$s"; done
+for s in quality quality_dq_subset repeated_seeds; do bash scripts/run_e2e_suite.sh "$s"; done
 python3 scripts/aggregate_e2e.py                     # headline/tables
 python3 scripts/analyze_e2e_resources.py             # GTT/UMA/thermal/power
 .venv-comfy/bin/python scripts/evaluate_quality.py   # SSIM/PSNR/CLIP + blind package
