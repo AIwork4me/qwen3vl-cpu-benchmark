@@ -1,0 +1,6 @@
+[server] ready
+[P1] success=True wall=150.5s images=1
+[P2] success=True wall=142.1s images=1
+[P3] success=True wall=142.1s images=1
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/gpu_baseline/server_run.json
+[done] server baseline

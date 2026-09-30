@@ -1,0 +1,450 @@
+{
+ "meta": {
+  "tag": "rm1328_ov",
+  "group": "matrix",
+  "route": "ov",
+  "timestamp": "2026-09-29T19:34:08.661851+00:00",
+  "torch": "2.12.0+rocm7.14.0",
+  "hip": "7.14.60850",
+  "gpu": "AMD Radeon 8060S Graphics",
+  "gtt_free_gib_start": 90.89,
+  "gtt_total_gib": 100.0,
+  "vram_state": "NORMAL_VRAM",
+  "te_device_selected": "cuda:0",
+  "dit": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1-full/diffusion_models/qwen_image_2.1_bf16.safetensors",
+  "vae": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1-full/vae/qwen_image_2.1_vae_bf16.safetensors",
+  "dit_sha16": "89f4158d066cc339",
+  "steps": 20,
+  "cfg": 2.5,
+  "sampler": "euler",
+  "scheduler": "simple",
+  "width": 1328,
+  "height": 1328,
+  "prompts": "P3",
+  "seeds": "20260929",
+  "iters": 2,
+  "pipelined": false,
+  "contend_text": false,
+  "comfyui_version": "0.37.0",
+  "aotriton": "1",
+  "cpu_governor": "powersave",
+  "cpu_epp": "balance_performance",
+  "vae_sha16": "bb21f7473051e1ac",
+  "ov": {
+   "openvino": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+   "dq_requested": 32,
+   "dq_effective": "32",
+   "compile_read_s": 0.135,
+   "compile_s": 4.631,
+   "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8"
+  },
+  "te_model": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8"
+ },
+ "loads": {
+  "dit_read_s": 4.411369442,
+  "vae_read_s": 1.074922915,
+  "ov_total_s": 5.758891836,
+  "ov_compile_read_s": 0.135059529,
+  "ov_compile_s": 4.630638167,
+  "total_load_s": 11.2459092
+ },
+ "images": [
+  {
+   "idx": 0,
+   "label": "P3_s20260929_i0",
+   "prompt_id": "P3",
+   "seed": 20260929,
+   "iter": 0,
+   "encode_s": 1.618880374,
+   "encode_pos_s": 1.448565926,
+   "encode_neg_s": 0.160239756,
+   "n_tokens_full": 185,
+   "n_tokens_kept": 171,
+   "cond_prep_s": 0.000299467,
+   "cond_pos_shape": [
+    1,
+    171,
+    4096
+   ],
+   "ov_ids_pos": [
+    151644,
+    8948,
+    198,
+    1092,
+    30782,
+    408,
+    323,
+    23643
+   ],
+   "dit_s": 375.523424507,
+   "dit_steps": [
+    [
+     0,
+     57539000231838
+    ],
+    [
+     1,
+     57557787110072
+    ],
+    [
+     2,
+     57576489749065
+    ],
+    [
+     3,
+     57595109826969
+    ],
+    [
+     4,
+     57613756115253
+    ],
+    [
+     5,
+     57632522185329
+    ],
+    [
+     6,
+     57651317553421
+    ],
+    [
+     7,
+     57670043477336
+    ],
+    [
+     8,
+     57688802394792
+    ],
+    [
+     9,
+     57707401402572
+    ],
+    [
+     10,
+     57726114299774
+    ],
+    [
+     11,
+     57745015440300
+    ],
+    [
+     12,
+     57763802381843
+    ],
+    [
+     13,
+     57782620545030
+    ],
+    [
+     14,
+     57801360886994
+    ],
+    [
+     15,
+     57820162394152
+    ],
+    [
+     16,
+     57838840369562
+    ],
+    [
+     17,
+     57857563582379
+    ],
+    [
+     18,
+     57876295400799
+    ],
+    [
+     19,
+     57894994927241
+    ]
+   ],
+   "dit_preload_in_window_s": 1.593044849,
+   "vae_s": 4.546089969,
+   "postprocess_s": 0.016664105,
+   "cond_shape": [
+    1,
+    171,
+    4096
+   ],
+   "cond_pos_mean": 0.09718061983585358,
+   "cond_pos_std": 11.00864028930664,
+   "total_gen_s": 383.286173582,
+   "png_save_s": 0.40109286,
+   "png": "results/e2e/images/rm1328_ov_P3_s20260929_i0.png",
+   "img_sha16": "2da390235e670d42",
+   "total_save_inclusive_s": 383.732148248,
+   "gtt_free_gib_after": 40.66,
+   "cuda_peak_alloc_gib": 48.73,
+   "windows": {
+    "enc": {
+     "gpu_busy_pct": {
+      "mean": 11.73,
+      "max": 27,
+      "n": 45
+     },
+     "proc_cpu_pct": {
+      "mean": 1130.89,
+      "max": 1709.3,
+      "n": 45
+     },
+     "gtt_used_bytes": {
+      "mean": 2476815610.31,
+      "max": 14568742912,
+      "n": 45
+     }
+    },
+    "dit": {
+     "gpu_busy_pct": {
+      "mean": 99.69,
+      "max": 100,
+      "n": 6939
+     },
+     "proc_cpu_pct": {
+      "mean": 211.33,
+      "max": 1008.4,
+      "n": 6939
+     },
+     "gtt_used_bytes": {
+      "mean": 15869821598.57,
+      "max": 15875289088,
+      "n": 6939
+     }
+    }
+   }
+  },
+  {
+   "idx": 1,
+   "label": "P3_s20260929_i1",
+   "prompt_id": "P3",
+   "seed": 20260929,
+   "iter": 1,
+   "encode_s": 0.99584594,
+   "encode_pos_s": 0.827632474,
+   "encode_neg_s": 0.162602392,
+   "n_tokens_full": 185,
+   "n_tokens_kept": 171,
+   "cond_prep_s": 0.000358719,
+   "cond_pos_shape": [
+    1,
+    171,
+    4096
+   ],
+   "ov_ids_pos": [
+    151644,
+    8948,
+    198,
+    1092,
+    30782,
+    408,
+    323,
+    23643
+   ],
+   "dit_s": 375.033451609,
+   "dit_steps": [
+    [
+     0,
+     57920009339938
+    ],
+    [
+     1,
+     57938548974138
+    ],
+    [
+     2,
+     57957414105450
+    ],
+    [
+     3,
+     57976164659715
+    ],
+    [
+     4,
+     57994897110725
+    ],
+    [
+     5,
+     58013637732024
+    ],
+    [
+     6,
+     58032444666381
+    ],
+    [
+     7,
+     58051016217634
+    ],
+    [
+     8,
+     58069786303925
+    ],
+    [
+     9,
+     58088654812370
+    ],
+    [
+     10,
+     58107430275095
+    ],
+    [
+     11,
+     58126128483114
+    ],
+    [
+     12,
+     58144964060334
+    ],
+    [
+     13,
+     58163616026317
+    ],
+    [
+     14,
+     58182354770497
+    ],
+    [
+     15,
+     58201226556730
+    ],
+    [
+     16,
+     58219966483288
+    ],
+    [
+     17,
+     58238584810243
+    ],
+    [
+     18,
+     58257274854469
+    ],
+    [
+     19,
+     58275987607180
+    ]
+   ],
+   "vae_s": 4.708700693,
+   "postprocess_s": 0.008569915,
+   "cond_shape": [
+    1,
+    171,
+    4096
+   ],
+   "cond_pos_mean": 0.09718061983585358,
+   "cond_pos_std": 11.00864028930664,
+   "total_gen_s": 380.747986805,
+   "png_save_s": 0.410059191,
+   "png": "results/e2e/images/rm1328_ov_P3_s20260929_i1.png",
+   "img_sha16": "2da390235e670d42",
+   "total_save_inclusive_s": 381.200145079,
+   "gtt_free_gib_after": 40.86,
+   "cuda_peak_alloc_gib": 48.73,
+   "windows": {
+    "enc": {
+     "gpu_busy_pct": {
+      "mean": 36.0,
+      "max": 48,
+      "n": 18
+     },
+     "proc_cpu_pct": {
+      "mean": 1568.49,
+      "max": 1705.7,
+      "n": 18
+     },
+     "gtt_used_bytes": {
+      "mean": 53846867968.0,
+      "max": 53846867968,
+      "n": 18
+     }
+    },
+    "dit": {
+     "gpu_busy_pct": {
+      "mean": 99.79,
+      "max": 100,
+      "n": 6929
+     },
+     "proc_cpu_pct": {
+      "mean": 211.56,
+      "max": 1373.8,
+      "n": 6929
+     },
+     "gtt_used_bytes": {
+      "mean": 16614746243.53,
+      "max": 53679095808,
+      "n": 6929
+     }
+    }
+   }
+  }
+ ],
+ "marks_ns": {
+  "start": 57514115680845,
+  "load_start": 57514116651540,
+  "load_end": 57525362560740,
+  "img0_P3_s20260929_i0_start": 57525377153473,
+  "img0_dit_start": 57528593780860,
+  "img0_dit_end": 57904117222479,
+  "img1_P3_s20260929_i1_start": 57909109783129,
+  "img1_dit_start": 57910115541350,
+  "img1_dit_end": 58285149055906,
+  "stop": 58290314017905
+ },
+ "monitor_summary": {
+  "whole_run": {
+   "proc_cpu_pct": {
+    "mean": 226.23,
+    "max": 3140.5,
+    "n": 14302
+   },
+   "sys_cpu_pct": {
+    "mean": 11.38,
+    "max": 100.0,
+    "n": 14302
+   },
+   "gpu_busy_pct": {
+    "mean": 98.04,
+    "max": 100,
+    "n": 14302
+   },
+   "gtt_used_bytes": {
+    "mean": 16288859982.44,
+    "max": 53846867968,
+    "n": 14302
+   },
+   "rss_bytes": {
+    "mean": 18275349611.25,
+    "max": 32306954240,
+    "n": 14302
+   },
+   "sys_available_bytes": {
+    "mean": 71907432554.54,
+    "max": 97082699776,
+    "n": 14302
+   },
+   "gpu_temp_c": {
+    "mean": 68.7,
+    "max": 72.0,
+    "n": 14302
+   },
+   "gpu_power_w": {
+    "mean": 52.5,
+    "max": 54.06,
+    "n": 14302
+   },
+   "cpu_temp_c": {
+    "mean": 70.3,
+    "max": 100.38,
+    "n": 14302
+   },
+   "cpu_freq_mhz": {
+    "mean": 1917.35,
+    "max": 4256.0,
+    "n": 14302
+   }
+  },
+  "n_samples": 14302
+ },
+ "epoch_at_t0": 1790710448.6614478,
+ "first_image_ready_epoch": 1790710843.209094,
+ "mon_t0_epoch": 1790710448.6614478
+}

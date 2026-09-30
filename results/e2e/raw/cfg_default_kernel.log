@@ -1,0 +1,14 @@
+[W930 03:47:11.522826173 sdp_utils.cpp:323] Warning: Flash Efficient attention on Current AMD GPU is still experimental. Enable it with TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL=1. (function operator())
+[cfg_default_kernel P3_s20260929_i0] enc=1.593s dit=209.29s vae=2.68s total=215.25s peak=34.38GiB
+[cfg_default_kernel P3_s20260929_i1] enc=0.988s dit=208.08s vae=2.35s total=211.42s peak=34.38GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/matrix/cfg_default_kernel.json (2 images, wall=438.7s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x72288b507ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x72288b507ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

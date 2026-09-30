@@ -1,0 +1,37 @@
+[
+ {
+  "prompt": "Q02",
+  "n": 5,
+  "ssim_med": 0.9795,
+  "ssim_min": 0.936,
+  "psnr_med": 34.59
+ },
+ {
+  "prompt": "Q05",
+  "n": 5,
+  "ssim_med": 0.9783,
+  "ssim_min": 0.8913,
+  "psnr_med": 29.94
+ },
+ {
+  "prompt": "Q10",
+  "n": 5,
+  "ssim_med": 0.9195,
+  "ssim_min": 0.879,
+  "psnr_med": 23.35
+ },
+ {
+  "prompt": "Q18",
+  "n": 5,
+  "ssim_med": 0.8735,
+  "ssim_min": 0.8031,
+  "psnr_med": 23.46
+ },
+ {
+  "prompt": "Q23",
+  "n": 5,
+  "ssim_med": 0.9165,
+  "ssim_min": 0.8797,
+  "psnr_med": 26.81
+ }
+]

@@ -1,0 +1,23 @@
+{
+ "prompt": null,
+ "seed": 7,
+ "route": "ov",
+ "dq": null,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 4,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "encode_s": 0.91769576,
+ "dit_s": 40.309231099,
+ "vae_s": 2.574421384,
+ "postprocess_s": null,
+ "png_save_s": 0.16818605,
+ "total_gen_s": 46.475036024,
+ "total_save_inclusive_s": 46.681903206,
+ "img_sha16": "b55c5789db199006",
+ "tag": "smoke_ov"
+}

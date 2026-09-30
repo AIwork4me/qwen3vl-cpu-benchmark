@@ -1,0 +1,97 @@
+{
+ "7": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_bf16.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "8": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_bf16.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "9": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "10": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "8",
+    0
+   ],
+   "prompt": "A wide-angle editorial photograph of a modern robotics laboratory: in the foreground, a silver humanoid robot with exactly two blue LED eyes holds a red coffee mug in its left hand and a green circuit board in its right hand; behind it, three monitors on a dark wooden desk show, from left to right, a line graph titled 'Qwen3-VL Throughput', a Python code editor with syntax highlighting, and a photograph of a white Maltese dog; two ceiling-mounted studio softboxes light the scene from above, while a floor-to-ceiling window in the background reveals a night city skyline with neon signs reading 'AI EXPO 2026'; shallow depth of field, 35mm lens, photorealistic, high dynamic range, sharp focus on the robot, bokeh background.",
+   "negative_prompt": " ",
+   "resolution": 1024
+  }
+ },
+ "11": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "8",
+    0
+   ],
+   "prompt": " ",
+   "negative_prompt": " ",
+   "resolution": 1024
+  }
+ },
+ "3": {
+  "class_type": "KSampler",
+  "inputs": {
+   "seed": 20260929,
+   "steps": 20,
+   "cfg": 2.5,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0,
+   "model": [
+    "7",
+    0
+   ],
+   "positive": [
+    "10",
+    0
+   ],
+   "negative": [
+    "11",
+    0
+   ],
+   "latent_image": [
+    "10",
+    2
+   ]
+  }
+ },
+ "4": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "3",
+    0
+   ],
+   "vae": [
+    "9",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "4",
+    0
+   ],
+   "filename_prefix": "server_P3"
+  }
+ }
+}

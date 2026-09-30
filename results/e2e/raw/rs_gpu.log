@@ -1,0 +1,42 @@
+[warmup] 2-step throwaway pass done
+[rs_gpu Q02_s11_i0] enc=1.214s dit=136.39s vae=2.40s total=140.00s peak=50.73GiB
+[rs_gpu Q02_s22_i0] enc=1.326s dit=136.42s vae=2.44s total=140.19s peak=50.73GiB
+[rs_gpu Q02_s33_i0] enc=1.316s dit=136.90s vae=2.15s total=140.38s peak=50.73GiB
+[rs_gpu Q02_s44_i0] enc=1.263s dit=137.84s vae=2.10s total=141.21s peak=50.73GiB
+[rs_gpu Q02_s55_i0] enc=1.323s dit=139.60s vae=2.13s total=143.05s peak=50.73GiB
+[rs_gpu Q05_s11_i0] enc=1.372s dit=141.87s vae=2.18s total=145.44s peak=50.73GiB
+[rs_gpu Q05_s22_i0] enc=1.345s dit=142.96s vae=2.23s total=146.55s peak=50.73GiB
+[rs_gpu Q05_s33_i0] enc=1.371s dit=144.59s vae=2.22s total=148.20s peak=50.73GiB
+[rs_gpu Q05_s44_i0] enc=1.402s dit=146.48s vae=2.26s total=150.15s peak=50.73GiB
+[rs_gpu Q05_s55_i0] enc=1.372s dit=146.91s vae=2.36s total=150.65s peak=50.73GiB
+[rs_gpu Q10_s11_i0] enc=1.999s dit=147.34s vae=2.24s total=151.59s peak=50.73GiB
+[rs_gpu Q10_s22_i0] enc=1.944s dit=147.92s vae=2.28s total=152.15s peak=50.73GiB
+[rs_gpu Q10_s33_i0] enc=1.961s dit=148.76s vae=2.44s total=153.17s peak=50.73GiB
+[rs_gpu Q10_s44_i0] enc=1.973s dit=149.67s vae=2.45s total=154.10s peak=50.73GiB
+[rs_gpu Q10_s55_i0] enc=2.119s dit=150.49s vae=2.28s total=154.90s peak=50.73GiB
+[rs_gpu Q18_s11_i0] enc=1.387s dit=150.54s vae=2.24s total=154.18s peak=50.73GiB
+[rs_gpu Q18_s22_i0] enc=1.421s dit=150.54s vae=2.27s total=154.24s peak=50.73GiB
+[rs_gpu Q18_s33_i0] enc=1.418s dit=149.79s vae=2.24s total=153.46s peak=50.73GiB
+[rs_gpu Q18_s44_i0] enc=1.411s dit=150.52s vae=2.23s total=154.17s peak=50.73GiB
+[rs_gpu Q18_s55_i0] enc=1.358s dit=150.77s vae=2.32s total=154.45s peak=50.73GiB
+[rs_gpu Q23_s11_i0] enc=2.233s dit=151.33s vae=2.37s total=155.95s peak=50.73GiB
+[rs_gpu Q23_s22_i0] enc=2.243s dit=151.31s vae=2.30s total=155.87s peak=50.73GiB
+[rs_gpu Q23_s33_i0] enc=2.195s dit=151.55s vae=2.31s total=156.06s peak=50.73GiB
+[rs_gpu Q23_s44_i0] enc=2.141s dit=151.83s vae=2.30s total=156.28s peak=50.73GiB
+[rs_gpu Q23_s55_i0] enc=2.192s dit=151.78s vae=2.30s total=156.28s peak=50.73GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/quality/rs_gpu.json (25 images, wall=3809.1s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x7ed1e9503f60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x7ed1e9503f60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x7ed1e9503f60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

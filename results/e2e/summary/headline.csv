@@ -1,0 +1,4 @@
+route,n_proc,cold_ttfi_median_s,warm_e2e_median_of_proc_medians_s,warm_e2e_ci95,warm_enc_median_s,warm_dit_median_s,warm_vae_median_s
+gpu,3,176.11,154.17,"(144.532, 154.386)",2.618,149.05,2.43
+native,1,255.03,248.87,,99.436,148.84,2.22
+ov_dq32,3,168.82,151.25,"(148.617, 152.517)",0.993,147.95,2.25

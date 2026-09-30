@@ -1,0 +1,31 @@
+{
+ "prompt": "Still life with exactly seven objects arranged on a marble counter: a brass clock, a glass of orange juice, two green apples, a small cactus in a terracotta pot, a folded blue napkin, and a pair of reading glasses, north-window light, photorealistic.",
+ "prompt_id": "Q10",
+ "seed": 110,
+ "route": "ov",
+ "dq": 128,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 0.514591571,
+ "dit_s": 149.182680619,
+ "vae_s": 2.354245634,
+ "postprocess_s": 0.00449388,
+ "png_save_s": 0.313748769,
+ "total_gen_s": 152.053091653,
+ "total_save_inclusive_s": 152.407659136,
+ "tag": "q_dq128"
+}

@@ -1,0 +1,42 @@
+[warmup] 2-step throwaway pass done
+[q_dq32 Q01_s101_i0] enc=0.684s dit=145.23s vae=2.67s total=148.59s peak=34.39GiB
+[q_dq32 Q02_s102_i0] enc=0.377s dit=146.18s vae=2.26s total=148.82s peak=34.39GiB
+[q_dq32 Q03_s103_i0] enc=0.480s dit=145.49s vae=2.29s total=148.26s peak=34.39GiB
+[q_dq32 Q04_s104_i0] enc=0.418s dit=145.47s vae=2.31s total=148.20s peak=34.39GiB
+[q_dq32 Q05_s105_i0] enc=0.444s dit=146.50s vae=2.23s total=149.18s peak=34.39GiB
+[q_dq32 Q06_s106_i0] enc=0.467s dit=146.29s vae=2.21s total=148.97s peak=34.39GiB
+[q_dq32 Q07_s107_i0] enc=0.555s dit=146.94s vae=2.20s total=149.70s peak=34.39GiB
+[q_dq32 Q08_s108_i0] enc=0.547s dit=147.32s vae=2.20s total=150.07s peak=34.39GiB
+[q_dq32 Q09_s109_i0] enc=0.547s dit=147.66s vae=2.23s total=150.43s peak=34.39GiB
+[q_dq32 Q10_s110_i0] enc=0.545s dit=147.18s vae=2.22s total=149.95s peak=34.39GiB
+[q_dq32 Q11_s111_i0] enc=0.416s dit=147.35s vae=2.25s total=150.02s peak=34.39GiB
+[q_dq32 Q12_s112_i0] enc=0.410s dit=148.19s vae=2.21s total=150.82s peak=34.39GiB
+[q_dq32 Q13_s113_i0] enc=0.452s dit=148.72s vae=2.25s total=151.42s peak=34.39GiB
+[q_dq32 Q14_s114_i0] enc=0.450s dit=147.50s vae=2.21s total=150.16s peak=34.39GiB
+[q_dq32 Q15_s115_i0] enc=0.433s dit=148.08s vae=2.27s total=150.79s peak=34.39GiB
+[q_dq32 Q16_s116_i0] enc=0.391s dit=148.00s vae=2.22s total=150.61s peak=34.39GiB
+[q_dq32 Q17_s117_i0] enc=0.408s dit=146.91s vae=2.20s total=149.52s peak=34.39GiB
+[q_dq32 Q18_s118_i0] enc=0.438s dit=147.15s vae=2.29s total=149.88s peak=34.39GiB
+[q_dq32 Q19_s119_i0] enc=0.429s dit=147.26s vae=2.23s total=149.92s peak=34.39GiB
+[q_dq32 Q20_s120_i0] enc=0.519s dit=148.02s vae=2.24s total=150.79s peak=34.39GiB
+[q_dq32 Q21_s121_i0] enc=0.317s dit=147.31s vae=2.23s total=149.85s peak=34.39GiB
+[q_dq32 Q22_s122_i0] enc=0.331s dit=147.44s vae=2.24s total=150.01s peak=34.39GiB
+[q_dq32 Q23_s123_i0] enc=0.701s dit=148.44s vae=2.19s total=151.33s peak=34.39GiB
+[q_dq32 Q24_s124_i0] enc=0.563s dit=147.86s vae=2.23s total=150.66s peak=34.39GiB
+[q_dq32 Q25_s125_i0] enc=0.430s dit=147.14s vae=2.23s total=149.80s peak=34.39GiB
+[q_dq32 Q26_s126_i0] enc=0.563s dit=148.16s vae=2.28s total=151.01s peak=34.39GiB
+[q_dq32 Q27_s127_i0] enc=0.513s dit=148.22s vae=2.24s total=150.97s peak=34.39GiB
+[q_dq32 Q28_s128_i0] enc=0.510s dit=148.60s vae=2.23s total=151.34s peak=34.39GiB
+[q_dq32 Q29_s129_i0] enc=0.610s dit=148.51s vae=2.23s total=151.35s peak=34.39GiB
+[q_dq32 Q30_s130_i0] enc=0.560s dit=148.30s vae=2.23s total=151.10s peak=34.39GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/quality/q_dq32.json (30 images, wall=4549.9s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x73c46cffff60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x73c46cffff60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

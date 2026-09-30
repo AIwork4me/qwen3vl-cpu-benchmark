@@ -1,0 +1,7 @@
+  [wall] ab_p1_gpu: 592.1s
+  [wall] ab_p1_ov: 614.1s
+  [wall] ab_p2_ov: 625.2s
+  [wall] ab_p2_gpu: 644.9s
+  [wall] ab_p3_gpu: 644.1s
+  [wall] ab_p3_ov: 631.2s
+[suite 00:48:37] stage core_ab done

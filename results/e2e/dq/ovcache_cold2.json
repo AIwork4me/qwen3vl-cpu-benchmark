@@ -1,0 +1,220 @@
+{
+ "meta": {
+  "tag": "ovcache_cold2",
+  "group": "dq",
+  "route": "ov",
+  "timestamp": "2026-09-29T20:27:51.398948+00:00",
+  "torch": "2.12.0+rocm7.14.0",
+  "hip": "7.14.60850",
+  "gpu": "AMD Radeon 8060S Graphics",
+  "gtt_free_gib_start": 90.89,
+  "gtt_total_gib": 100.0,
+  "vram_state": "NORMAL_VRAM",
+  "te_device_selected": "cuda:0",
+  "dit": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1-full/diffusion_models/qwen_image_2.1_bf16.safetensors",
+  "vae": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen-image-2.1-full/vae/qwen_image_2.1_vae_bf16.safetensors",
+  "dit_sha16": "89f4158d066cc339",
+  "steps": 4,
+  "cfg": 2.5,
+  "sampler": "euler",
+  "scheduler": "simple",
+  "width": 1024,
+  "height": 1024,
+  "prompts": "P1",
+  "seeds": "7",
+  "iters": 1,
+  "pipelined": false,
+  "contend_text": false,
+  "comfyui_version": "0.37.0",
+  "aotriton": "1",
+  "cpu_governor": "powersave",
+  "cpu_epp": "balance_performance",
+  "vae_sha16": "bb21f7473051e1ac",
+  "ov": {
+   "openvino": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+   "dq_requested": 32,
+   "dq_effective": "32",
+   "compile_read_s": 0.14,
+   "compile_s": 0.689,
+   "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8"
+  },
+  "te_model": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8"
+ },
+ "loads": {
+  "dit_read_s": 2.074915096,
+  "vae_read_s": 1.103151046,
+  "ov_total_s": 1.502741391,
+  "ov_compile_read_s": 0.14015659,
+  "ov_compile_s": 0.688899291,
+  "total_load_s": 4.684767688
+ },
+ "images": [
+  {
+   "idx": 0,
+   "label": "P1_s7_i0",
+   "prompt_id": "P1",
+   "seed": 7,
+   "iter": 0,
+   "encode_s": 2.150863353,
+   "encode_pos_s": 1.978097421,
+   "encode_neg_s": 0.161065116,
+   "n_tokens_full": 39,
+   "n_tokens_kept": 25,
+   "cond_prep_s": 0.000142397,
+   "cond_pos_shape": [
+    1,
+    25,
+    4096
+   ],
+   "ov_ids_pos": [
+    151644,
+    8948,
+    198,
+    1092,
+    30782,
+    408,
+    323,
+    23643
+   ],
+   "dit_s": 30.236897678,
+   "dit_steps": [
+    [
+     0,
+     60749978845328
+    ],
+    [
+     1,
+     60757398500015
+    ],
+    [
+     2,
+     60764782013782
+    ],
+    [
+     3,
+     60772129645595
+    ]
+   ],
+   "dit_preload_in_window_s": 1.837889481,
+   "vae_s": 3.621312516,
+   "postprocess_s": 0.009848983,
+   "cond_shape": [
+    1,
+    25,
+    4096
+   ],
+   "cond_pos_mean": 0.13168394565582275,
+   "cond_pos_std": 12.05274486541748,
+   "total_gen_s": 37.850650811,
+   "png_save_s": 0.230549467,
+   "png": "results/e2e/images/ovcache_cold2_P1_s7_i0.png",
+   "img_sha16": "35622fa574f8d00b",
+   "total_save_inclusive_s": 38.122741774,
+   "gtt_free_gib_after": 55.53,
+   "cuda_peak_alloc_gib": 34.39,
+   "windows": {
+    "enc": {
+     "gpu_busy_pct": {
+      "mean": 13.28,
+      "max": 25,
+      "n": 71
+     },
+     "proc_cpu_pct": {
+      "mean": 611.39,
+      "max": 1724.4,
+      "n": 71
+     },
+     "gtt_used_bytes": {
+      "mean": 3736340970.37,
+      "max": 14503587840,
+      "n": 71
+     }
+    },
+    "dit": {
+     "gpu_busy_pct": {
+      "mean": 95.92,
+      "max": 100,
+      "n": 555
+     },
+     "proc_cpu_pct": {
+      "mean": 217.98,
+      "max": 1248.8,
+      "n": 555
+     },
+     "gtt_used_bytes": {
+      "mean": 15435216803.75,
+      "max": 15450734592,
+      "n": 555
+     }
+    }
+   }
+  }
+ ],
+ "marks_ns": {
+  "start": 60736852561763,
+  "load_start": 60736853793262,
+  "load_end": 60741538560950,
+  "img0_P1_s7_i0_start": 60741556263297,
+  "img0_dit_start": 60745548671443,
+  "img0_dit_end": 60775785589709,
+  "stop": 60779682391428
+ },
+ "monitor_summary": {
+  "whole_run": {
+   "proc_cpu_pct": {
+    "mean": 443.66,
+    "max": 3134.4,
+    "n": 768
+   },
+   "sys_cpu_pct": {
+    "mean": 18.75,
+    "max": 100.0,
+    "n": 768
+   },
+   "gpu_busy_pct": {
+    "mean": 78.56,
+    "max": 100,
+    "n": 768
+   },
+   "gtt_used_bytes": {
+    "mean": 14012337733.33,
+    "max": 37922263040,
+    "n": 768
+   },
+   "rss_bytes": {
+    "mean": 18498098469.33,
+    "max": 32103960576,
+    "n": 768
+   },
+   "sys_available_bytes": {
+    "mean": 72848394293.33,
+    "max": 96906289152,
+    "n": 768
+   },
+   "gpu_temp_c": {
+    "mean": 66.35,
+    "max": 71.0,
+    "n": 768
+   },
+   "gpu_power_w": {
+    "mean": 51.99,
+    "max": 54.03,
+    "n": 768
+   },
+   "cpu_temp_c": {
+    "mean": 76.3,
+    "max": 98.62,
+    "n": 768
+   },
+   "cpu_freq_mhz": {
+    "mean": 2238.71,
+    "max": 4273.0,
+    "n": 768
+   }
+  },
+  "n_samples": 768
+ },
+ "epoch_at_t0": 1790713671.3983283,
+ "first_image_ready_epoch": 1790713713.9526806,
+ "mon_t0_epoch": 1790713671.3983283
+}

@@ -1,0 +1,43 @@
+{
+ "P1": {
+  "prompt_id": "a85cee42-9b43-4895-9e00-401415d1eaae",
+  "success": true,
+  "wall_s": 150.51,
+  "images": [
+   {
+    "filename": "server_P1_00001_.png",
+    "subfolder": "",
+    "type": "output"
+   }
+  ]
+ },
+ "P2": {
+  "prompt_id": "67524679-d2bf-4a0f-9d1c-09bf07f9b1f6",
+  "success": true,
+  "wall_s": 142.13,
+  "images": [
+   {
+    "filename": "server_P2_00001_.png",
+    "subfolder": "",
+    "type": "output"
+   }
+  ]
+ },
+ "P3": {
+  "prompt_id": "c2ee2aab-c832-4c09-8bd0-fed8c2ba04ee",
+  "success": true,
+  "wall_s": 142.13,
+  "images": [
+   {
+    "filename": "server_P3_00001_.png",
+    "subfolder": "",
+    "type": "output"
+   }
+  ]
+ },
+ "_server_prompt_exec_s": [
+  150.09,
+  140.6,
+  141.58
+ ]
+}

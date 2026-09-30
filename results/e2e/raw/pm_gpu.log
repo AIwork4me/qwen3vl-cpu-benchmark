@@ -1,0 +1,26 @@
+[pm_gpu P1_s20260929_i0] enc=1.770s dit=152.92s vae=2.90s total=159.70s peak=50.73GiB
+[pm_gpu P1_s20260929_i1] enc=1.351s dit=151.44s vae=2.38s total=155.18s peak=50.73GiB
+[pm_gpu P2_s20260929_i0] enc=2.027s dit=150.99s vae=2.28s total=155.31s peak=50.73GiB
+[pm_gpu P2_s20260929_i1] enc=2.003s dit=149.94s vae=2.23s total=154.18s peak=50.73GiB
+[pm_gpu P3_s20260929_i0] enc=2.684s dit=149.86s vae=2.24s total=154.79s peak=50.73GiB
+[pm_gpu P3_s20260929_i1] enc=2.691s dit=150.14s vae=2.24s total=155.07s peak=50.73GiB
+[pm_gpu P4_s20260929_i0] enc=1.273s dit=149.02s vae=2.19s total=152.49s peak=50.73GiB
+[pm_gpu P4_s20260929_i1] enc=1.296s dit=149.02s vae=2.23s total=152.56s peak=50.73GiB
+[pm_gpu P5_s20260929_i0] enc=4.009s dit=151.01s vae=2.22s total=157.24s peak=50.73GiB
+[pm_gpu P5_s20260929_i1] enc=4.142s dit=150.66s vae=2.25s total=157.06s peak=50.73GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/matrix/pm_gpu.json (10 images, wall=1571.3s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x740b78507ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x740b78507ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x740b78507ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

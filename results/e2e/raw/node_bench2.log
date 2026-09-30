@@ -1,0 +1,5 @@
+[server] ready
+[gen0] success=True wall=154.5s
+[gen1] success=True wall=142.1s
+[gen2] success=True wall=142.1s
+[done] {'gen0': {'success': True, 'wall_s': 154.53}, 'gen1': {'success': True, 'wall_s': 142.14}, 'gen2': {'success': True, 'wall_s': 142.13}, '_server_prompt_exec_s': [154.12, 140.88, 141.07]}

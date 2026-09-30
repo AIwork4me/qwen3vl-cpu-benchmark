@@ -1,0 +1,31 @@
+{
+ "prompt": "A train compartment scene: an old man doing a crossword, a young woman with headphones watching the rain streak past, a soldier's kit bag on the rack, condensation on the glass, English countryside blurring by, warm interior light versus cold exterior, cinematic photorealism, medium shot.",
+ "prompt_id": "Q30",
+ "seed": 130,
+ "route": "ov",
+ "dq": 32,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 0.560231289,
+ "dit_s": 148.301198531,
+ "vae_s": 2.232977534,
+ "postprocess_s": 0.003746937,
+ "png_save_s": 0.318108267,
+ "total_gen_s": 151.095979276,
+ "total_save_inclusive_s": 151.436958432,
+ "tag": "q_dq32"
+}

@@ -1,0 +1,14 @@
+[warmup] 4-step throwaway pass done
+[kn20_aot P3_s20260929_i0] enc=1.176s dit=165.34s vae=3.53s total=170.05s peak=34.39GiB
+[kn20_aot P3_s20260929_i1] enc=1.414s dit=151.10s vae=3.71s total=156.24s peak=34.39GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/matrix/kn20_aot.json (2 images, wall=383.3s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x754e9ef9ff60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x754e9ef9ff60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

@@ -1,0 +1,23 @@
+{
+ "prompt": null,
+ "seed": 7,
+ "route": "gpu",
+ "dq": null,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 4,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "encode_s": 1.260422738,
+ "dit_s": 27.354527163,
+ "vae_s": 2.895244318,
+ "postprocess_s": null,
+ "png_save_s": 0.19573205,
+ "total_gen_s": 31.530116996,
+ "total_save_inclusive_s": 31.758051565,
+ "img_sha16": "ad919bf47c03556b",
+ "tag": "smoke_gpu"
+}

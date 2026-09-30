@@ -1,0 +1,32 @@
+{
+ "prompt": "A red cube on white sand.",
+ "prompt_id": "P4",
+ "seed": 20260929,
+ "route": "ov",
+ "dq": null,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 5.174773072,
+ "dit_s": 166.930329058,
+ "vae_s": 8.206573517,
+ "postprocess_s": 0.004544563,
+ "png_save_s": 0.305554642,
+ "total_gen_s": 175.138244355,
+ "total_save_inclusive_s": 175.476253636,
+ "tag": "pipe_ov10",
+ "img_sha16": "e903448657dfba3a"
+}

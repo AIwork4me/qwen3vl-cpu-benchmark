@@ -1,0 +1,32 @@
+{
+ "prompt": "An ultra-detailed panoramic editorial photograph of a sprawling neon-lit cyberpunk night market set inside a converted Victorian train station: in the immediate foreground, a young woman in a translucent rain-poncho with glowing cyan fiber-optic trim holds a steaming bowl of ramen topped with a soft-boiled egg, exactly two chopsticks, and three sheets of nori; to her left, a robotic street vendor with brass gears and four articulated arms juggles six skewers of grilled squid over a blue plasma grill; behind them, a row of nine hanging paper lanterns in alternating vermilion and jade green illuminates handwritten kanji signs advertising fake noodle prices; the station's original wrought-iron ribs are wrapped in holographic advertisements that cycle between a retro pixel-art cat, a rotating geodesic automobile, and scrolling stock tickers; on the mezzanine balcony above, a five-piece band with laser harps and an analog synthesizer plays to a crowd of commuters, cyborgs, and at least two cats wearing tiny headphones; rain falls through the broken glass ceiling in visible silver shafts, pooling on the wet platform tiles where reflections double every light source; shot on 85mm lens at f/1.8, cinematic color grade with teal shadows and amber highlights, volumetric fog, razor-sharp focus on the woman's face, every background element still legible, photorealistic, 8k detail.",
+ "prompt_id": "P5",
+ "seed": 20260929,
+ "route": "ov",
+ "dq": null,
+ "resolution": [
+  1024,
+  1024
+ ],
+ "steps": 20,
+ "cfg": 2.5,
+ "sampler": "euler",
+ "scheduler": "simple",
+ "negative": " ",
+ "dit_sha16": "89f4158d066cc339",
+ "vae_sha16": "bb21f7473051e1ac",
+ "te_sha16": null,
+ "model_dir": "/home/amd/Desktop/qwen3vl-cpu-benchmark/models/qwen3vl-openvino-int8",
+ "comfyui_version": "0.37.0",
+ "torch": "2.12.0+rocm7.14.0",
+ "aotriton": "1",
+ "encode_s": 1.570594335,
+ "dit_s": 150.688063768,
+ "vae_s": 2.228866383,
+ "postprocess_s": 0.006607812,
+ "png_save_s": 0.304421503,
+ "total_gen_s": 154.489342108,
+ "total_save_inclusive_s": 154.826681652,
+ "tag": "cont_ov",
+ "img_sha16": "3dc951991ad4e3bc"
+}

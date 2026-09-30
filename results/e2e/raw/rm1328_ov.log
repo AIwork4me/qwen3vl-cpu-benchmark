@@ -1,0 +1,13 @@
+[rm1328_ov P3_s20260929_i0] enc=1.619s dit=375.52s vae=4.55s total=383.29s peak=48.73GiB
+[rm1328_ov P3_s20260929_i1] enc=0.996s dit=375.03s vae=4.71s total=380.75s peak=48.73GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/matrix/rm1328_ov.json (2 images, wall=776.3s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x70f881c03ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x70f881c03ec0>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'

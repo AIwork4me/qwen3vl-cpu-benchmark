@@ -1,0 +1,15 @@
+[ab_p1_ov P3_s20260929_i0] enc=2.897s dit=142.44s vae=3.47s total=150.48s peak=34.39GiB
+[ab_p1_ov P3_s20260929_i1] enc=1.037s dit=143.72s vae=2.43s total=147.19s peak=34.39GiB
+[ab_p1_ov P3_s20260929_i2] enc=0.962s dit=145.44s vae=2.21s total=148.62s peak=34.39GiB
+[ab_p1_ov P3_s20260929_i3] enc=0.986s dit=146.21s vae=2.21s total=149.41s peak=34.39GiB
+[saved] /home/amd/Desktop/qwen3vl-cpu-benchmark/results/e2e/ab/ab_p1_ov.json (4 images, wall=608.3s)
+Exception ignored in: <function ModelPatcher.__del__ at 0x7e0312b07f60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
+Exception ignored in: <function ModelPatcher.__del__ at 0x7e0312b07f60>
+Traceback (most recent call last):
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1750, in __del__
+  File "/home/amd/Desktop/qwen3vl-cpu-benchmark/ComfyUI/comfy/model_patcher.py", line 1303, in detach
+AttributeError: 'NoneType' object has no attribute 'ON_DETACH'
