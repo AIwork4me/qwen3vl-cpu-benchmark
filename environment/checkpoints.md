@@ -34,6 +34,8 @@
   RSS 7.587 vs 15.142 GiB；cosine 范围与模型大小逐格一致。
 - 可比性边界诚实：standalone 标 NOT DIRECTLY COMPARABLE、OpenVINO True INT8 GEMM 标
   UNKNOWN（未做内部 dump）、量化方案注明"非 W8A8"。
+  （后续已解决：root-cause 轮证实动态量化 int8/VNNI dot 执行，见 environment/root_cause_checkpoints.md
+  与 report/OPENVINO_ZEN5_ROOT_CAUSE.md；本轮检查点保持原文。）
 - OpenVINO 设备证据：execution_devices=["CPU"]、INFERENCE_NUM_THREADS=16、NUM_STREAMS=1。
 - 文件清单完整无缺；runtime_path.md 分类 A2×5 + A1×3 与 JSON meta 一致。
 - 次要备注（不影响判定）：§1 加速比按中位数精确为 69.4×/36.5×/22.4×，报告取保守值 22–68×。

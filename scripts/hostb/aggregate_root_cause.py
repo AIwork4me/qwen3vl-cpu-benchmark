@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Frozen HOST-B snapshot — paths assume this file lives at scripts/<name>;
+# copy there (or adjust ROOT) before running.
 """Aggregate the ISA/DQ matrix + profiling evidence into the root-cause tables.
 
 Inputs (all produced by investigate_openvino_runtime.py / run_openvino_isa_matrix.sh):

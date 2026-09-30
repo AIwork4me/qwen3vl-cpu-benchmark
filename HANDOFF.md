@@ -1,5 +1,15 @@
 # 交接文档 — Qwen-Image 2.1 端到端 A/B 验证（未完成部分）
 
+> **[存档 2026-09-30]** 本文写于 e2e 实验开始前，仅供历史参考。Step 1–5 已全部完成并经
+> PR #4 合入 main（最终报告 `report/QWEN_IMAGE_E2E_HYBRID.md`；验收记录
+> `environment/e2e_checkpoints.md`，6 道审计 + 20 点终审 + 用户盲评全 PASS）。
+> Step 6（ComfyUI 上游提案草稿）未执行。本文提到的三个工作区脚本
+> `scripts/bench_e2e_qwen_image21.py`、`scripts/run_e2e_ab.sh`（已删除）与
+> `scripts/prep_e2e_cond.py`（保留为独立校验工具）在 Gate-1 被
+> `scripts/e2e_pipeline.py` + `scripts/run_e2e_suite.sh` + `scripts/ov_encoder.py` 取代；
+> 实际报告名为 `QWEN_IMAGE_E2E_HYBRID.md`、分支为 `experiment/qwen-image-e2e-hybrid`。
+> 以下原文未改动。
+
 > 写于 2026-09-29 晚，因用户指示停止。前序工作（root-cause investigation）**已完成并合入 main**（PR #1，merge commit `3ee1388`）；本文档只覆盖**进行中的端到端 A/B 计划**的剩余部分。
 > 交接原则沿用用户要求：**做一步 → 独立 subagent 核验 → PASS 后再下一步**。
 
@@ -15,6 +25,9 @@ Step 0（PR 合并）✅ 完成；Step 1（DiT 下载）🟡 后台进行中（7
   perf Level D 因 `perf_event_paranoid=4` 不可得）；VNNI 增量仅 1.23–1.47×；
   22–69× 主因是免反量化架构；**DQ=128 免费再快 11–21%**（cos ≥0.9959）——
   这是端到端 A/B 要验收的产品发现。
+  > [2026-09-30 更正] e2e 结论推翻本条："免费"只在编码器级成立——图像级 SSIM/CLIP
+  > 单调下降、每图仅省 ≤0.16 s，最终推荐 **DQ 32**（64 可接受，128 不推荐），见
+  > `report/QWEN_IMAGE_E2E_HYBRID.md` §DQ group / §Recommended architecture。
 - 报告：`report/OPENVINO_ZEN5_ROOT_CAUSE.md`（HOST A）/ `*.hostB.md`（HOST B）；
   核验记录 `environment/root_cause_checkpoints.md`；README 已更新（UNKNOWN→YES，保留历史；
   CPU util 1332% vs 1552–1572% 双窗口解释）。

@@ -179,6 +179,6 @@ det_test() {
 case "${1:-}" in
   core_ab|core_native|prompt_matrix|step_matrix|res_matrix|dit_kernel_note|\
   continuous|pipelined|contention|dq_matrix|ov_cache|quality|quality_dq_subset|repeated_seeds|det_test|kernel_note20) "$1" ;;
-  *) echo "stages: core_ab core_native prompt_matrix step_matrix res_matrix dit_kernel_note continuous pipelined contention dq_matrix ov_cache quality quality_dq_subset repeated_seeds"; exit 1 ;;
+  *) echo "stages: core_ab core_native prompt_matrix step_matrix res_matrix dit_kernel_note kernel_note20 continuous pipelined contention dq_matrix ov_cache det_test quality quality_dq_subset repeated_seeds"; exit 1 ;;
 esac
 echo "[suite $(date +%H:%M:%S)] stage $1 done"

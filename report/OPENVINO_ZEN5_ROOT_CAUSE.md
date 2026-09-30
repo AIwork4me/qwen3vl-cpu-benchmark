@@ -31,6 +31,10 @@ AVX512_VNNI**、贡献多少、0.187 s 的根本原因是什么。每个结论�
    设 0=纯 BF16 路径且 VNNI 指令完全消失）。
 4. 顺带发现：`DYNAMIC_QUANTIZATION_GROUP_SIZE=128` 比 32 默认值再快 **11–21%**
    （cosine 0.9959–0.9971，仍与 BF16 参考同阶），是免费的调优空间。
+   （后续更正 2026-09-30："免费"只在编码器级成立——e2e 轮实测 DQ128 带来图像级
+   SSIM/CLIP 单调下降、每图仅省 ≤0.16 s，最终推荐 **DQ 32**，见
+   report/QWEN_IMAGE_E2E_HYBRID.md「DQ group 0/32/64/128」与「Recommended
+   architecture」节；本条保留为编码器级历史记录。）
 
 ## What was known before this investigation
 
@@ -280,7 +284,8 @@ scripts/investigate_openvino_runtime.py run_openvino_isa_matrix.sh aggregate_roo
 - "VNNI 在此 workload 中实际执行"——建议写明证据层级：runtime dispatch + JIT 机器码 +
   反事实；perf 采样未获得（系统限制），不做指令级计数的宣称。
 - "DYNAMIC_QUANTIZATION_GROUP_SIZE=128 还能再快 11–21%（精度 cos≥0.9959）"——
-  本机本模型实测，别的模型需重测。
+  本机本模型实测，别的模型需重测。（e2e 轮后续更正：图像级有可测质量代价、
+  每图仅省 ≤0.16 s，产品默认推荐 DQ 32 —— 见 report/QWEN_IMAGE_E2E_HYBRID.md。）
 - 权重流量 4.1× 之差为字节对账推算；DRAM 带宽未实测。
 
 ### Do not claim（不能说）

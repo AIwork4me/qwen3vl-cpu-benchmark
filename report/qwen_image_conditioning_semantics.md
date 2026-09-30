@@ -63,3 +63,8 @@ class Qwen3VLClipModel(sd1_clip.SDClipModel):
 - ComfyUI P1 cond: shape [1, 25, 4096], dtype fp32, device cpu
 - token 计数（含模板）: P1=39, P2=81, P3=185；裁剪后: P1=25
 - 若 OpenVINO bridge 输出与 ComfyUI/BF16 参考的 cosine similarity ≈ 0.98+（同为 fp 精度），语义对齐成立
+- 【e2e 轮补充 2026-09-30】负向提示 `" "`（prevent_empty_text，qwen3vl.py:168）裁剪后
+  9 tokens；产品路径 `encode_from_tokens_scheduled` 无 hooks 时返回
+  `[[cond, {"pooled_output": pooled}]]`，bridge 注入 `[[cond, {}]]` 对该 DiT 功能等价
+  （只消费 tensor + attention_mask/reference_latents/image_slots 键）——实测锚点见
+  results/e2e/cond/identity.csv 与 report/QWEN_IMAGE_E2E_HYBRID.md「Conditioning correctness」。

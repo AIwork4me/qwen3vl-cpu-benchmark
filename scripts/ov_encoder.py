@@ -5,15 +5,16 @@ Runs inside .venv-comfy-rocm next to the ROCm torch DiT (openvino wheel is
 torch-independent). Tokenization uses ComfyUI's OWN QwenImage21Tokenizer
 (comfy.text_encoders.qwen_image21) — the exact product tokenizer object — so the
 token-id sequence fed to the OV IR is by construction the same one ComfyUI's
-native route uses (asserted per-call).
+native route uses (output shape asserted per call; token-level equality verified
+in results/e2e/cond/identity.csv).
 
 Graph patch (identical to the validated bench_openvino_bridge.py):
   - add_outputs(<node feeding final RMSNorm's pow>) -> layer-36 residual stream
     BEFORE final RMSNorm == ComfyUI layer_idx=-1, layer_norm_hidden_state=False
   - trim from the second <|im_start|> (151644) == encode_token_weights t2i trim
 
-encode(text) -> dict(np_hidden_trimmed [1,seq,4096] fp32, n_tokens_full,
-                     n_tokens_kept, latency_s)
+encode(text) -> dict(hidden [1,seq,4096] fp32, ids, n_tokens_full,
+                     n_tokens_kept, encode_s)
 """
 import json
 import os

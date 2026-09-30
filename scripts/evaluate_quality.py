@@ -4,7 +4,6 @@
 Inputs : results/e2e/images/q_<route>_<QID>_s<seed>_i0.png (+ sidecar .json)
           reference route = q_gpu (ComfyUI product path)
 Outputs: results/e2e/quality/quality_metrics.csv
-          results/e2e/quality/pairwise_vs_gpu.md
           results/e2e/quality/blind/ contact sheets (A/B/C/D anonymized)
 
 Metrics per (prompt, seed):
@@ -14,11 +13,12 @@ Metrics per (prompt, seed):
   B. prompt-image alignment: CLIP ViT-L/14 cos(text, image) — same evaluator
      for every route; reported per route (absolute) and delta vs gpu.
   C. pairwise image similarity: CLIP image-embedding cosine vs gpu image.
-  D. blind package: per prompt, 2x2 contact sheet with shuffled A/B/C/D labels,
+  D. blind package: per prompt, 2x2 contact sheet with one shuffled label per present
+     route (A–D on the Q01–Q12 four-route subset; A/B only for Q13–Q30),
      mapping stored in results/e2e/quality/blind/key.csv (labels randomized with
      a fixed seed; no subjective scores are invented here).
 
-Runs in .venv-openvino (torch cpu + transformers + scikit-image + PIL).
+Runs in .venv-comfy (torch 2.9.1+cpu + transformers + scikit-image + PIL).
 """
 import csv
 import glob

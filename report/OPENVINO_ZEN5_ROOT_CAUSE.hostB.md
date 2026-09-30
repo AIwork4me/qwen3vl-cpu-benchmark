@@ -175,7 +175,7 @@ possible, so no VNNI retired-instruction counting claim is made.
 
 ## ISA ablation (Phase 4)
 
-`results/openvino_isa/isa_matrix.csv` — 3 fresh processes each, 2 warm + 10
+`results/openvino_isa/isa_matrix_hostB.csv（注：未加 _hostB 后缀的 isa_matrix.csv 现为 HOST A 数据）` — 3 fresh processes each, 2 warm + 10
 measured iterations, P1/P2/P3, 16 pinned cores, LATENCY/1-stream. Warm p50
 median across processes (HOST B, seconds):
 
@@ -237,7 +237,7 @@ Answers to the task's five questions:
    (OV-bridge 0.9972–0.9985, ComfyUI A1 0.9978–0.9986, A2 0.9989–0.9993 vs
    BF16 reference), so DQ=128's accuracy cost is comparable to switching
    between already-accepted paths — but it is **not** numerically equivalent,
-   and DQ=64 offers a better speed/accuracy trade-off than DQ=128 if closer
+   and DQ=64 offers a better speed/accuracy trade-off than DQ=128 if closer (e2e round: DQ=32 recommended — see report/QWEN_IMAGE_E2E_HYBRID.md)
    numerics are required.
 
 ## Weight-compression effect (Phase 9 + 10)
@@ -325,6 +325,10 @@ path could theoretically do.
   dynamically quantized activations, u8 weights resident, and this path is
   1.37–1.47× faster than the bf16-decompressed alternative and 1.21–1.47×
   faster than an FP16-weights model; DQ=128 adds another 1.16–1.26× at
+  (Superseded 2026-09-30 by the e2e round: at image level DQ=128/64 measurably reduce
+  SSIM/CLIP similarity for 0.11–0.16 s per ~153 s image saved; recommended default is
+  **DQ=32** — see report/QWEN_IMAGE_E2E_HYBRID.md, Q7 answer. This item stands as the
+  encoder-level record.)
 cosine 0.998 (DQ=64 ≈1.2× at 0.999).
 - On HOST A (transfer): same wheel + byte-identical model + same ISA decision
   inputs + cosine-1.0 replica ⇒ the same dispatch decision; STRONG EVIDENCE,
@@ -389,7 +393,7 @@ taskset -c 0-15 .venv-openvino/bin/python scripts/investigate_openvino_runtime.p
 | `results/openvino_root_cause/host_b_model_sha256.txt` | model artifact hashes (match HOST A) |
 | `results/openvino_root_cause/backend_linkage.txt` | plugin/oneDNN/TBB linkage + hashes |
 | `results/openvino_root_cause/investigate_baseline_p*.json`, `profiling_P*_*.csv`, `runtime_model_*.xml` | baseline, per-node profiling, runtime graphs |
-| `results/openvino_isa/isa_matrix.csv` (+ `investigate_*_p*.json`, `*_p*.stdout`) | ISA/DQ matrix raw runs |
+| `results/openvino_isa/isa_matrix_hostB.csv（注：未加 _hostB 后缀的 isa_matrix.csv 现为 HOST A 数据）` (+ `investigate_*_p*.json`, `*_p*.stdout`) | ISA/DQ matrix raw runs |
 | `results/openvino_isa/jit_dump/` (local), `jit_vnni_hits*.txt/json`, `jit_instruction_summary*.txt` | JIT binaries + instruction census |
 | `results/openvino_isa/onednn_verbose_findings.md`, `onednn_*.log/stdout` | verbose capabilities + partial dispatch lines |
 | `results/openvino_isa/phase7_8_perf_unavailable.md` | perf unavailability record |

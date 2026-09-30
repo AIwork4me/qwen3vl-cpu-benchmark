@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Frozen HOST-B snapshot — paths assume this file lives at scripts/<name>;
+# copy there (or adjust ROOT) before running.
 """Parse oneDNN verbose logs (onednn:verb or dnnl_verbose format).
 
 oneDNN verbose lines look like:

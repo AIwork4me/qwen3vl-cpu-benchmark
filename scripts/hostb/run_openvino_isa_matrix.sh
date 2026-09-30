@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Frozen HOST-B snapshot — paths assume this file lives at scripts/<name>;
+# copy there (or adjust ROOT) before running.
 # ISA / dispatch / dynamic-quantization matrix for the OpenVINO Qwen3-VL INT8
 # conditioning workload (root-cause investigation, HOST B).
 #
