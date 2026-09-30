@@ -457,12 +457,29 @@ a real 1.39× DiT win and part of the recommended product configuration.
 - Warm E2E percentage is small at this operating point (DiT-dominated); at 40 steps it
   shrinks further (step-matrix data below)
 
-## Recommended architecture
+## Recommended architecture and configuration (Phase 39)
 
-Hybrid (CPU OpenVINO INT8 encoder + GPU DiT/VAE) — with DQ group chosen per the
-latency/quality matrix below. Rationale: strictly better on memory and cold start,
-equal-or-better warm latency, identical quality at DQ32, and the CPU encoder becomes a
-pipelining asset in continuous generation.
+**Recommended: Hybrid — OpenVINO INT8 Qwen3-VL encoder on the Zen 5 CPU with
+DYNAMIC_QUANTIZATION_GROUP_SIZE=32 (DQ 64 acceptable), Radeon GPU exclusively for
+DiT + VAE, TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL=1, warm OpenVINO cache.**
+
+Decision inputs (all measured):
+- **DQ 32 vs 64 vs 128**: encode 0.993 / 0.884 / 0.834 s — the 64/128 savings
+  (0.11–0.16 s per ~153 s image) are negligible, while conditioning cosine
+  (0.9985 / 0.9982 / 0.9971) and image similarity (SSIM med 0.9643 / 0.9617 / 0.9465 on
+  the shared subset) degrade monotonically. **DQ 32 is the best latency/quality
+  trade-off**; the data does not support preferring 128 (contrary to the encoder-only
+  round's "free speedup" framing — at e2e scale the speed is immaterial).
+- **Memory**: −16.46 GiB GTT, −9.2 GiB physical UMA vs the GPU-heavy route.
+- **Latency**: −7.3 s cold, −1.5–2% warm (growing with prompt length).
+- **Quality**: statistically indistinguishable prompt adherence (Δ −0.0006 med).
+- **Stability**: no thermal runaway; CPU temps higher but stable; deterministic
+  steady-state outputs.
+
+Productization path: the included ComfyUI custom node
+(`custom_nodes/qwen3vl_openvino_cpu`, Phase 40) exposes model_dir / cpu_threads /
+dq_group / cache_dir and outputs drop-in Qwen-Image 2.1 conditioning + latent; server
+benchmark results in the Custom-node section.
 
 ## What we can claim / What we cannot claim
 
