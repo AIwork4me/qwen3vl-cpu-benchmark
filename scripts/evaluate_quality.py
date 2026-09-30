@@ -115,9 +115,10 @@ def main():
     entries = {}
     for route in ROUTES:
         for f in sorted(glob.glob(os.path.join(IMG, f"{route}_Q*_i0.png"))):
-            base = os.path.basename(f)[:-7]  # strip _i0.png
-            qid = base.split("_s")[0].split("_", 1)[1]  # q_dq32_Q01 -> Q01
-            seed = base.split("_s")[-1]
+            base = os.path.basename(f)[:-7]          # e.g. q_dq32_Q01_s101
+            assert base.startswith(route + "_")
+            rest = base[len(route) + 1:]              # Q01_s101
+            qid, seed = rest.rsplit("_s", 1)
             entries.setdefault((qid, seed), {})[route] = f
 
     rows = []
@@ -161,7 +162,7 @@ def main():
             sheet.paste(im, (x, y))
             d.text((x + 8, y + 6), LBL[slot], fill="red")
         d.text((8, 8), f"{qid} s{seed} — which images differ? A/B/C/D", fill="black")
-        sheet.save(os.path.join(OUT, "blind", f"{qid}_s{seed}.jpg"), quality=90)
+        sheet.save(os.path.join(OUT, "blind", f"blind_{qid}_s{seed}.jpg"), quality=90)
         blind_key.append({"prompt": qid, "seed": seed, **{LBL[i]: r for i, r in enumerate(order)}})
 
     if rows:

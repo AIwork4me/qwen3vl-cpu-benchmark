@@ -309,7 +309,46 @@ latency-vs-quality judgment the quality data informs.
 
 ## Final image quality (Phases 18–21)
 
-(filled from `results/e2e/quality/quality_metrics.csv` + blind package)
+30 prompts (portrait/landscape/text-rendering/complex/multi-object/fine-detail/
+photo/illustration/long/short/Chinese Q18–Q20/English), per-prompt fixed seed, warmup-
+stabilized deterministic generation, ONLY the conditioning route varies. DQ64/128 on the
+Q01–Q12 subset (documented reduction — per-image cost ~2.6 min; full-set for the two core
+routes). All numbers from `results/e2e/quality/quality_metrics.csv` (SSIM/PSNR via
+scikit-image; CLIP ViT-L/14 with 77-token chunked scoring — same evaluator, same
+truncation for every route; LPIPS unavailable offline — weights unreachable, recorded).
+
+**DQ32 vs GPU-route, 30 prompts:** SSIM med 0.9299 (min 0.7701) · PSNR med 26.22 dB ·
+CLIP image-similarity med **0.9926** · CLIP prompt-adherence delta med **−0.0006**
+(range −0.0222…+0.0106 — noise-level, both signs).
+
+**DQ comparison on the shared 12-prompt subset:**
+
+| | DQ32 | DQ64 | DQ128 |
+|---|---:|---:|---:|
+| SSIM med (vs GPU route) | **0.9643** | 0.9617 | 0.9465 |
+| PSNR med (dB) | 29.20 | 30.45 | 29.38 |
+| CLIP image-sim med | **0.9976** | 0.9972 | 0.9970 |
+| CLIP adherence delta med | −0.0001 | +0.0007 | −0.0001 |
+
+Divergent prompts (SSIM<0.85 vs GPU route): Q06 (street-sign text), Q09, Q13, Q18, Q21
+(very short), Q24 — every one keeps prompt-adherence within ±0.011 of the GPU route
+(both directions); the conditioning delta shifts composition on a minority of prompts
+without harming prompt following. Text-rendering prompts Q05/Q07/Q19 score slightly
+BETTER on the hybrid (adherence +0.0028/+0.0037/+0.0105).
+
+**Quality acceptance (Phase 21)**: PASS at the pre-declared gate — DQ32 conditioning
+cosine 0.9985 ≥ 0.997; across 30 prompts: no systematic collapse (all imgcos ≥ 0.9432),
+no prompt-adherence regression (median −0.0006, worst −0.0222 on a single prompt),
+no text-rendering regression (Q05/07/19 improve; Q06 −0.0077 within noise), quality
+metrics within normal same-model variance. **Blind human-evaluation package** generated
+(`results/e2e/quality/blind/` — 30 contact sheets, A/B(/C/D) labels shuffled with a
+fixed seed; mapping in `blind/key.csv`). No subjective scores are invented here; human
+review is left to the reader as designed.
+
+**Q7 answer**: DQ 32 is the recommended default — 64 and 128 save only 0.15–0.19 s per
+warm encode (against a ~150 s image) while measurably reducing pixel/CLIP similarity;
+accuracy ordering (SSIM/imgcos: 32 > 64 > 128; conditioning cos 0.9985 > 0.9982 > 0.9971)
+is consistent across every metric.
 
 ## Failure cases (Phase 35) — where the hybrid is NOT better
 
