@@ -40,6 +40,25 @@ Headline (auto-generated, `results/e2e/summary/headline.csv`):
 | gpu (G) | 176.11 | 154.17 | 2.618 | 149.05 | 2.43 | 51.86 |
 | ov_dq32 (H) | 168.82 | 151.25 | 0.993 | 147.95 | 2.25 | 35.40 |
 
+Through the **real ComfyUI server** (product stack, custom node): warm 140.88–141.07 s
+(H) vs 140.60–141.58 s (G) — statistically identical; the harness's absolute per-image
+times are ~7% conservative vs the server's dynamic weight loading (documented below).
+
+### The one-table verdict (spec's minimal conclusion)
+
+| | GPU-heavy | Hybrid CPU+GPU |
+|---|---:|---:|
+| Time to first image (cold) | 176.11 s | **168.82 s** |
+| Warm image latency (harness) | 154.17 s | **151.25 s** |
+| Warm image latency (real server) | 140.6–141.6 s | 140.9–141.1 s (equal) |
+| 5-image throughput | 0.40 img/min | 0.39 img/min (equal) |
+| Text encoder (warm) | 2.618 s | **0.993 s** |
+| DiT latency | 149.05 s | 147.95 s (equal within drift) |
+| GPU peak memory (GTT) | 51.86 GiB | **35.40 GiB (−16.46)** |
+| GPU busy during encode | 83–90% | ~idle |
+| CPU RSS / UMA consumed | 32.0 / 52.7 GiB | **30.1 / 43.5 GiB** |
+| Quality (vs G, 30 prompts) | reference | SSIM 0.930 med, adherence Δ −0.0006 |
+
 ## Test platform
 
 - AMD Ryzen AI Max+ PRO 395 (Zen 5, 16C/32T, AVX-512 + AVX512_VNNI + AVX512_BF16),
